@@ -1,0 +1,272 @@
+# CivicAlert seed data requirements
+# Format: pipe-separated values. Use UTF-8.
+# Use this file to expand DataSeeder.java or seed SQL. Avoid duplicate inserts on restart.
+
+## OFFICIAL_INFO
+# topic|content|source_name|source_url|language
+voting_hours|Polling stations are open from 07:00 to 21:00 on election day.|Demo Central Electoral Commission||en
+election_date|The demo election takes place on the official date announced by the election authority.|Demo Central Electoral Commission||en
+sms_voting|Voting by SMS is not available. Any claim that voters can vote by SMS is misleading.|Demo Central Electoral Commission||en
+online_voting|Online voting is not available for this demo election. Voters must follow the official voting procedure.|Demo Central Electoral Commission||en
+phone_voting|Voting by phone call is not available.|Demo Central Electoral Commission||en
+mobile_app_voting|Voting through a mobile application is not available.|Demo Central Electoral Commission||en
+polling_station_lookup|Voters should verify polling stations only through official election sources.|Demo Central Electoral Commission||en
+polling_station_change|Polling station changes are valid only when announced by the official election authority.|Demo Central Electoral Commission||en
+required_documents|Voters must present an accepted identity document according to official rules.|Demo Central Electoral Commission||en
+expired_documents|Rules about expired documents must be checked only through official sources.|Demo Central Electoral Commission||en
+ballot_marking|Ballots must be marked according to official instructions at the polling station.|Demo Central Electoral Commission||en
+ballot_photos|Voters should follow official rules about taking photos inside polling stations.|Demo Central Electoral Commission||en
+ballot_invalid_rules|A ballot is invalid only under rules defined by official election legislation and procedures.|Demo Central Electoral Commission||en
+assistance_for_disabled_voters|Voters who need assistance should follow the official assistance procedure at the polling station.|Demo Central Electoral Commission||en
+observer_rules|Observers may be present only under official accreditation and election rules.|Demo Central Electoral Commission||en
+election_cancelled|The election has not been cancelled. Any cancellation would be announced only through official channels.|Demo Central Electoral Commission||en
+election_postponed|The election has not been postponed. Any postponement would be announced only through official channels.|Demo Central Electoral Commission||en
+results_publication|Official results are published only by the authorized election body after legal procedures.|Demo Central Electoral Commission||en
+preliminary_results|Preliminary results are not final and must come from official election sources.|Demo Central Electoral Commission||en
+complaints_process|Election complaints must be submitted through official legal procedures.|Demo Central Electoral Commission||en
+emergency_contacts|For urgent election information, citizens should contact official election information channels.|Demo Central Electoral Commission||en
+official_sources|Official election information must be verified through the election authority and official public channels.|Demo Central Electoral Commission||en
+diaspora_voting|Diaspora voting rules and polling locations must be checked through official sources.|Demo Central Electoral Commission||en
+student_voting|Student voting rules must be verified through official election instructions.|Demo Central Electoral Commission||en
+campaign_silence|Campaign silence period rules are defined by official election legislation.|Demo Central Electoral Commission||en
+voting_hours|Secțiile de votare sunt deschise între orele 07:00 și 21:00 în ziua alegerilor.|Comisia Electorală Centrală Demo||ro
+election_date|Alegerile demo au loc la data oficială anunțată de autoritatea electorală.|Comisia Electorală Centrală Demo||ro
+sms_voting|Votarea prin SMS nu este disponibilă. Orice afirmație că se poate vota prin SMS este înșelătoare.|Comisia Electorală Centrală Demo||ro
+online_voting|Votarea online nu este disponibilă pentru aceste alegeri demo.|Comisia Electorală Centrală Demo||ro
+phone_voting|Votarea prin apel telefonic nu este disponibilă.|Comisia Electorală Centrală Demo||ro
+polling_station_lookup|Alegătorii trebuie să verifice secția de votare doar prin surse electorale oficiale.|Comisia Electorală Centrală Demo||ro
+polling_station_change|Schimbarea secției de votare este valabilă doar dacă este anunțată oficial.|Comisia Electorală Centrală Demo||ro
+required_documents|Alegătorii trebuie să prezinte un act de identitate acceptat conform regulilor oficiale.|Comisia Electorală Centrală Demo||ro
+ballot_marking|Buletinul de vot trebuie marcat conform instrucțiunilor oficiale din secția de votare.|Comisia Electorală Centrală Demo||ro
+election_cancelled|Alegerile nu au fost anulate. Orice anulare ar fi anunțată doar prin canale oficiale.|Comisia Electorală Centrală Demo||ro
+election_postponed|Alegerile nu au fost amânate. Orice amânare ar fi anunțată doar prin canale oficiale.|Comisia Electorală Centrală Demo||ro
+results_publication|Rezultatele oficiale sunt publicate doar de autoritatea electorală autorizată.|Comisia Electorală Centrală Demo||ro
+official_sources|Informațiile electorale oficiale trebuie verificate prin canalele publice ale autorității electorale.|Comisia Electorală Centrală Demo||ro
+diaspora_voting|Regulile pentru votul în diasporă trebuie verificate prin surse oficiale.|Comisia Electorală Centrală Demo||ro
+voting_hours|Избирательные участки открыты с 07:00 до 21:00 в день выборов.|Демо Центральная избирательная комиссия||ru
+election_date|Демо-выборы проходят в официальную дату, объявленную избирательным органом.|Демо Центральная избирательная комиссия||ru
+sms_voting|Голосование по SMS недоступно. Любое утверждение о голосовании по SMS является вводящим в заблуждение.|Демо Центральная избирательная комиссия||ru
+online_voting|Онлайн-голосование недоступно для этих демо-выборов.|Демо Центральная избирательная комиссия||ru
+phone_voting|Голосование по телефонному звонку недоступно.|Демо Центральная избирательная комиссия||ru
+polling_station_lookup|Избиратели должны проверять свой участок только через официальные избирательные источники.|Демо Центральная избирательная комиссия||ru
+polling_station_change|Изменение избирательного участка действительно только после официального объявления.|Демо Центральная избирательная комиссия||ru
+required_documents|Избиратели должны предъявить документ, принятый согласно официальным правилам.|Демо Центральная избирательная комиссия||ru
+ballot_marking|Бюллетень должен быть заполнен согласно официальным инструкциям на участке.|Демо Центральная избирательная комиссия||ru
+election_cancelled|Выборы не отменены. Любая отмена будет объявлена только через официальные каналы.|Демо Центральная избирательная комиссия||ru
+election_postponed|Выборы не перенесены. Любой перенос будет объявлен только через официальные каналы.|Демо Центральная избирательная комиссия||ru
+results_publication|Официальные результаты публикуются только уполномоченным избирательным органом.|Демо Центральная избирательная комиссия||ru
+official_sources|Официальную информацию о выборах следует проверять через официальные публичные каналы.|Демо Центральная избирательная комиссия||ru
+
+## RUMOR_PATTERNS
+# phrase|category|severity|language
+vote by sms|fake_voting_method|5|en
+voting by sms|fake_voting_method|5|en
+can i vote by sms|fake_voting_method|5|en
+can we vote by sms|fake_voting_method|5|en
+sms voting is available|fake_voting_method|5|en
+vote using sms|fake_voting_method|5|en
+vote with sms|fake_voting_method|5|en
+vote by text message|fake_voting_method|5|en
+text message voting|fake_voting_method|5|en
+vote online|fake_voting_method|5|en
+online voting is available|fake_voting_method|5|en
+vote by phone|fake_voting_method|5|en
+vote with mobile app|fake_voting_method|5|en
+download app to vote|fake_voting_method|5|en
+send your id by sms to vote|fake_voting_method|5|en
+voting cancelled|voting_process|5|en
+election cancelled|voting_process|5|en
+the election was cancelled|voting_process|5|en
+election postponed|voting_date|5|en
+voting postponed|voting_date|5|en
+voting moved to tomorrow|voting_date|5|en
+voting date changed|voting_date|5|en
+election moved to next week|voting_date|5|en
+do not vote today|voter_suppression|5|en
+stay home do not vote|voter_suppression|5|en
+your vote will not count|voter_suppression|4|en
+voting is useless today|voter_suppression|3|en
+polling stations are closed|polling_location|5|en
+polling station closed|polling_location|5|en
+polling station moved|polling_location|4|en
+your polling station changed|polling_location|4|en
+all stations closed early|voting_hours|5|en
+voting ends at 18|voting_hours|4|en
+voting ends at 6 pm|voting_hours|4|en
+polls open only after noon|voting_hours|4|en
+polling stations open tomorrow|voting_date|5|en
+ballots are invalid|ballot_confusion|4|en
+ballots with pen are invalid|ballot_confusion|4|en
+ballots marked with stamp are invalid|ballot_confusion|4|en
+take a photo of your ballot to prove vote|ballot_confusion|3|en
+bring only passport|id_requirement|3|en
+id cards are not accepted|id_requirement|4|en
+passport is mandatory for everyone|id_requirement|3|en
+students cannot vote|id_requirement|4|en
+results already decided|results_misinformation|4|en
+official results leaked|results_misinformation|4|en
+results published before polls close|results_misinformation|4|en
+observers are banned|observer_misinformation|3|en
+observers cannot enter polling stations|observer_misinformation|3|en
+diaspora votes cancelled|diaspora_voting|5|en
+diaspora polling stations closed|diaspora_voting|5|en
+voting abroad is cancelled|diaspora_voting|5|en
+central election commission asks you to send id|official_impersonation|5|en
+official commission asks for your password|official_impersonation|5|en
+vot prin sms|fake_voting_method|5|ro
+votare prin sms|fake_voting_method|5|ro
+poți vota prin sms|fake_voting_method|5|ro
+poti vota prin sms|fake_voting_method|5|ro
+pot sa votez prin sms|fake_voting_method|5|ro
+pot să votez prin sms|fake_voting_method|5|ro
+pot vota prin sms|fake_voting_method|5|ro
+pot sa votez cu sms|fake_voting_method|5|ro
+pot să votez cu sms|fake_voting_method|5|ro
+se poate vota prin sms|fake_voting_method|5|ro
+se poate vota cu sms|fake_voting_method|5|ro
+este posibil sa votez prin sms|fake_voting_method|5|ro
+este posibil să votez prin sms|fake_voting_method|5|ro
+votez prin sms|fake_voting_method|5|ro
+votam prin sms|fake_voting_method|5|ro
+trimite sms pentru vot|fake_voting_method|5|ro
+vot prin mesaj|fake_voting_method|5|ro
+vot prin telefon|fake_voting_method|5|ro
+poți vota online|fake_voting_method|5|ro
+poti vota online|fake_voting_method|5|ro
+vot online|fake_voting_method|5|ro
+vot prin aplicație|fake_voting_method|5|ro
+votează prin aplicație|fake_voting_method|5|ro
+alegerile au fost anulate|voting_process|5|ro
+votarea a fost anulată|voting_process|5|ro
+alegerile sunt anulate|voting_process|5|ro
+alegerile au fost amânate|voting_date|5|ro
+votarea s-a amânat|voting_date|5|ro
+votarea s-a mutat pe mâine|voting_date|5|ro
+alegerile s-au mutat pe mâine|voting_date|5|ro
+data votării s-a schimbat|voting_date|5|ro
+nu mergeți la vot astăzi|voter_suppression|5|ro
+nu mergeti la vot astazi|voter_suppression|5|ro
+stați acasă nu votați|voter_suppression|5|ro
+stati acasa nu votati|voter_suppression|5|ro
+votul tău nu contează|voter_suppression|4|ro
+secțiile de votare sunt închise|polling_location|5|ro
+sectiile de votare sunt inchise|polling_location|5|ro
+secția de votare este închisă|polling_location|5|ro
+secția de votare s-a mutat|polling_location|4|ro
+sectia de votare s-a mutat|polling_location|4|ro
+secția ta s-a schimbat|polling_location|4|ro
+secțiile se închid la 18|voting_hours|4|ro
+votarea se termină la 18|voting_hours|4|ro
+secțiile se deschid doar după prânz|voting_hours|4|ro
+buletinele sunt invalide|ballot_confusion|4|ro
+buletinele completate cu pixul sunt invalide|ballot_confusion|4|ro
+buletinele marcate cu ștampilă sunt invalide|ballot_confusion|4|ro
+fă poză la buletin ca dovadă|ballot_confusion|3|ro
+cartea de identitate nu este acceptată|id_requirement|4|ro
+buletinul nu este acceptat|id_requirement|4|ro
+pașaportul este obligatoriu|id_requirement|3|ro
+studenții nu pot vota|id_requirement|4|ro
+rezultatele sunt deja decise|results_misinformation|4|ro
+rezultatele oficiale au fost scurse|results_misinformation|4|ro
+rezultatele au apărut înainte de închiderea secțiilor|results_misinformation|4|ro
+observatorii sunt interziși|observer_misinformation|3|ro
+observatorii nu pot intra în secții|observer_misinformation|3|ro
+voturile diasporei au fost anulate|diaspora_voting|5|ro
+votul în diaspora este anulat|diaspora_voting|5|ro
+secțiile din diaspora sunt închise|diaspora_voting|5|ro
+comisia electorală cere poza buletinului|official_impersonation|5|ro
+cec cere datele personale prin mesaj|official_impersonation|5|ro
+можно голосовать по смс|fake_voting_method|5|ru
+могу ли я голосовать по смс|fake_voting_method|5|ru
+голосование по смс|fake_voting_method|5|ru
+смс голосование|fake_voting_method|5|ru
+голосовать через смс|fake_voting_method|5|ru
+можно проголосовать по смс|fake_voting_method|5|ru
+голосовать онлайн|fake_voting_method|5|ru
+онлайн голосование доступно|fake_voting_method|5|ru
+голосование по телефону|fake_voting_method|5|ru
+голосовать через приложение|fake_voting_method|5|ru
+выборы отменены|voting_process|5|ru
+голосование отменено|voting_process|5|ru
+выборы были отменены|voting_process|5|ru
+выборы перенесли|voting_date|5|ru
+голосование перенесли|voting_date|5|ru
+голосование перенесли на завтра|voting_date|5|ru
+выборы завтра а не сегодня|voting_date|5|ru
+дата голосования изменилась|voting_date|5|ru
+не ходите голосовать сегодня|voter_suppression|5|ru
+оставайтесь дома не голосуйте|voter_suppression|5|ru
+ваш голос не будет засчитан|voter_suppression|4|ru
+избирательные участки закрыты|polling_location|5|ru
+участки закрыты|polling_location|5|ru
+ваш участок изменился|polling_location|4|ru
+избирательный участок перенесли|polling_location|4|ru
+участки закрываются в 18|voting_hours|4|ru
+голосование заканчивается в 18|voting_hours|4|ru
+бюллетени недействительны|ballot_confusion|4|ru
+бюллетени с ручкой недействительны|ballot_confusion|4|ru
+сфотографируйте бюллетень как доказательство|ballot_confusion|3|ru
+удостоверения личности не принимаются|id_requirement|4|ru
+паспорт обязателен для всех|id_requirement|3|ru
+студенты не могут голосовать|id_requirement|4|ru
+результаты уже решены|results_misinformation|4|ru
+официальные результаты утекли|results_misinformation|4|ru
+результаты опубликованы до закрытия участков|results_misinformation|4|ru
+наблюдатели запрещены|observer_misinformation|3|ru
+наблюдателей не пускают на участки|observer_misinformation|3|ru
+голоса диаспоры отменены|diaspora_voting|5|ru
+голосование за рубежом отменено|diaspora_voting|5|ru
+участки за рубежом закрыты|diaspora_voting|5|ru
+избирательная комиссия просит отправить документы|official_impersonation|5|ru
+цик просит пароль по сообщению|official_impersonation|5|ru
+
+## VERIFIED_CLAIMS
+# claim_text|category|status|correction_text|official_source|official_source_url|language|region|published
+You can vote by SMS.|fake_voting_method|VERIFIED_FALSE|Voting by SMS is not available. Use only official voting procedures.|Demo Central Electoral Commission||en||true
+Can I vote by SMS?|fake_voting_method|VERIFIED_FALSE|Voting by SMS is not available. Use only official voting procedures.|Demo Central Electoral Commission||en||true
+SMS voting is available.|fake_voting_method|VERIFIED_FALSE|SMS voting is not available for this demo election.|Demo Central Electoral Commission||en||true
+You can vote online.|fake_voting_method|VERIFIED_FALSE|Online voting is not available for this demo election.|Demo Central Electoral Commission||en||true
+You can vote by phone.|fake_voting_method|VERIFIED_FALSE|Voting by phone call is not available.|Demo Central Electoral Commission||en||true
+The election was cancelled.|voting_process|VERIFIED_FALSE|The election has not been cancelled. Check only official channels for election status.|Demo Central Electoral Commission||en||true
+The election was postponed.|voting_date|VERIFIED_FALSE|The election has not been postponed. Official changes are announced only through official channels.|Demo Central Electoral Commission||en||true
+Voting was moved to tomorrow.|voting_date|VERIFIED_FALSE|Voting has not been moved to tomorrow unless officially announced by the election authority.|Demo Central Electoral Commission||en||true
+Polling stations are closed.|polling_location|VERIFIED_FALSE|Polling stations are open according to the official schedule unless the election authority announces otherwise.|Demo Central Electoral Commission||en||true
+Polling stations are open from 07:00 to 21:00.|voting_hours|VERIFIED_TRUE|Correct. Polling stations are open from 07:00 to 21:00 on election day.|Demo Central Electoral Commission||en||true
+Voting ends at 18:00.|voting_hours|VERIFIED_FALSE|Voting does not end at 18:00. Polling stations are open from 07:00 to 21:00.|Demo Central Electoral Commission||en||true
+ID cards are not accepted.|id_requirement|MISLEADING|Accepted identity documents must be checked through official election rules. Do not rely on viral posts.|Demo Central Electoral Commission||en||true
+Results are already official before polls close.|results_misinformation|VERIFIED_FALSE|Official results are published only after legal counting and reporting procedures.|Demo Central Electoral Commission||en||true
+Diaspora votes were cancelled.|diaspora_voting|VERIFIED_FALSE|Diaspora voting information must be checked through official election sources.|Demo Central Electoral Commission||en||true
+Observers are banned from polling stations.|observer_misinformation|MISLEADING|Observer access depends on official accreditation and election rules.|Demo Central Electoral Commission||en||true
+Poți vota prin SMS.|fake_voting_method|VERIFIED_FALSE|Votarea prin SMS nu este disponibilă. Folosiți doar procedurile oficiale de vot.|Comisia Electorală Centrală Demo||ro||true
+Poti vota prin SMS.|fake_voting_method|VERIFIED_FALSE|Votarea prin SMS nu este disponibilă. Folosiți doar procedurile oficiale de vot.|Comisia Electorală Centrală Demo||ro||true
+Pot sa votez prin SMS?|fake_voting_method|VERIFIED_FALSE|Votarea prin SMS nu este disponibilă. Folosiți doar procedurile oficiale de vot.|Comisia Electorală Centrală Demo||ro||true
+Pot să votez prin SMS?|fake_voting_method|VERIFIED_FALSE|Votarea prin SMS nu este disponibilă. Folosiți doar procedurile oficiale de vot.|Comisia Electorală Centrală Demo||ro||true
+Se poate vota prin SMS.|fake_voting_method|VERIFIED_FALSE|Votarea prin SMS nu este disponibilă. Folosiți doar procedurile oficiale de vot.|Comisia Electorală Centrală Demo||ro||true
+Votarea online este disponibilă.|fake_voting_method|VERIFIED_FALSE|Votarea online nu este disponibilă pentru aceste alegeri demo.|Comisia Electorală Centrală Demo||ro||true
+Alegerile au fost anulate.|voting_process|VERIFIED_FALSE|Alegerile nu au fost anulate. Verificați doar canalele oficiale.|Comisia Electorală Centrală Demo||ro||true
+Alegerile au fost amânate.|voting_date|VERIFIED_FALSE|Alegerile nu au fost amânate. Orice modificare ar fi anunțată oficial.|Comisia Electorală Centrală Demo||ro||true
+Secțiile de votare sunt închise.|polling_location|VERIFIED_FALSE|Secțiile de votare sunt deschise conform programului oficial, dacă nu există un anunț oficial contrar.|Comisia Electorală Centrală Demo||ro||true
+Secțiile de votare sunt deschise între 07:00 și 21:00.|voting_hours|VERIFIED_TRUE|Corect. Secțiile de votare sunt deschise între 07:00 și 21:00.|Comisia Electorală Centrală Demo||ro||true
+Votarea se termină la 18:00.|voting_hours|VERIFIED_FALSE|Votarea nu se termină la 18:00. Secțiile sunt deschise între 07:00 și 21:00.|Comisia Electorală Centrală Demo||ro||true
+Rezultatele sunt deja oficiale înainte de închiderea secțiilor.|results_misinformation|VERIFIED_FALSE|Rezultatele oficiale sunt publicate doar după procedurile legale de numărare și raportare.|Comisia Electorală Centrală Demo||ro||true
+Voturile diasporei au fost anulate.|diaspora_voting|VERIFIED_FALSE|Informațiile despre votul în diasporă trebuie verificate prin surse oficiale.|Comisia Electorală Centrală Demo||ro||true
+Можно голосовать по СМС.|fake_voting_method|VERIFIED_FALSE|Голосование по SMS недоступно. Используйте только официальные процедуры голосования.|Демо Центральная избирательная комиссия||ru||true
+Могу ли я голосовать по СМС?|fake_voting_method|VERIFIED_FALSE|Голосование по SMS недоступно. Используйте только официальные процедуры голосования.|Демо Центральная избирательная комиссия||ru||true
+Онлайн голосование доступно.|fake_voting_method|VERIFIED_FALSE|Онлайн-голосование недоступно для этих демо-выборов.|Демо Центральная избирательная комиссия||ru||true
+Выборы отменены.|voting_process|VERIFIED_FALSE|Выборы не отменены. Проверяйте только официальные каналы.|Демо Центральная избирательная комиссия||ru||true
+Выборы перенесли.|voting_date|VERIFIED_FALSE|Выборы не перенесены. Любое изменение будет объявлено официально.|Демо Центральная избирательная комиссия||ru||true
+Избирательные участки закрыты.|polling_location|VERIFIED_FALSE|Избирательные участки открыты согласно официальному расписанию, если нет официального объявления об изменении.|Демо Центральная избирательная комиссия||ru||true
+Избирательные участки открыты с 07:00 до 21:00.|voting_hours|VERIFIED_TRUE|Верно. Избирательные участки открыты с 07:00 до 21:00.|Демо Центральная избирательная комиссия||ru||true
+Голосование заканчивается в 18:00.|voting_hours|VERIFIED_FALSE|Голосование не заканчивается в 18:00. Участки открыты с 07:00 до 21:00.|Демо Центральная избирательная комиссия||ru||true
+Результаты уже официальные до закрытия участков.|results_misinformation|VERIFIED_FALSE|Официальные результаты публикуются только после законных процедур подсчета и отчетности.|Демо Центральная избирательная комиссия||ru||true
+Голоса диаспоры отменены.|diaspora_voting|VERIFIED_FALSE|Информацию о голосовании диаспоры следует проверять через официальные источники.|Демо Центральная избирательная комиссия||ru||true
+
+## REQUIRED DEMO TESTS
+# input|expected_status|expected_category
+pot sa votez prin sms?|VERIFIED_FALSE or NEEDS_REVIEW|fake_voting_method
+pot să votez prin sms?|VERIFIED_FALSE or NEEDS_REVIEW|fake_voting_method
+poți vota prin sms|VERIFIED_FALSE|fake_voting_method
+vot prin sms|VERIFIED_FALSE or NEEDS_REVIEW|fake_voting_method
+Can I vote by SMS?|VERIFIED_FALSE or NEEDS_REVIEW|fake_voting_method
+The election was cancelled.|VERIFIED_FALSE or NEEDS_REVIEW|voting_process
+Candidate X is good.|NO_MATCH_FOUND|neutral

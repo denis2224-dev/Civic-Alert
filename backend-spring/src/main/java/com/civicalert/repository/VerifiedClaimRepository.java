@@ -16,4 +16,6 @@ public interface VerifiedClaimRepository extends JpaRepository<VerifiedClaim, Lo
             String normalizedClaim,
             String language
     );
+
+    Optional<VerifiedClaim> findFirstByNormalizedClaimAndLanguage(String normalizedClaim, String language);
 }

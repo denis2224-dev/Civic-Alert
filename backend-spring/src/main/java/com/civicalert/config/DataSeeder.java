@@ -8,465 +8,330 @@ import com.civicalert.repository.OfficialInfoRepository;
 import com.civicalert.repository.RumorPatternRepository;
 import com.civicalert.repository.VerifiedClaimRepository;
 import com.civicalert.util.TextNormalizer;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
 public class DataSeeder implements CommandLineRunner {
 
+    private static final Logger log = LoggerFactory.getLogger(DataSeeder.class);
+    private static final List<Path> SEED_FILE_CANDIDATES = List.of(
+            Paths.get("civicalert_seed_data_requirements.txt"),
+            Paths.get("../civicalert_seed_data_requirements.txt")
+    );
+
     private final OfficialInfoRepository officialInfoRepository;
     private final RumorPatternRepository rumorPatternRepository;
     private final VerifiedClaimRepository verifiedClaimRepository;
+    private final JdbcTemplate jdbcTemplate;
 
     public DataSeeder(
             OfficialInfoRepository officialInfoRepository,
             RumorPatternRepository rumorPatternRepository,
-            VerifiedClaimRepository verifiedClaimRepository
+            VerifiedClaimRepository verifiedClaimRepository,
+            JdbcTemplate jdbcTemplate
     ) {
         this.officialInfoRepository = officialInfoRepository;
         this.rumorPatternRepository = rumorPatternRepository;
         this.verifiedClaimRepository = verifiedClaimRepository;
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override
     public void run(String... args) {
-        seedOfficialInfo();
-        seedRumorPatterns();
-        seedVerifiedClaims();
+        ensureOfficialInfoTopicLanguageUniqueness();
+        SeedData seedData = loadSeedData();
+        seedOfficialInfo(seedData.officialInfo());
+        seedRumorPatterns(seedData.rumorPatterns());
+        seedVerifiedClaims(seedData.verifiedClaims());
     }
 
-    private void seedOfficialInfo() {
-        List<OfficialSeed> officialSeeds = List.of(
-                new OfficialSeed("voting_hours", "Polling stations are open from 07:00 to 21:00 on election day.", "en"),
-                new OfficialSeed("election_date", "Election day is announced only through official election communications.", "en"),
-                new OfficialSeed("sms_voting", "Voting by SMS is not available. Any such claim is misleading.", "en"),
-                new OfficialSeed("online_voting", "Online voting is not available for this election.", "en"),
-                new OfficialSeed("mobile_voting", "Voting through mobile applications is not part of the official procedure.", "en"),
-                new OfficialSeed("early_voting", "Early voting follows official legal schedules and locations only.", "en"),
-                new OfficialSeed("polling_station_lookup", "Voters should verify their polling station only through official sources.", "en"),
-                new OfficialSeed("polling_station_change", "Any polling station change is announced only by official election authorities.", "en"),
-                new OfficialSeed("required_documents", "Voters must present a legally accepted identification document.", "en"),
-                new OfficialSeed("expired_documents", "Expired documents may not be accepted. Check official guidance before voting.", "en"),
-                new OfficialSeed("student_voting", "Students vote according to legal residence or temporary voting rules published officially.", "en"),
-                new OfficialSeed("diaspora_voting", "Diaspora voting is available only in officially announced locations.", "en"),
-                new OfficialSeed("ballot_marking", "Ballots must be marked according to official instructions in the polling station.", "en"),
-                new OfficialSeed("ballot_photos", "Taking photos of completed ballots may violate election rules.", "en"),
-                new OfficialSeed("ballot_invalid_rules", "A ballot can become invalid if marked incorrectly. Follow official instructions.", "en"),
-                new OfficialSeed("assistance_for_disabled_voters", "Voters with disabilities can request assistance according to official procedures.", "en"),
-                new OfficialSeed("observer_rules", "Observers follow accredited legal rules and cannot alter voting results.", "en"),
-                new OfficialSeed("election_cancelled", "The election has not been cancelled. Any cancellation would be announced officially.", "en"),
-                new OfficialSeed("election_postponed", "The election has not been postponed unless officially announced.", "en"),
-                new OfficialSeed("results_publication", "Official election results are published only by the authorized election body.", "en"),
-                new OfficialSeed("preliminary_results", "Preliminary results are unofficial and may change after verification.", "en"),
-                new OfficialSeed("final_results", "Final results are published after legal counting and validation procedures.", "en"),
-                new OfficialSeed("complaints_process", "Election complaints must be submitted through the official legal process.", "en"),
-                new OfficialSeed("emergency_contacts", "Emergency election support contacts are published only on official channels.", "en"),
-                new OfficialSeed("official_sources", "Use only official websites and hotlines for election-process information.", "en"),
+    private void ensureOfficialInfoTopicLanguageUniqueness() {
+        try {
+            String constraintName = jdbcTemplate.query(
+                    """
+                    SELECT con.conname
+                    FROM pg_constraint con
+                    JOIN pg_class rel ON rel.oid = con.conrelid
+                    WHERE rel.relname = 'official_info'
+                      AND con.contype = 'u'
+                      AND pg_get_constraintdef(con.oid) ILIKE '%(topic)%'
+                      AND pg_get_constraintdef(con.oid) NOT ILIKE '%(topic, language)%'
+                    LIMIT 1
+                    """,
+                    rs -> rs.next() ? rs.getString(1) : null
+            );
 
-                new OfficialSeed("voting_hours_ro", "Secțiile de votare sunt deschise între 07:00 și 21:00 în ziua alegerilor.", "ro"),
-                new OfficialSeed("sms_voting_ro", "Votarea prin SMS nu este disponibilă.", "ro"),
-                new OfficialSeed("online_voting_ro", "Votarea online nu este disponibilă pentru aceste alegeri.", "ro"),
-                new OfficialSeed("polling_station_lookup_ro", "Secția de votare se verifică doar din surse oficiale.", "ro"),
-                new OfficialSeed("election_cancelled_ro", "Alegerile nu au fost anulate.", "ro"),
-                new OfficialSeed("results_publication_ro", "Rezultatele oficiale sunt publicate doar de autoritatea electorală.", "ro"),
+            if (constraintName != null && !constraintName.isBlank()) {
+                jdbcTemplate.execute("ALTER TABLE official_info DROP CONSTRAINT \"" + constraintName.replace("\"", "\"\"") + "\"");
+            }
+            jdbcTemplate.execute(
+                    "CREATE UNIQUE INDEX IF NOT EXISTS uk_official_info_topic_language ON official_info (topic, language)"
+            );
+        } catch (DataAccessException ex) {
+            log.warn("Could not update official_info uniqueness constraint. Continuing with existing schema.", ex);
+        }
+    }
 
-                new OfficialSeed("voting_hours_ru", "Избирательные участки открыты с 07:00 до 21:00 в день выборов.", "ru"),
-                new OfficialSeed("sms_voting_ru", "Голосование по СМС недоступно.", "ru"),
-                new OfficialSeed("online_voting_ru", "Онлайн-голосование недоступно для этих выборов.", "ru"),
-                new OfficialSeed("polling_station_lookup_ru", "Проверяйте свой участок только через официальные источники.", "ru"),
-                new OfficialSeed("election_cancelled_ru", "Выборы не отменены.", "ru"),
-                new OfficialSeed("results_publication_ru", "Официальные результаты публикуются только уполномоченным органом.", "ru")
+    private SeedData loadSeedData() {
+        Path seedFile = resolveSeedFilePath()
+                .orElseThrow(() -> new IllegalStateException(
+                        "Seed data file not found. Expected civicalert_seed_data_requirements.txt in project root."
+                ));
+
+        List<OfficialSeed> officialSeeds = new ArrayList<>();
+        List<RumorPatternSeed> rumorPatternSeeds = new ArrayList<>();
+        List<VerifiedClaimSeed> verifiedClaimSeeds = new ArrayList<>();
+
+        SeedSection currentSection = SeedSection.NONE;
+        List<String> lines;
+        try {
+            lines = Files.readAllLines(seedFile, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            throw new IllegalStateException("Unable to read seed data file: " + seedFile, e);
+        }
+
+        for (String rawLine : lines) {
+            String line = rawLine.trim();
+            if (line.isEmpty() || line.startsWith("#")) {
+                continue;
+            }
+            if (line.startsWith("## ")) {
+                currentSection = SeedSection.fromHeader(line);
+                continue;
+            }
+            if (currentSection == SeedSection.NONE || currentSection == SeedSection.REQUIRED_DEMO_TESTS) {
+                continue;
+            }
+
+            switch (currentSection) {
+                case OFFICIAL_INFO -> parseOfficialInfo(line).ifPresent(officialSeeds::add);
+                case RUMOR_PATTERNS -> parseRumorPattern(line).ifPresent(rumorPatternSeeds::add);
+                case VERIFIED_CLAIMS -> parseVerifiedClaim(line).ifPresent(verifiedClaimSeeds::add);
+                case NONE, REQUIRED_DEMO_TESTS -> {
+                }
+            }
+        }
+
+        log.info(
+                "Loaded seed data file {} with {} official records, {} rumor patterns, {} verified claims.",
+                seedFile,
+                officialSeeds.size(),
+                rumorPatternSeeds.size(),
+                verifiedClaimSeeds.size()
         );
+        return new SeedData(officialSeeds, rumorPatternSeeds, verifiedClaimSeeds);
+    }
 
+    private Optional<Path> resolveSeedFilePath() {
+        for (Path candidate : SEED_FILE_CANDIDATES) {
+            Path path = candidate.toAbsolutePath().normalize();
+            if (Files.exists(path) && Files.isRegularFile(path)) {
+                return Optional.of(path);
+            }
+        }
+        return Optional.empty();
+    }
+
+    private Optional<OfficialSeed> parseOfficialInfo(String line) {
+        String[] parts = line.split("\\|", -1);
+        if (parts.length != 5) {
+            log.warn("Skipping malformed OFFICIAL_INFO line: {}", line);
+            return Optional.empty();
+        }
+        return Optional.of(
+                new OfficialSeed(
+                        parts[0].trim(),
+                        parts[1].trim(),
+                        parts[2].trim(),
+                        blankToNull(parts[3]),
+                        parts[4].trim().toLowerCase(Locale.ROOT)
+                )
+        );
+    }
+
+    private Optional<RumorPatternSeed> parseRumorPattern(String line) {
+        String[] parts = line.split("\\|", -1);
+        if (parts.length != 4) {
+            log.warn("Skipping malformed RUMOR_PATTERNS line: {}", line);
+            return Optional.empty();
+        }
+        try {
+            return Optional.of(
+                    new RumorPatternSeed(
+                            parts[0].trim(),
+                            parts[1].trim(),
+                            Integer.parseInt(parts[2].trim()),
+                            parts[3].trim().toLowerCase(Locale.ROOT)
+                    )
+            );
+        } catch (NumberFormatException ex) {
+            log.warn("Skipping RUMOR_PATTERNS line with invalid severity: {}", line);
+            return Optional.empty();
+        }
+    }
+
+    private Optional<VerifiedClaimSeed> parseVerifiedClaim(String line) {
+        String[] parts = line.split("\\|", -1);
+        if (parts.length != 9) {
+            log.warn("Skipping malformed VERIFIED_CLAIMS line: {}", line);
+            return Optional.empty();
+        }
+
+        ClaimStatus status;
+        try {
+            status = ClaimStatus.valueOf(parts[2].trim().toUpperCase(Locale.ROOT));
+        } catch (IllegalArgumentException ex) {
+            log.warn("Skipping VERIFIED_CLAIMS line with invalid status: {}", line);
+            return Optional.empty();
+        }
+
+        return Optional.of(
+                new VerifiedClaimSeed(
+                        parts[0].trim(),
+                        parts[1].trim(),
+                        status,
+                        parts[3].trim(),
+                        parts[4].trim(),
+                        blankToNull(parts[5]),
+                        parts[6].trim().toLowerCase(Locale.ROOT),
+                        blankToNull(parts[7]),
+                        Boolean.parseBoolean(parts[8].trim())
+                )
+        );
+    }
+
+    private void seedOfficialInfo(List<OfficialSeed> officialSeeds) {
+        int inserted = 0;
         for (OfficialSeed officialSeed : officialSeeds) {
-            seedOfficial(officialSeed.topic(), officialSeed.content(), officialSeed.language());
+            Optional<OfficialInfo> existing = officialInfoRepository.findByTopicAndLanguage(
+                    officialSeed.topic(),
+                    officialSeed.language()
+            );
+            if (existing.isPresent()) {
+                continue;
+            }
+
+            OfficialInfo info = new OfficialInfo();
+            info.setTopic(officialSeed.topic());
+            info.setContent(officialSeed.content());
+            info.setSourceName(
+                    officialSeed.sourceName().isBlank()
+                            ? "Demo Central Electoral Commission"
+                            : officialSeed.sourceName()
+            );
+            info.setSourceUrl(officialSeed.sourceUrl());
+            info.setLanguage(officialSeed.language());
+            officialInfoRepository.save(info);
+            inserted++;
         }
+        log.info("Seeded official_info: inserted {} new rows.", inserted);
     }
 
-    private void seedOfficial(String topic, String content, String language) {
-        if (officialInfoRepository.findByTopic(topic).isPresent()) {
-            return;
-        }
-
-        OfficialInfo info = new OfficialInfo();
-        info.setTopic(topic);
-        info.setContent(content);
-        info.setSourceName("Central Electoral Commission");
-        info.setSourceUrl("https://cec.example/demo");
-        info.setLanguage(language);
-        officialInfoRepository.save(info);
-    }
-
-    private void seedRumorPatterns() {
-        List<PatternSeed> patterns = List.of(
-                new PatternSeed("voting cancelled", "voting_process", 5, "en"),
-                new PatternSeed("election cancelled", "voting_process", 5, "en"),
-                new PatternSeed("election postponed", "voting_date", 5, "en"),
-                new PatternSeed("voting moved to tomorrow", "voting_date", 5, "en"),
-                new PatternSeed("voting date changed", "voting_date", 5, "en"),
-                new PatternSeed("polls open tomorrow instead", "voting_date", 4, "en"),
-                new PatternSeed("polling starts at noon", "voting_hours", 4, "en"),
-                new PatternSeed("polling stations open only until 18 00", "voting_hours", 4, "en"),
-                new PatternSeed("do not vote today", "voter_suppression", 5, "en"),
-                new PatternSeed("skip voting to avoid fines", "voter_suppression", 4, "en"),
-                new PatternSeed("polling stations are closed", "polling_location", 5, "en"),
-                new PatternSeed("polling station moved", "polling_location", 4, "en"),
-                new PatternSeed("your polling station changed", "polling_location", 4, "en"),
-                new PatternSeed("all polling stations moved downtown", "polling_location", 4, "en"),
-                new PatternSeed("vote by sms", "fake_voting_method", 5, "en"),
-                new PatternSeed("vote by text message", "fake_voting_method", 5, "en"),
-                new PatternSeed("vote online", "fake_voting_method", 5, "en"),
-                new PatternSeed("vote by phone", "fake_voting_method", 5, "en"),
-                new PatternSeed("mobile app voting is active", "fake_voting_method", 5, "en"),
-                new PatternSeed("ballots with pen are invalid", "ballot_confusion", 4, "en"),
-                new PatternSeed("ballots marked with stamp are invalid", "ballot_confusion", 4, "en"),
-                new PatternSeed("ballot with two marks is still valid", "ballot_confusion", 3, "en"),
-                new PatternSeed("bring only passport", "id_requirement", 3, "en"),
-                new PatternSeed("id cards are not accepted", "id_requirement", 4, "en"),
-                new PatternSeed("results already decided", "results_misinformation", 4, "en"),
-                new PatternSeed("official results leaked", "results_misinformation", 4, "en"),
-                new PatternSeed("observers are banned", "observer_misinformation", 3, "en"),
-                new PatternSeed("observers can remove voters from line", "observer_misinformation", 3, "en"),
-                new PatternSeed("diaspora votes cancelled", "diaspora_voting", 5, "en"),
-                new PatternSeed("fake election hotline confirms cancellation", "official_impersonation", 4, "en"),
-                new PatternSeed("commission website says vote by sms", "official_impersonation", 5, "en"),
-
-                new PatternSeed("alegerile au fost anulate", "voting_process", 5, "ro"),
-                new PatternSeed("votarea a fost anulată", "voting_process", 5, "ro"),
-                new PatternSeed("alegerile au fost amânate", "voting_date", 5, "ro"),
-                new PatternSeed("votarea s-a mutat pe mâine", "voting_date", 5, "ro"),
-                new PatternSeed("data votării s-a schimbat", "voting_date", 5, "ro"),
-                new PatternSeed("secțiile se deschid la ora 12", "voting_hours", 4, "ro"),
-                new PatternSeed("secțiile se închid la 18 00", "voting_hours", 4, "ro"),
-                new PatternSeed("nu mergeți la vot astăzi", "voter_suppression", 5, "ro"),
-                new PatternSeed("nu votați azi nu contează", "voter_suppression", 4, "ro"),
-                new PatternSeed("secțiile de votare sunt închise", "polling_location", 5, "ro"),
-                new PatternSeed("secția de votare s-a mutat", "polling_location", 4, "ro"),
-                new PatternSeed("toate secțiile s-au mutat în centru", "polling_location", 4, "ro"),
-                new PatternSeed("poți vota prin sms", "fake_voting_method", 5, "ro"),
-                new PatternSeed("vot prin sms", "fake_voting_method", 5, "ro"),
-                new PatternSeed("poți vota online", "fake_voting_method", 5, "ro"),
-                new PatternSeed("vot online", "fake_voting_method", 5, "ro"),
-                new PatternSeed("vot prin telefon", "fake_voting_method", 5, "ro"),
-                new PatternSeed("buletinele completate cu pixul sunt invalide", "ballot_confusion", 4, "ro"),
-                new PatternSeed("ștampila face buletinul invalid", "ballot_confusion", 4, "ro"),
-                new PatternSeed("cartea de identitate nu este acceptată", "id_requirement", 4, "ro"),
-                new PatternSeed("se acceptă doar pașaportul", "id_requirement", 3, "ro"),
-                new PatternSeed("rezultatele sunt deja decise", "results_misinformation", 4, "ro"),
-                new PatternSeed("rezultatele oficiale au fost scurse", "results_misinformation", 4, "ro"),
-                new PatternSeed("observatorii sunt interziși", "observer_misinformation", 3, "ro"),
-                new PatternSeed("observatorii pot opri votanții", "observer_misinformation", 3, "ro"),
-                new PatternSeed("voturile diasporei au fost anulate", "diaspora_voting", 5, "ro"),
-                new PatternSeed("site-ul oficial confirmă vot prin sms", "official_impersonation", 5, "ro"),
-                new PatternSeed("linia oficială spune că alegerile sunt anulate", "official_impersonation", 4, "ro"),
-
-                new PatternSeed("выборы отменены", "voting_process", 5, "ru"),
-                new PatternSeed("голосование отменено", "voting_process", 5, "ru"),
-                new PatternSeed("выборы перенесли", "voting_date", 5, "ru"),
-                new PatternSeed("голосование перенесли на завтра", "voting_date", 5, "ru"),
-                new PatternSeed("дата голосования изменена", "voting_date", 5, "ru"),
-                new PatternSeed("участки открываются в 12 00", "voting_hours", 4, "ru"),
-                new PatternSeed("участки закрываются в 18 00", "voting_hours", 4, "ru"),
-                new PatternSeed("не ходите голосовать сегодня", "voter_suppression", 5, "ru"),
-                new PatternSeed("сегодня голосовать не нужно", "voter_suppression", 4, "ru"),
-                new PatternSeed("избирательные участки закрыты", "polling_location", 5, "ru"),
-                new PatternSeed("ваш участок изменился", "polling_location", 4, "ru"),
-                new PatternSeed("все участки перенесли в центр", "polling_location", 4, "ru"),
-                new PatternSeed("можно голосовать по смс", "fake_voting_method", 5, "ru"),
-                new PatternSeed("голосование по смс", "fake_voting_method", 5, "ru"),
-                new PatternSeed("можно голосовать онлайн", "fake_voting_method", 5, "ru"),
-                new PatternSeed("онлайн голосование доступно", "fake_voting_method", 5, "ru"),
-                new PatternSeed("голосование по телефону", "fake_voting_method", 5, "ru"),
-                new PatternSeed("бюллетени недействительны", "ballot_confusion", 4, "ru"),
-                new PatternSeed("бюллетень с ручкой недействителен", "ballot_confusion", 4, "ru"),
-                new PatternSeed("удостоверения личности не принимаются", "id_requirement", 4, "ru"),
-                new PatternSeed("принимают только паспорт", "id_requirement", 3, "ru"),
-                new PatternSeed("результаты уже решены", "results_misinformation", 4, "ru"),
-                new PatternSeed("официальные результаты утекли", "results_misinformation", 4, "ru"),
-                new PatternSeed("наблюдатели запрещены", "observer_misinformation", 3, "ru"),
-                new PatternSeed("наблюдатели могут не пустить на голосование", "observer_misinformation", 3, "ru"),
-                new PatternSeed("голоса диаспоры отменены", "diaspora_voting", 5, "ru"),
-                new PatternSeed("официальный сайт разрешил смс голосование", "official_impersonation", 5, "ru"),
-                new PatternSeed("горячая линия цик подтвердила отмену выборов", "official_impersonation", 4, "ru")
-        );
-
-        for (PatternSeed pattern : patterns) {
-            String normalized = TextNormalizer.normalize(pattern.phrase());
-            if (rumorPatternRepository.findByNormalizedPhraseAndLanguage(normalized, pattern.language()).isPresent()) {
+    private void seedRumorPatterns(List<RumorPatternSeed> patternSeeds) {
+        int inserted = 0;
+        for (RumorPatternSeed patternSeed : patternSeeds) {
+            String normalizedPhrase = TextNormalizer.normalize(patternSeed.phrase());
+            if (rumorPatternRepository
+                    .findByNormalizedPhraseAndCategoryAndLanguage(
+                            normalizedPhrase,
+                            patternSeed.category(),
+                            patternSeed.language()
+                    )
+                    .isPresent()) {
                 continue;
             }
 
             RumorPattern entity = new RumorPattern();
-            entity.setPhrase(pattern.phrase());
-            entity.setNormalizedPhrase(normalized);
-            entity.setCategory(pattern.category());
-            entity.setSeverity(pattern.severity());
-            entity.setLanguage(pattern.language());
+            entity.setPhrase(patternSeed.phrase());
+            entity.setNormalizedPhrase(normalizedPhrase);
+            entity.setCategory(patternSeed.category());
+            entity.setSeverity(patternSeed.severity());
+            entity.setLanguage(patternSeed.language());
             entity.setActive(true);
             rumorPatternRepository.save(entity);
+            inserted++;
         }
+        log.info("Seeded rumor_patterns: inserted {} new rows.", inserted);
     }
 
-    private void seedVerifiedClaims() {
-        List<VerifiedClaimSeed> claims = List.of(
-                new VerifiedClaimSeed(
-                        "You can vote by SMS.",
-                        "fake_voting_method",
-                        ClaimStatus.VERIFIED_FALSE,
-                        "Voting by SMS is not available. Use only official voting procedures.",
-                        "en",
-                        "Moldova"
-                ),
-                new VerifiedClaimSeed(
-                        "The election was cancelled.",
-                        "voting_process",
-                        ClaimStatus.VERIFIED_FALSE,
-                        "The election has not been cancelled. Polling stations operate according to the official schedule.",
-                        "en",
-                        "Moldova"
-                ),
-                new VerifiedClaimSeed(
-                        "Voting is online.",
-                        "fake_voting_method",
-                        ClaimStatus.VERIFIED_FALSE,
-                        "Online voting is not available for this election.",
-                        "en",
-                        "Moldova"
-                ),
-                new VerifiedClaimSeed(
-                        "Polling stations are open from 07:00 to 21:00.",
-                        "voting_hours",
-                        ClaimStatus.VERIFIED_TRUE,
-                        "Correct. Polling stations are open from 07:00 to 21:00.",
-                        "en",
-                        "Moldova"
-                ),
-                new VerifiedClaimSeed(
-                        "Voting is from 07:00 to 21:00.",
-                        "voting_hours",
-                        ClaimStatus.VERIFIED_TRUE,
-                        "Correct. Polling stations are open from 07:00 to 21:00.",
-                        "en",
-                        "Moldova"
-                ),
-                new VerifiedClaimSeed(
-                        "Results are already official before polls close.",
-                        "results_misinformation",
-                        ClaimStatus.VERIFIED_FALSE,
-                        "Official results are published only after legal counting and reporting procedures.",
-                        "en",
-                        "Moldova"
-                ),
-                new VerifiedClaimSeed(
-                        "You need only a passport to vote.",
-                        "id_requirement",
-                        ClaimStatus.NEEDS_CONTEXT,
-                        "Accepted documents depend on official election regulations. Check the official requirements list.",
-                        "en",
-                        "Moldova"
-                ),
-                new VerifiedClaimSeed(
-                        "Identity cards are not accepted.",
-                        "id_requirement",
-                        ClaimStatus.VERIFIED_FALSE,
-                        "Identity cards are accepted according to official election rules.",
-                        "en",
-                        "Moldova"
-                ),
-                new VerifiedClaimSeed(
-                        "Polling station information is available only on official sources.",
-                        "polling_location",
-                        ClaimStatus.VERIFIED_TRUE,
-                        "Correct. Verify polling locations only via official election sources.",
-                        "en",
-                        "Moldova"
-                ),
-                new VerifiedClaimSeed(
-                        "All ballots marked with pen are invalid.",
-                        "ballot_confusion",
-                        ClaimStatus.MISLEADING,
-                        "Ballot validity depends on official marking rules, not a blanket pen-only rule.",
-                        "en",
-                        "Moldova"
-                ),
-                new VerifiedClaimSeed(
-                        "Diaspora voting was cancelled.",
-                        "diaspora_voting",
-                        ClaimStatus.VERIFIED_FALSE,
-                        "Diaspora voting has not been cancelled. Use official lists of polling stations abroad.",
-                        "en",
-                        "Diaspora"
-                ),
-                new VerifiedClaimSeed(
-                        "Observers are banned from polling stations.",
-                        "observer_misinformation",
-                        ClaimStatus.VERIFIED_FALSE,
-                        "Authorized observers are allowed under official election law.",
-                        "en",
-                        "Moldova"
-                ),
+    private void seedVerifiedClaims(List<VerifiedClaimSeed> claimSeeds) {
+        int inserted = 0;
+        for (VerifiedClaimSeed claimSeed : claimSeeds) {
+            String normalizedClaim = TextNormalizer.normalize(claimSeed.claimText());
+            Optional<VerifiedClaim> existing =
+                    verifiedClaimRepository.findFirstByNormalizedClaimAndLanguage(normalizedClaim, claimSeed.language());
+            if (existing.isPresent()) {
+                continue;
+            }
 
-                new VerifiedClaimSeed(
-                        "Poți vota prin SMS.",
-                        "fake_voting_method",
-                        ClaimStatus.VERIFIED_FALSE,
-                        "Votarea prin SMS nu este disponibilă.",
-                        "ro",
-                        "Moldova"
-                ),
-                new VerifiedClaimSeed(
-                        "Alegerile au fost anulate.",
-                        "voting_process",
-                        ClaimStatus.VERIFIED_FALSE,
-                        "Alegerile nu au fost anulate.",
-                        "ro",
-                        "Moldova"
-                ),
-                new VerifiedClaimSeed(
-                        "Poți vota online.",
-                        "fake_voting_method",
-                        ClaimStatus.VERIFIED_FALSE,
-                        "Votarea online nu este disponibilă.",
-                        "ro",
-                        "Moldova"
-                ),
-                new VerifiedClaimSeed(
-                        "Secțiile sunt deschise între 07:00 și 21:00.",
-                        "voting_hours",
-                        ClaimStatus.VERIFIED_TRUE,
-                        "Corect. Programul oficial este 07:00 - 21:00.",
-                        "ro",
-                        "Moldova"
-                ),
-                new VerifiedClaimSeed(
-                        "Cartea de identitate nu este acceptată la vot.",
-                        "id_requirement",
-                        ClaimStatus.VERIFIED_FALSE,
-                        "Cartea de identitate este acceptată conform regulilor oficiale.",
-                        "ro",
-                        "Moldova"
-                ),
-                new VerifiedClaimSeed(
-                        "Rezultatele sunt oficiale înainte de închiderea secțiilor.",
-                        "results_misinformation",
-                        ClaimStatus.VERIFIED_FALSE,
-                        "Rezultatele oficiale apar după închiderea secțiilor și validarea legală.",
-                        "ro",
-                        "Moldova"
-                ),
-                new VerifiedClaimSeed(
-                        "Voturile diasporei au fost anulate.",
-                        "diaspora_voting",
-                        ClaimStatus.VERIFIED_FALSE,
-                        "Voturile diasporei nu au fost anulate.",
-                        "ro",
-                        "Diaspora"
-                ),
-
-                new VerifiedClaimSeed(
-                        "Можно голосовать по СМС.",
-                        "fake_voting_method",
-                        ClaimStatus.VERIFIED_FALSE,
-                        "Голосование по СМС недоступно.",
-                        "ru",
-                        "Moldova"
-                ),
-                new VerifiedClaimSeed(
-                        "Выборы отменены.",
-                        "voting_process",
-                        ClaimStatus.VERIFIED_FALSE,
-                        "Выборы не отменены.",
-                        "ru",
-                        "Moldova"
-                ),
-                new VerifiedClaimSeed(
-                        "Можно голосовать онлайн.",
-                        "fake_voting_method",
-                        ClaimStatus.VERIFIED_FALSE,
-                        "Онлайн-голосование недоступно.",
-                        "ru",
-                        "Moldova"
-                ),
-                new VerifiedClaimSeed(
-                        "Участки открыты с 07:00 до 21:00.",
-                        "voting_hours",
-                        ClaimStatus.VERIFIED_TRUE,
-                        ClaimCheckTexts.RU_VOTING_HOURS,
-                        "ru",
-                        "Moldova"
-                ),
-                new VerifiedClaimSeed(
-                        "Удостоверение личности не принимается на участке.",
-                        "id_requirement",
-                        ClaimStatus.VERIFIED_FALSE,
-                        "Удостоверение личности принимается по официальным правилам.",
-                        "ru",
-                        "Moldova"
-                ),
-                new VerifiedClaimSeed(
-                        "Официальные результаты объявлены до закрытия участков.",
-                        "results_misinformation",
-                        ClaimStatus.VERIFIED_FALSE,
-                        "Официальные результаты публикуются после закрытия участков и законной проверки.",
-                        "ru",
-                        "Moldova"
-                ),
-                new VerifiedClaimSeed(
-                        "Голоса диаспоры отменены.",
-                        "diaspora_voting",
-                        ClaimStatus.VERIFIED_FALSE,
-                        "Голоса диаспоры не отменены.",
-                        "ru",
-                        "Diaspora"
-                )
-        );
-
-        for (VerifiedClaimSeed claim : claims) {
-            seedVerifiedClaim(
-                    claim.claimText(),
-                    claim.category(),
-                    claim.status(),
-                    claim.correctionText(),
-                    claim.language(),
-                    claim.region()
+            VerifiedClaim claim = new VerifiedClaim();
+            claim.setClaimText(claimSeed.claimText());
+            claim.setNormalizedClaim(normalizedClaim);
+            claim.setCategory(claimSeed.category());
+            claim.setStatus(claimSeed.status());
+            claim.setCorrectionText(claimSeed.correctionText());
+            claim.setOfficialSource(
+                    claimSeed.officialSource().isBlank()
+                            ? "Demo Central Electoral Commission"
+                            : claimSeed.officialSource()
             );
+            claim.setOfficialSourceUrl(claimSeed.officialSourceUrl());
+            claim.setLanguage(claimSeed.language());
+            claim.setRegion(claimSeed.region());
+            claim.setPublished(claimSeed.published());
+            verifiedClaimRepository.save(claim);
+            inserted++;
+        }
+        log.info("Seeded verified_claims: inserted {} new rows.", inserted);
+    }
+
+    private String blankToNull(String value) {
+        String trimmed = value == null ? null : value.trim();
+        return trimmed == null || trimmed.isEmpty() ? null : trimmed;
+    }
+
+    private enum SeedSection {
+        NONE,
+        OFFICIAL_INFO,
+        RUMOR_PATTERNS,
+        VERIFIED_CLAIMS,
+        REQUIRED_DEMO_TESTS;
+
+        static SeedSection fromHeader(String header) {
+            return switch (header.toUpperCase(Locale.ROOT)) {
+                case "## OFFICIAL_INFO" -> OFFICIAL_INFO;
+                case "## RUMOR_PATTERNS" -> RUMOR_PATTERNS;
+                case "## VERIFIED_CLAIMS" -> VERIFIED_CLAIMS;
+                case "## REQUIRED DEMO TESTS" -> REQUIRED_DEMO_TESTS;
+                default -> NONE;
+            };
         }
     }
 
-    private void seedVerifiedClaim(
-            String claimText,
-            String category,
-            ClaimStatus status,
-            String correctionText,
-            String language,
-            String region
+    private record OfficialSeed(
+            String topic,
+            String content,
+            String sourceName,
+            String sourceUrl,
+            String language
     ) {
-        String normalized = TextNormalizer.normalize(claimText);
-        String normalizedLanguage = language.trim().toLowerCase(Locale.ROOT);
-        if (verifiedClaimRepository.findFirstByNormalizedClaimAndLanguageAndPublishedTrue(normalized, normalizedLanguage).isPresent()) {
-            return;
-        }
-
-        VerifiedClaim claim = new VerifiedClaim();
-        claim.setClaimText(claimText);
-        claim.setNormalizedClaim(normalized);
-        claim.setCategory(category);
-        claim.setStatus(status);
-        claim.setCorrectionText(correctionText);
-        claim.setOfficialSource("Central Electoral Commission");
-        claim.setOfficialSourceUrl("https://cec.example/demo");
-        claim.setLanguage(normalizedLanguage);
-        claim.setRegion(region);
-        claim.setPublished(true);
-        verifiedClaimRepository.save(claim);
     }
 
-    private record OfficialSeed(String topic, String content, String language) {
-    }
-
-    private record PatternSeed(String phrase, String category, int severity, String language) {
+    private record RumorPatternSeed(String phrase, String category, int severity, String language) {
     }
 
     private record VerifiedClaimSeed(
@@ -474,15 +339,18 @@ public class DataSeeder implements CommandLineRunner {
             String category,
             ClaimStatus status,
             String correctionText,
+            String officialSource,
+            String officialSourceUrl,
             String language,
-            String region
+            String region,
+            boolean published
     ) {
     }
 
-    private static final class ClaimCheckTexts {
-        private static final String RU_VOTING_HOURS = "Верно. Участки открыты с 07:00 до 21:00.";
-
-        private ClaimCheckTexts() {
-        }
+    private record SeedData(
+            List<OfficialSeed> officialInfo,
+            List<RumorPatternSeed> rumorPatterns,
+            List<VerifiedClaimSeed> verifiedClaims
+    ) {
     }
 }

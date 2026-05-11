@@ -8,17 +8,21 @@ import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "official_info")
+@Table(
+        name = "official_info",
+        uniqueConstraints = @UniqueConstraint(name = "uk_official_info_topic_language", columnNames = {"topic", "language"})
+)
 public class OfficialInfo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String topic;
 
     @Column(nullable = false, columnDefinition = "TEXT")
@@ -98,4 +102,3 @@ public class OfficialInfo {
         this.updatedAt = updatedAt;
     }
 }
-
