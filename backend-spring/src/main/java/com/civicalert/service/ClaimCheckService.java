@@ -55,7 +55,7 @@ public class ClaimCheckService {
             response.setStatus(ClaimStatus.NEEDS_REVIEW);
             response.setRiskLevel(RiskLevel.MEDIUM);
             response.setCategory("engine_unavailable");
-            response.setMessage("Automatic rumor detection is temporarily unavailable. Please submit this claim for manual review.");
+            response.setMessage("The claim could not be fully analyzed by the detection engine, but it was received.");
         } else if (detectionResult.isMatched()) {
             response.setStatus(ClaimStatus.NEEDS_REVIEW);
             response.setRiskLevel(detectionResult.getRiskLevel());
