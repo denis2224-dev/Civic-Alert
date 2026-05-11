@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { finalize, timeout, TimeoutError } from 'rxjs';
 import { ClaimCheckResponse } from '../../models/claim-check.model';
@@ -22,11 +22,15 @@ export class ClaimCheckerComponent {
   result: ClaimCheckResponse | null = null;
   private loadingFailsafeTimer: ReturnType<typeof setTimeout> | null = null;
 
-  constructor(private readonly claimService: ClaimService) {}
+  constructor(
+    private readonly claimService: ClaimService,
+    private readonly changeDetectorRef: ChangeDetectorRef
+  ) {}
 
   checkClaim(): void {
     if (!this.text.trim()) {
       this.errorMessage = 'Please enter a claim to check.';
+      this.scheduleViewUpdate();
       return;
     }
 
@@ -38,6 +42,7 @@ export class ClaimCheckerComponent {
       if (this.loading) {
         this.loading = false;
         this.errorMessage = 'Something went wrong while checking the claim. Please try again.';
+        this.scheduleViewUpdate();
       }
     }, ClaimCheckerComponent.FAILSAFE_LOADING_RESET_MS);
 
@@ -53,30 +58,36 @@ export class ClaimCheckerComponent {
           finalize(() => {
             this.loading = false;
             this.resetLoadingFailsafe();
+            this.scheduleViewUpdate();
           })
         )
         .subscribe({
           next: (response) => {
             this.result = response;
+            this.scheduleViewUpdate();
           },
           error: (error: unknown) => {
             console.error('Claim check request failed:', error);
 
             if (error instanceof TimeoutError) {
               this.errorMessage = 'Something went wrong while checking the claim. Please try again.';
+              this.scheduleViewUpdate();
               return;
             }
 
             if (error instanceof HttpErrorResponse) {
               if (error.status === 0) {
                 this.errorMessage = 'Could not connect to the backend. Make sure Spring Boot is running on port 8080.';
+                this.scheduleViewUpdate();
                 return;
               }
               this.errorMessage = 'Something went wrong while checking the claim. Please try again.';
+              this.scheduleViewUpdate();
               return;
             }
 
             this.errorMessage = 'Something went wrong while checking the claim. Please try again.';
+            this.scheduleViewUpdate();
           }
         });
     } catch (error) {
@@ -84,6 +95,7 @@ export class ClaimCheckerComponent {
       this.loading = false;
       this.resetLoadingFailsafe();
       this.errorMessage = 'Something went wrong while checking the claim. Please try again.';
+      this.scheduleViewUpdate();
     }
   }
 
@@ -96,5 +108,9 @@ export class ClaimCheckerComponent {
       clearTimeout(this.loadingFailsafeTimer);
       this.loadingFailsafeTimer = null;
     }
+  }
+
+  private scheduleViewUpdate(): void {
+    this.changeDetectorRef.markForCheck();
   }
 }
