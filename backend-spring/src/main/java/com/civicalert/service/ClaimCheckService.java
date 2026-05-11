@@ -51,7 +51,12 @@ public class ClaimCheckService {
         DetectionResult detectionResult = cEngineService.analyzeClaim(normalizedClaim, language);
         ClaimCheckResponse response = new ClaimCheckResponse();
 
-        if (detectionResult.isMatched()) {
+        if (detectionResult.getError() != null && !detectionResult.getError().isBlank()) {
+            response.setStatus(ClaimStatus.NEEDS_REVIEW);
+            response.setRiskLevel(RiskLevel.MEDIUM);
+            response.setCategory("engine_unavailable");
+            response.setMessage("Automatic rumor detection is temporarily unavailable. Please submit this claim for manual review.");
+        } else if (detectionResult.isMatched()) {
             response.setStatus(ClaimStatus.NEEDS_REVIEW);
             response.setRiskLevel(detectionResult.getRiskLevel());
             response.setCategory(detectionResult.getCategory());
@@ -99,4 +104,3 @@ public class ClaimCheckService {
         };
     }
 }
-
