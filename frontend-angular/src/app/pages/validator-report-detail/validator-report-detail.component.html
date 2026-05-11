@@ -1,0 +1,64 @@
+<section class="panel" *ngIf="report; else loadingTemplate">
+  <h1>Review Report {{ report.trackingCode }}</h1>
+
+  <div class="meta-grid">
+    <p><strong>Status:</strong> {{ report.status }}</p>
+    <p><strong>Region:</strong> {{ report.region }}</p>
+    <p><strong>Platform:</strong> {{ report.platform }}</p>
+    <p><strong>Category:</strong> {{ report.category || 'N/A' }}</p>
+    <p><strong>Risk Level:</strong> {{ report.riskLevel || 'LOW' }}</p>
+    <p><strong>Risk Score:</strong> {{ report.riskScore ?? 0 }}</p>
+  </div>
+
+  <div class="claim-block">
+    <h2>Claim Text</h2>
+    <p>{{ report.claimText }}</p>
+  </div>
+
+  <div class="claim-block">
+    <h2>Detection Logs</h2>
+    <div class="log-item" *ngFor="let log of detectionLogs">
+      <p><strong>Matched Phrase:</strong> {{ log.matchedPhrase || 'N/A' }}</p>
+      <p><strong>Category:</strong> {{ log.category || 'N/A' }}</p>
+      <p><strong>Severity:</strong> {{ log.severity ?? 0 }}</p>
+      <p><strong>Risk:</strong> {{ log.riskLevel || 'LOW' }} ({{ log.riskScore ?? 0 }})</p>
+      <p><strong>Created:</strong> {{ log.createdAt | date: 'short' }}</p>
+    </div>
+  </div>
+
+  <div class="form-grid">
+    <label for="correctionText">Correction Text</label>
+    <textarea id="correctionText" rows="4" [(ngModel)]="correctionText"></textarea>
+
+    <label for="officialSource">Official Source</label>
+    <input id="officialSource" [(ngModel)]="officialSource" />
+
+    <label for="officialSourceUrl">Official Source URL</label>
+    <input id="officialSourceUrl" [(ngModel)]="officialSourceUrl" />
+
+    <label class="checkbox">
+      <input type="checkbox" [(ngModel)]="publish" />
+      Publish correction to public verified claims
+    </label>
+  </div>
+
+  <div class="actions">
+    <button type="button" class="neutral" (click)="markUnderReview()">Mark Under Review</button>
+    <button type="button" class="success" (click)="submitDecision('VERIFIED_TRUE')">Verify True</button>
+    <button type="button" class="danger" (click)="submitDecision('VERIFIED_FALSE')">Verify False</button>
+    <button type="button" class="warn" (click)="submitDecision('MISLEADING')">Mark Misleading</button>
+    <button type="button" class="warn" (click)="submitDecision('NEEDS_CONTEXT')">Needs Context</button>
+    <button type="button" class="danger" (click)="submitDecision('REJECTED')">Reject</button>
+  </div>
+
+  <p class="success-text" *ngIf="successMessage">{{ successMessage }}</p>
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+</section>
+
+<ng-template #loadingTemplate>
+  <section class="panel">
+    <p *ngIf="loading">Loading report details...</p>
+    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+  </section>
+</ng-template>
+

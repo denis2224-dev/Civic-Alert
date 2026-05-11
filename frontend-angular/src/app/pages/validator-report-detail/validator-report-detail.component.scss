@@ -1,0 +1,108 @@
+.panel {
+  background: #121825;
+  border: 1px solid #2b3445;
+  border-radius: 8px;
+  padding: 24px;
+}
+
+h1,
+h2 {
+  margin: 0 0 10px;
+  color: #e8edf7;
+}
+
+.meta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 8px;
+}
+
+.meta-grid p,
+.claim-block p,
+.log-item p {
+  margin: 0;
+  color: #c7d4e8;
+}
+
+.claim-block {
+  margin-top: 16px;
+  border: 1px solid #283247;
+  border-radius: 8px;
+  padding: 12px;
+  background: #0f1420;
+}
+
+.log-item {
+  border-top: 1px solid #233148;
+  margin-top: 10px;
+  padding-top: 10px;
+  display: grid;
+  gap: 6px;
+}
+
+.form-grid {
+  margin-top: 16px;
+  display: grid;
+  gap: 8px;
+}
+
+label {
+  color: #d2dceb;
+}
+
+textarea,
+input {
+  border: 1px solid #344158;
+  background: #0f1420;
+  color: #e8edf7;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.actions {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+button {
+  border: 0;
+  border-radius: 8px;
+  padding: 9px 12px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.neutral {
+  background: #2e3c55;
+}
+
+.success {
+  background: #2b7a56;
+}
+
+.danger {
+  background: #933748;
+}
+
+.warn {
+  background: #8d6528;
+}
+
+.success-text {
+  color: #7ce6ad;
+  margin-top: 12px;
+}
+
+.error {
+  color: #ff7d7d;
+  margin-top: 12px;
+}
+

@@ -1,0 +1,86 @@
+.panel {
+  background: #121825;
+  border: 1px solid #2b3445;
+  border-radius: 8px;
+  padding: 24px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+h1 {
+  margin: 0;
+  color: #e8edf7;
+}
+
+button {
+  background: #2f58c4;
+  border: 0;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border-bottom: 1px solid #273147;
+  padding: 10px 8px;
+  text-align: left;
+  color: #cad7eb;
+  white-space: nowrap;
+}
+
+th {
+  color: #9fb2d3;
+  font-size: 13px;
+}
+
+a {
+  color: #9db9ff;
+  text-decoration: none;
+}
+
+.risk-badge {
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+}
+
+.risk-critical {
+  background: #5a2229;
+  color: #ffb7bf;
+}
+
+.risk-high {
+  background: #5a3a1c;
+  color: #ffd7b0;
+}
+
+.risk-medium {
+  background: #4e4920;
+  color: #ffefab;
+}
+
+.risk-low {
+  background: #1c4a34;
+  color: #b8f3d0;
+}
+
+.error {
+  color: #ff7d7d;
+}
+

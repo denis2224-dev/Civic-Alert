@@ -1,0 +1,43 @@
+<section class="panel">
+  <div class="header">
+    <h1>Validator Dashboard</h1>
+    <button type="button" (click)="loadReports()">Refresh</button>
+  </div>
+
+  <p *ngIf="loading">Loading reports...</p>
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+  <div class="table-wrapper" *ngIf="!loading && !errorMessage">
+    <table>
+      <thead>
+        <tr>
+          <th>Tracking</th>
+          <th>Region</th>
+          <th>Category</th>
+          <th>Risk Level</th>
+          <th>Risk Score</th>
+          <th>Status</th>
+          <th>Created</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let report of reports">
+          <td>{{ report.trackingCode }}</td>
+          <td>{{ report.region }}</td>
+          <td>{{ report.category || 'N/A' }}</td>
+          <td>
+            <span class="risk-badge" [ngClass]="riskClass(report.riskLevel)">{{ report.riskLevel || 'LOW' }}</span>
+          </td>
+          <td>{{ report.riskScore ?? 0 }}</td>
+          <td>{{ report.status }}</td>
+          <td>{{ report.createdAt | date: 'short' }}</td>
+          <td>
+            <a [routerLink]="['/validator/reports', report.id]">Review</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
