@@ -84,10 +84,15 @@ Risk levels:
 - `public_reports`
 - `detection_logs`
 
-Seeded on startup (without duplication checks):
-- official voting facts,
-- known rumor patterns,
-- initial verified claims.
+Seeded on startup (with duplication-safe checks):
+- `official_info`: 25+ official election-process facts, with EN/RO/RU records for key topics.
+- `rumor_patterns`: 80+ multilingual rumor phrases (EN/RO/RU) across categories like `fake_voting_method`, `voter_suppression`, `polling_location`, and `results_misinformation`.
+- `verified_claims`: 25+ published verified examples (true/false/misleading/needs-context), including multilingual samples.
+
+Seeding is idempotent:
+- official info is inserted only when a topic is missing,
+- rumor patterns are inserted only when `(normalized_phrase, language)` is missing,
+- verified claims are inserted only when `(normalized_claim, language, published=true)` is missing.
 
 ## 7. PostgreSQL (Existing `spring-postgres` Container)
 
@@ -168,7 +173,8 @@ Frontend URL:
 - `CEngineService` invokes `../c-engine/civic_alert_engine` using `ProcessBuilder`.
 - If binary is missing, backend runs `make` in `c-engine/`.
 - Engine JSON output is parsed into backend DTOs.
-- If engine compile/run fails, backend stays up and returns a manual-review oriented fallback.
+- Engine execution has a timeout to prevent hanging requests.
+- If engine compile/run/parse fails, backend stays up and returns a safe fallback (`NEEDS_REVIEW`) with a clear message.
 
 Build engine manually (optional):
 
@@ -184,6 +190,42 @@ make
 - `"You can vote by SMS."`
 - `"The polling station moved."`
 - `"Candidate X is good."` -> should return `NO_MATCH_FOUND` for election-process rumor detection.
+- `"Voting is from 07:00 to 21:00."` -> should return `VERIFIED_TRUE`.
+
+## 13. Add More Rumor Patterns Later
+
+1. Add seed entries in `backend-spring/src/main/java/com/civicalert/config/DataSeeder.java` (`seedRumorPatterns` list) with phrase, category, severity, and language.
+2. Keep phrase text realistic and election-process focused.
+3. Restart backend so idempotent seeding inserts only missing records.
+4. If you want C-engine detection to catch the same phrase immediately, also add it in `c-engine/rumor_matcher.c` and rebuild:
+
+```bash
+cd c-engine
+make
+```
+
+## 14. Troubleshooting “Checking...” Stays Loading
+
+If claim checking stays on `Checking...`:
+
+1. Confirm backend is running on `http://localhost:8080`.
+2. Confirm frontend API base is `http://localhost:8080/api` (`frontend-angular/src/app/services/api-base.ts`).
+3. Open browser dev tools and check failing request to `POST /api/public/check-claim`.
+4. If backend is down, frontend now shows:
+   - `Could not connect to the backend. Make sure Spring Boot is running on port 8080.`
+5. If backend returns an error/timeout, frontend now stops loading and shows:
+   - `Something went wrong while checking the claim. Please try again.`
+6. Restart services:
+
+```bash
+cd backend-spring
+mvn spring-boot:run
+```
+
+```bash
+cd frontend-angular
+ng serve
+```
 
 ## API Endpoints Summary
 

@@ -244,6 +244,14 @@ public class DataSeeder implements CommandLineRunner {
                         "Moldova"
                 ),
                 new VerifiedClaimSeed(
+                        "Voting is from 07:00 to 21:00.",
+                        "voting_hours",
+                        ClaimStatus.VERIFIED_TRUE,
+                        "Correct. Polling stations are open from 07:00 to 21:00.",
+                        "en",
+                        "Moldova"
+                ),
+                new VerifiedClaimSeed(
                         "Results are already official before polls close.",
                         "results_misinformation",
                         ClaimStatus.VERIFIED_FALSE,
