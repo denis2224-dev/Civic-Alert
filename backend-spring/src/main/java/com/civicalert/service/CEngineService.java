@@ -2,14 +2,20 @@ package com.civicalert.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.civicalert.dto.DetectionResult;
+import com.civicalert.entity.RumorPattern;
 import com.civicalert.enums.RiskLevel;
+import com.civicalert.repository.RumorPatternRepository;
 import jakarta.annotation.PostConstruct;
-import java.io.InputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -27,13 +33,18 @@ public class CEngineService {
     private static final long STREAM_WAIT_SECONDS = 2;
 
     private final ObjectMapper objectMapper;
+    private final RumorPatternRepository rumorPatternRepository;
     private final Path engineDirectory = Paths.get("../c-engine").toAbsolutePath().normalize();
     private final Path engineBinary = engineDirectory.resolve("civic_alert_engine");
     private volatile boolean compilationAttempted;
     private volatile String compilationError;
 
-    public CEngineService(ObjectMapper objectMapper) {
+    public CEngineService(
+            ObjectMapper objectMapper,
+            RumorPatternRepository rumorPatternRepository
+    ) {
         this.objectMapper = objectMapper;
+        this.rumorPatternRepository = rumorPatternRepository;
     }
 
     @PostConstruct
@@ -56,10 +67,15 @@ public class CEngineService {
             return fallback;
         }
 
-        ProcessBuilder processBuilder = new ProcessBuilder(engineBinary.toString(), text);
-        processBuilder.directory(engineDirectory.toFile());
+        Path patternFile = null;
+        try {
+            patternFile = exportPatternsToTempFile(language);
+        } catch (IOException e) {
+            log.warn("Could not export rumor patterns for C engine. Using built-in engine patterns.", e);
+        }
 
         try {
+            ProcessBuilder processBuilder = buildEngineProcess(text, language, patternFile);
             ProcessResult execution = executeProcess(processBuilder, ENGINE_TIMEOUT_SECONDS, false);
 
             if (execution.timedOut()) {
@@ -102,7 +118,79 @@ public class CEngineService {
             fallback.setError("Unable to parse C engine output: " + e.getMessage());
             fallback.setEngineOutput("{\"matched\":false,\"error\":\"invalid_engine_json\"}");
             return fallback;
+        } finally {
+            if (patternFile != null) {
+                try {
+                    Files.deleteIfExists(patternFile);
+                } catch (IOException deleteEx) {
+                    log.debug("Failed to delete temp pattern file {}", patternFile, deleteEx);
+                }
+            }
         }
+    }
+
+    private ProcessBuilder buildEngineProcess(String text, String language, Path patternFile) {
+        List<String> command = new ArrayList<>();
+        command.add(engineBinary.toString());
+        command.add("--claim");
+        command.add(text);
+
+        if (patternFile != null) {
+            command.add("--patterns");
+            command.add(patternFile.toAbsolutePath().toString());
+        }
+
+        if (language != null && !language.isBlank()) {
+            command.add("--language");
+            command.add(language.trim().toLowerCase(Locale.ROOT));
+        }
+
+        ProcessBuilder processBuilder = new ProcessBuilder(command);
+        processBuilder.directory(engineDirectory.toFile());
+        return processBuilder;
+    }
+
+    private Path exportPatternsToTempFile(String language) throws IOException {
+        List<RumorPattern> patterns = rumorPatternRepository.findByActiveTrueAndLanguage(
+                language == null ? "" : language.trim().toLowerCase(Locale.ROOT)
+        );
+        if (patterns.isEmpty()) {
+            patterns = rumorPatternRepository.findByActiveTrue();
+        }
+        patterns = patterns.stream()
+                .sorted(
+                        Comparator.comparing(RumorPattern::getSeverity, Comparator.nullsLast(Comparator.reverseOrder()))
+                                .thenComparing(RumorPattern::getCreatedAt, Comparator.nullsLast(Comparator.reverseOrder()))
+                )
+                .toList();
+
+        if (patterns.isEmpty()) {
+            return null;
+        }
+
+        Path tempFile = Files.createTempFile("civicalert_patterns_", ".txt");
+        List<String> lines = patterns.stream()
+                .map(pattern -> {
+                    String phrase = sanitizePatternField(
+                            pattern.getNormalizedPhrase() == null || pattern.getNormalizedPhrase().isBlank()
+                                    ? pattern.getPhrase()
+                                    : pattern.getNormalizedPhrase()
+                    );
+                    String category = sanitizePatternField(pattern.getCategory());
+                    int severity = pattern.getSeverity() == null ? 1 : pattern.getSeverity();
+                    String patternLanguage = sanitizePatternField(pattern.getLanguage());
+                    return phrase + "|" + category + "|" + severity + "|" + patternLanguage;
+                })
+                .toList();
+        Files.write(tempFile, lines, StandardCharsets.UTF_8);
+        return tempFile;
+    }
+
+    private String sanitizePatternField(String value) {
+        if (value == null) {
+            return "";
+        }
+        return value.replace("|", " ").replace("\n", " ").replace("\r", " ").trim();
     }
 
     private synchronized boolean ensureEngineReady() {
