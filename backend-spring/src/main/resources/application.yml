@@ -1,0 +1,24 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: civic-alert
+  datasource:
+    url: jdbc:postgresql://localhost:5432/civicalert
+    username: civicalert_user
+    password: civicalert_pass
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: false
+
+logging:
+  level:
+    org.hibernate.SQL: WARN
+
