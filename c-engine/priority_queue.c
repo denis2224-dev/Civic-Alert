@@ -72,7 +72,7 @@ void pq_push(PriorityQueue *queue, PQItem item) {
 }
 
 PQItem pq_pop(PriorityQueue *queue) {
-    PQItem empty = {.score = -1, .pattern_index = -1};
+    PQItem empty = {.score = -1, .pattern_index = -1, .exact_match = 0, .fuzzy_match = 0};
     if (queue == NULL || queue->size == 0 || queue->items == NULL) {
         return empty;
     }
@@ -99,4 +99,3 @@ void pq_free(PriorityQueue *queue) {
     queue->size = 0;
     queue->capacity = 0;
 }
-

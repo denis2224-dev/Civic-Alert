@@ -6,6 +6,8 @@
 typedef struct {
     int score;
     int pattern_index;
+    int exact_match;
+    int fuzzy_match;
 } PQItem;
 
 typedef struct {
@@ -21,4 +23,3 @@ int pq_is_empty(const PriorityQueue *queue);
 void pq_free(PriorityQueue *queue);
 
 #endif
-

@@ -1,7 +1,6 @@
 #include "json_writer.h"
 #include "normalizer.h"
 #include "rumor_matcher.h"
-#include "trie.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -53,21 +52,19 @@ int main(int argc, char **argv) {
         return 1;
     }
 
-    TrieNode *root = trie_create_node();
-    if (root == NULL) {
+    RumorMatcher *matcher = rumor_matcher_create();
+    if (matcher == NULL || !rumor_matcher_init(matcher, NULL, NULL)) {
         free(normalized);
-        fprintf(stderr, "Trie allocation failed.\n");
+        rumor_matcher_destroy(matcher);
+        fprintf(stderr, "Pattern matcher initialization failed.\n");
         return 1;
     }
 
-    rumor_matcher_load_patterns(root);
-
     EngineDetectionResult result;
-    rumor_matcher_detect(root, normalized, &result);
+    rumor_matcher_detect(matcher, normalized, &result);
     json_writer_print(&result);
 
-    trie_free(root);
+    rumor_matcher_destroy(matcher);
     free(normalized);
     return 0;
 }
-

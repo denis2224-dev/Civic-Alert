@@ -25,6 +25,12 @@ char *normalize_text(const char *input) {
     for (size_t i = 0; i < len; i++) {
         unsigned char ch = (unsigned char)input[i];
 
+        if (ch >= 128) {
+            normalized[out++] = (char)ch;
+            previous_was_space = 0;
+            continue;
+        }
+
         if (isalnum(ch)) {
             normalized[out++] = (char)tolower(ch);
             previous_was_space = 0;
@@ -44,4 +50,3 @@ char *normalize_text(const char *input) {
     normalized[out] = '\0';
     return normalized;
 }
-
