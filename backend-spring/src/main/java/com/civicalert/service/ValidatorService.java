@@ -10,6 +10,7 @@ import com.civicalert.enums.RiskLevel;
 import com.civicalert.repository.DetectionLogRepository;
 import com.civicalert.repository.PublicReportRepository;
 import com.civicalert.repository.VerifiedClaimRepository;
+import com.civicalert.util.ElectionTextRules;
 import com.civicalert.util.TextNormalizer;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
@@ -79,6 +80,7 @@ public class ValidatorService {
     @Transactional
     public PublicReport applyDecision(Long id, ValidatorDecisionRequest request) {
         PublicReport report = findReport(id);
+        guardAgainstInvalidSmsPublish(report, request);
         report.setStatus(resolveReportStatus(request.getStatus(), request.isPublish()));
 
         if (request.isPublish()) {
@@ -86,6 +88,20 @@ public class ValidatorService {
         }
 
         return publicReportRepository.save(report);
+    }
+
+    private void guardAgainstInvalidSmsPublish(PublicReport report, ValidatorDecisionRequest request) {
+        if (!request.isPublish() || request.getStatus() != ClaimStatus.VERIFIED_TRUE) {
+            return;
+        }
+
+        String normalizedClaim = TextNormalizer.normalize(report.getClaimText());
+        if (ElectionTextRules.isSmsVotingClaim(normalizedClaim)) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "SMS voting cannot be marked as verified true in this demo because official info says SMS voting is not available."
+            );
+        }
     }
 
     private PublicReport findReport(Long id) {
@@ -146,4 +162,3 @@ public class ValidatorService {
         };
     }
 }
-

@@ -109,11 +109,11 @@ public class DataSeeder implements CommandLineRunner {
 
         for (String rawLine : lines) {
             String line = rawLine.trim();
-            if (line.isEmpty() || line.startsWith("#")) {
-                continue;
-            }
             if (line.startsWith("## ")) {
                 currentSection = SeedSection.fromHeader(line);
+                continue;
+            }
+            if (line.isEmpty() || line.startsWith("#")) {
                 continue;
             }
             if (currentSection == SeedSection.NONE || currentSection == SeedSection.REQUIRED_DEMO_TESTS) {
@@ -294,7 +294,7 @@ public class DataSeeder implements CommandLineRunner {
             );
             claim.setOfficialSourceUrl(claimSeed.officialSourceUrl());
             claim.setLanguage(claimSeed.language());
-            claim.setRegion(claimSeed.region());
+            claim.setRegion(claimSeed.region() == null ? "General" : claimSeed.region());
             claim.setPublished(claimSeed.published());
             verifiedClaimRepository.save(claim);
             inserted++;
