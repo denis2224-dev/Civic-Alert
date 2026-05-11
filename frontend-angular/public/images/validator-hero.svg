@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 280" role="img" aria-label="Validator dashboard illustration">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1c2332"/>
+      <stop offset="100%" stop-color="#2f3a23"/>
+    </linearGradient>
+  </defs>
+  <rect width="480" height="280" rx="18" fill="url(#bg3)"/>
+  <rect x="52" y="66" width="376" height="150" rx="12" fill="#0f1722" stroke="#6c8597" stroke-width="2"/>
+  <rect x="72" y="86" width="336" height="20" rx="6" fill="#2f4455"/>
+  <rect x="72" y="118" width="336" height="1.5" fill="#385160"/>
+  <rect x="72" y="144" width="336" height="1.5" fill="#385160"/>
+  <rect x="72" y="170" width="336" height="1.5" fill="#385160"/>
+  <rect x="82" y="124" width="78" height="12" rx="6" fill="#5e7a8d"/>
+  <rect x="170" y="124" width="62" height="12" rx="6" fill="#8faac0"/>
+  <rect x="242" y="124" width="54" height="12" rx="6" fill="#3d9b86"/>
+  <rect x="306" y="124" width="64" height="12" rx="6" fill="#ffb84f"/>
+  <rect x="82" y="150" width="78" height="12" rx="6" fill="#5e7a8d"/>
+  <rect x="170" y="150" width="62" height="12" rx="6" fill="#8faac0"/>
+  <rect x="242" y="150" width="54" height="12" rx="6" fill="#8a71ff"/>
+  <rect x="306" y="150" width="64" height="12" rx="6" fill="#b1505e"/>
+  <circle cx="396" cy="192" r="18" fill="#3d9b86"/>
+  <path d="M388 192l5 5 10-11" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>

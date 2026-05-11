@@ -1,6 +1,11 @@
 <section class="panel">
-  <h1>Check election information before sharing it.</h1>
-  <p>Paste a suspicious election-process claim and verify it against trusted corrections.</p>
+  <div class="hero">
+    <img src="/images/claim-hero.svg" alt="" aria-hidden="true" />
+    <div>
+      <h1>Check election information before sharing it.</h1>
+      <p>Paste a suspicious election-process claim and verify it against trusted corrections.</p>
+    </div>
+  </div>
 
   <label for="claimText">Claim</label>
   <textarea
@@ -33,17 +38,32 @@
 </section>
 
 <section class="panel result" *ngIf="result">
-  <h2>Result</h2>
-
-  <div class="result-grid">
-    <div><strong>Status:</strong> {{ result.status }}</div>
-    <div><strong>Risk Level:</strong> {{ result.riskLevel }}</div>
-    <div><strong>Category:</strong> {{ result.category }}</div>
-    <div><strong>Message:</strong> {{ result.message }}</div>
+  <div class="result-header">
+    <h2>Result</h2>
+    <span class="status-pill" [ngClass]="statusClass(result.status)">
+      {{ formatLabel(result.status) }}
+    </span>
   </div>
 
-  <p *ngIf="result.correction"><strong>Correction:</strong> {{ result.correction }}</p>
-  <p *ngIf="result.officialSource">
+  <div class="result-grid">
+    <div class="result-item">
+      <span class="item-label">Risk Level</span>
+      <span class="risk-pill" [ngClass]="riskClass(result.riskLevel)">
+        {{ formatLabel(result.riskLevel) }}
+      </span>
+    </div>
+    <div class="result-item">
+      <span class="item-label">Category</span>
+      <span>{{ formatLabel(result.category) }}</span>
+    </div>
+    <div class="result-item full">
+      <span class="item-label">Message</span>
+      <span>{{ result.message }}</span>
+    </div>
+  </div>
+
+  <p class="detail" *ngIf="result.correction"><strong>Correction:</strong> {{ result.correction }}</p>
+  <p class="detail" *ngIf="result.officialSource">
     <strong>Official Source:</strong>
     <a *ngIf="result.officialSourceUrl" [href]="result.officialSourceUrl" target="_blank" rel="noreferrer">
       {{ result.officialSource }}
@@ -60,4 +80,3 @@
     Report This Claim
   </a>
 </section>
-

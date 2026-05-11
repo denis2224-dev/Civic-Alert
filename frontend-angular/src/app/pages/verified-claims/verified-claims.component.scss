@@ -1,6 +1,6 @@
 .panel {
-  background: #121825;
-  border: 1px solid #2b3445;
+  background: #121820;
+  border: 1px solid #2d3b45;
   border-radius: 8px;
   padding: 24px;
   display: flex;
@@ -11,9 +11,21 @@
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: end;
+  align-items: center;
   gap: 12px;
   flex-wrap: wrap;
+}
+
+.title-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.title-group img {
+  width: 88px;
+  border-radius: 8px;
+  border: 1px solid #40606a;
 }
 
 h1 {
@@ -29,8 +41,8 @@ label {
 }
 
 select {
-  border: 1px solid #344158;
-  background: #0f1420;
+  border: 1px solid #435368;
+  background: #0d131d;
   color: #e8edf7;
   border-radius: 8px;
   padding: 8px 10px;
@@ -43,8 +55,8 @@ select {
 }
 
 .claim-card {
-  background: #0f1420;
-  border: 1px solid #293246;
+  background: #0e141d;
+  border: 1px solid #30414c;
   border-radius: 8px;
   padding: 14px;
 }
@@ -52,19 +64,62 @@ select {
 h2 {
   margin: 0 0 10px;
   font-size: 16px;
-  color: #9db9ff;
+  color: #8be2cc;
 }
 
 p {
   margin: 0 0 8px;
-  color: #b4c3da;
+  color: #ced9ea;
 }
 
 a {
-  color: #9db9ff;
+  color: #9fd8ff;
+}
+
+.status-pill {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-neutral {
+  background: #37424d;
+  color: #dce7f6;
+}
+
+.status-verified_true {
+  background: #1d5944;
+  color: #bdf6df;
+}
+
+.status-verified_false {
+  background: #5d2430;
+  color: #ffc0cd;
+}
+
+.status-misleading {
+  background: #6a4521;
+  color: #ffdcb4;
+}
+
+.status-needs_context,
+.status-needs_review {
+  background: #544b1f;
+  color: #fff1b4;
+}
+
+.empty-state {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 12px;
+  border: 1px dashed #3f5461;
+  border-radius: 8px;
+  color: #c8d8f0;
 }
 
 .error {
   color: #ff7d7d;
 }
-

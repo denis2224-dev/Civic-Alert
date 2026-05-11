@@ -1,11 +1,14 @@
 <section class="panel">
   <div class="header">
-    <h1>Verified Corrections</h1>
+    <div class="title-group">
+      <img src="/images/verified-hero.svg" alt="" aria-hidden="true" />
+      <h1>Verified Corrections</h1>
+    </div>
     <div>
       <label for="category">Filter by category</label>
       <select id="category" [(ngModel)]="selectedCategory" (change)="applyFilter()">
         <option value="all">All</option>
-        <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+        <option *ngFor="let category of categories" [value]="category">{{ formatLabel(category) }}</option>
       </select>
     </div>
   </div>
@@ -14,9 +17,12 @@
 
   <div class="claims">
     <article class="claim-card" *ngFor="let claim of filteredClaims">
-      <h2>{{ claim.category }}</h2>
+      <h2>{{ formatLabel(claim.category) }}</h2>
       <p><strong>Claim:</strong> {{ claim.claimText }}</p>
-      <p><strong>Status:</strong> {{ claim.status }}</p>
+      <p>
+        <strong>Status:</strong>
+        <span class="status-pill" [ngClass]="statusClass(claim.status)">{{ formatLabel(claim.status) }}</span>
+      </p>
       <p *ngIf="claim.correctionText"><strong>Correction:</strong> {{ claim.correctionText }}</p>
       <p *ngIf="claim.officialSource">
         <strong>Official Source:</strong>
@@ -27,6 +33,6 @@
       </p>
       <p><strong>Updated:</strong> {{ claim.updatedAt | date: 'medium' }}</p>
     </article>
+    <p class="empty-state" *ngIf="!filteredClaims.length && !errorMessage">No verified claims match this filter.</p>
   </div>
 </section>
-

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ValidatorReport } from '../../models/validator.model';
 import { ValidatorService } from '../../services/validator.service';
+import { toDisplayLabel } from '../../utils/display-label';
 
 @Component({
   selector: 'app-validator-dashboard',
@@ -13,7 +14,10 @@ export class ValidatorDashboardComponent implements OnInit {
   loading = false;
   errorMessage = '';
 
-  constructor(private readonly validatorService: ValidatorService) {}
+  constructor(
+    private readonly validatorService: ValidatorService,
+    private readonly changeDetectorRef: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.loadReports();
@@ -22,14 +26,17 @@ export class ValidatorDashboardComponent implements OnInit {
   loadReports(): void {
     this.loading = true;
     this.errorMessage = '';
+    this.changeDetectorRef.markForCheck();
     this.validatorService.getReports().subscribe({
       next: (reports) => {
         this.reports = reports;
         this.loading = false;
+        this.changeDetectorRef.markForCheck();
       },
       error: () => {
         this.errorMessage = 'Unable to load validator reports.';
         this.loading = false;
+        this.changeDetectorRef.markForCheck();
       }
     });
   }
@@ -40,5 +47,8 @@ export class ValidatorDashboardComponent implements OnInit {
     }
     return `risk-${value.toLowerCase()}`;
   }
-}
 
+  formatLabel(value?: string | null): string {
+    return toDisplayLabel(value);
+  }
+}

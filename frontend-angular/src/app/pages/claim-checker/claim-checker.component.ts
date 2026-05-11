@@ -3,6 +3,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { finalize, timeout, TimeoutError } from 'rxjs';
 import { ClaimCheckResponse } from '../../models/claim-check.model';
 import { ClaimService } from '../../services/claim.service';
+import { toDisplayLabel } from '../../utils/display-label';
 
 @Component({
   selector: 'app-claim-checker',
@@ -101,6 +102,24 @@ export class ClaimCheckerComponent {
 
   get showReportButton(): boolean {
     return this.result?.status === 'NEEDS_REVIEW' || this.result?.status === 'NO_MATCH_FOUND';
+  }
+
+  formatLabel(value?: string | null): string {
+    return toDisplayLabel(value);
+  }
+
+  statusClass(status?: string | null): string {
+    if (!status) {
+      return 'status-neutral';
+    }
+    return `status-${status.toLowerCase()}`;
+  }
+
+  riskClass(riskLevel?: string | null): string {
+    if (!riskLevel) {
+      return 'risk-low';
+    }
+    return `risk-${riskLevel.toLowerCase()}`;
   }
 
   private resetLoadingFailsafe(): void {
