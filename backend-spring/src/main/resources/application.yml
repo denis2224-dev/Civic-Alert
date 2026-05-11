@@ -5,9 +5,9 @@ spring:
   application:
     name: civic-alert
   datasource:
-    url: jdbc:postgresql://localhost:5432/civicalert
-    username: civicalert_user
-    password: civicalert_pass
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:55432}/${DB_NAME:civicalert}
+    username: ${DB_USER:civicalert_user}
+    password: ${DB_PASSWORD:civicalert_pass}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -21,4 +21,3 @@ spring:
 logging:
   level:
     org.hibernate.SQL: WARN
-
