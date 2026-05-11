@@ -178,8 +178,22 @@ button[disabled] {
   color: #c3f9e3;
 }
 
+.risk-neutral {
+  background: #334a63;
+  color: #d6e9ff;
+}
+
 .detail {
   color: #d1dded;
+}
+
+.neutral-warning {
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px solid #3f5975;
+  border-radius: 8px;
+  background: #112033;
+  color: #c8defb;
 }
 
 .error {

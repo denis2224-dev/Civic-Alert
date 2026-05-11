@@ -45,7 +45,9 @@
 <section class="panel success" *ngIf="response">
   <h2>Report Submitted</h2>
   <p><strong>Tracking Code:</strong> {{ response.trackingCode }}</p>
-  <p><strong>Status:</strong> {{ response.status }}</p>
+  <p>
+    <strong>Status:</strong>
+    <span class="status-pill" [ngClass]="statusClass(response.status)">{{ formatLabel(response.status) }}</span>
+  </p>
   <p>{{ response.message }}</p>
 </section>
-

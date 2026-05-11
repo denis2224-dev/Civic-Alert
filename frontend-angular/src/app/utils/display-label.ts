@@ -1,8 +1,9 @@
 const LABEL_OVERRIDES: Record<string, string> = {
   verified_true: 'Verified True',
-  verified_false: 'Verified False',
+  verified_false: 'Verified False / Misleading',
+  misleading: 'Misleading',
   needs_review: 'Needs Review',
-  no_match_found: 'No Match Found',
+  no_match_found: 'No Verified Match Found',
   needs_context: 'Needs Context',
   under_review: 'Under Review',
   fake_voting_method: 'Fake Voting Method',

@@ -13,9 +13,11 @@
 <section class="panel result" *ngIf="reportStatus">
   <h2>Status</h2>
   <p><strong>Tracking Code:</strong> {{ reportStatus.trackingCode }}</p>
-  <p><strong>Status:</strong> {{ reportStatus.status }}</p>
-  <p><strong>Category:</strong> {{ reportStatus.category || 'N/A' }}</p>
-  <p><strong>Risk Level:</strong> {{ reportStatus.riskLevel || 'N/A' }}</p>
+  <p><strong>Status:</strong> {{ formatLabel(reportStatus.status) }}</p>
+  <p><strong>Category:</strong> {{ formatLabel(reportStatus.category) }}</p>
+  <p>
+    <strong>Risk Level:</strong>
+    <span class="risk-pill" [ngClass]="riskClass(reportStatus.riskLevel)">{{ formatLabel(reportStatus.riskLevel) }}</span>
+  </p>
   <p><strong>Risk Score:</strong> {{ reportStatus.riskScore ?? 'N/A' }}</p>
 </section>
-

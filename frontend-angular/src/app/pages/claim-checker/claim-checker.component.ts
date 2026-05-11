@@ -104,6 +104,10 @@ export class ClaimCheckerComponent {
     return this.result?.status === 'NEEDS_REVIEW' || this.result?.status === 'NO_MATCH_FOUND';
   }
 
+  get showNoMatchWarning(): boolean {
+    return this.result?.status === 'NO_MATCH_FOUND';
+  }
+
   formatLabel(value?: string | null): string {
     return toDisplayLabel(value);
   }
@@ -115,7 +119,10 @@ export class ClaimCheckerComponent {
     return `status-${status.toLowerCase()}`;
   }
 
-  riskClass(riskLevel?: string | null): string {
+  riskClass(riskLevel?: string | null, status?: string | null): string {
+    if (status === 'NO_MATCH_FOUND') {
+      return 'risk-neutral';
+    }
     if (!riskLevel) {
       return 'risk-low';
     }

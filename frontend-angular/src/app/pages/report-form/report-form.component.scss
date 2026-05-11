@@ -60,3 +60,33 @@ p {
   color: #a9b6ca;
 }
 
+.status-pill {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 4px 9px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-neutral {
+  background: #37424d;
+  color: #dce7f6;
+}
+
+.status-received,
+.status-under_review {
+  background: #544b1f;
+  color: #fff1b4;
+}
+
+.status-resolved,
+.status-published {
+  background: #225846;
+  color: #c3f9e3;
+}
+
+.status-rejected {
+  background: #5d2430;
+  color: #ffc0cd;
+}

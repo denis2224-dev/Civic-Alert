@@ -49,3 +49,31 @@ p {
   color: #b4c3da;
 }
 
+.risk-pill {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.risk-critical {
+  background: #6b2834;
+  color: #ffc6d2;
+}
+
+.risk-high {
+  background: #6a4a1c;
+  color: #ffe0b8;
+}
+
+.risk-medium {
+  background: #625a24;
+  color: #fff4b7;
+}
+
+.risk-low {
+  background: #225846;
+  color: #c3f9e3;
+}
