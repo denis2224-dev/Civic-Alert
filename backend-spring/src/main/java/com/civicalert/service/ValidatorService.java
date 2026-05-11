@@ -81,6 +81,7 @@ public class ValidatorService {
     public PublicReport applyDecision(Long id, ValidatorDecisionRequest request) {
         PublicReport report = findReport(id);
         guardAgainstInvalidSmsPublish(report, request);
+        applyValidatorRiskOutcome(report, request.getStatus());
         report.setStatus(resolveReportStatus(request.getStatus(), request.isPublish()));
 
         if (request.isPublish()) {
@@ -131,6 +132,57 @@ public class ValidatorService {
         claim.setPublished(true);
 
         verifiedClaimRepository.save(claim);
+    }
+
+    private void applyValidatorRiskOutcome(PublicReport report, ClaimStatus claimStatus) {
+        if (claimStatus == null) {
+            return;
+        }
+
+        switch (claimStatus) {
+            case VERIFIED_FALSE -> {
+                report.setRiskLevel(RiskLevel.HIGH);
+                report.setRiskScore(maxRisk(report.getRiskScore(), 70));
+            }
+            case MISLEADING -> {
+                report.setRiskLevel(RiskLevel.HIGH);
+                report.setRiskScore(maxRisk(report.getRiskScore(), 60));
+            }
+            case NEEDS_CONTEXT -> {
+                report.setRiskLevel(RiskLevel.MEDIUM);
+                report.setRiskScore(maxRisk(report.getRiskScore(), 40));
+            }
+            case VERIFIED_TRUE -> {
+                report.setRiskLevel(RiskLevel.LOW);
+                report.setRiskScore(minRisk(report.getRiskScore(), 20));
+            }
+            case REJECTED -> {
+                report.setRiskLevel(RiskLevel.LOW);
+                report.setRiskScore(minRisk(report.getRiskScore(), 20));
+            }
+            case NEEDS_REVIEW, NO_MATCH_FOUND -> {
+                if (report.getRiskLevel() == null) {
+                    report.setRiskLevel(RiskLevel.MEDIUM);
+                }
+                if (report.getRiskScore() == null) {
+                    report.setRiskScore(35);
+                }
+            }
+        }
+    }
+
+    private Integer maxRisk(Integer current, int fallback) {
+        if (current == null) {
+            return fallback;
+        }
+        return Math.max(current, fallback);
+    }
+
+    private Integer minRisk(Integer current, int fallback) {
+        if (current == null) {
+            return fallback;
+        }
+        return Math.min(current, fallback);
     }
 
     private ReportStatus resolveReportStatus(ClaimStatus claimStatus, boolean publish) {

@@ -17,10 +17,10 @@ WORKDIR /app/backend-spring
 
 COPY --from=java-builder /build/backend-spring/target/backend-spring-0.0.1-SNAPSHOT.jar /app/backend-spring/app.jar
 COPY --from=c-builder /build/c-engine/civic_alert_engine /app/c-engine/civic_alert_engine
+COPY civicalert_seed_data_requirements.txt /app/backend-spring/civicalert_seed_data_requirements.txt
 
 RUN chmod +x /app/c-engine/civic_alert_engine
 
 EXPOSE 8080
 
 ENTRYPOINT ["java", "-jar", "/app/backend-spring/app.jar"]
-
