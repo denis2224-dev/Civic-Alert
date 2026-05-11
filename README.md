@@ -120,7 +120,29 @@ Important for this local environment:
 
 If your container maps to `5432`, set `DB_PORT=5432`.
 
-## 8. Run Backend
+## 8. One-Command Docker Run
+
+You can run the full app (frontend + backend) with one command:
+
+```bash
+docker compose up --build
+```
+
+App URLs:
+- Frontend: `http://localhost:4200`
+- Backend API: `http://localhost:8080/api`
+
+Important:
+- This uses the already existing `spring-postgres` container.
+- Make sure `spring-postgres` is running before `docker compose up`.
+
+Stop containers:
+
+```bash
+docker compose down
+```
+
+## 9. Run Backend (Without Docker)
 
 ```bash
 cd backend-spring
@@ -130,7 +152,7 @@ mvn spring-boot:run
 Backend API base:
 - `http://localhost:8080/api`
 
-## 9. Run Frontend
+## 10. Run Frontend (Without Docker)
 
 ```bash
 cd frontend-angular
@@ -141,7 +163,7 @@ ng serve
 Frontend URL:
 - `http://localhost:4200`
 
-## 10. How Spring Boot Calls the C Engine
+## 11. How Spring Boot Calls the C Engine
 
 - `CEngineService` invokes `../c-engine/civic_alert_engine` using `ProcessBuilder`.
 - If binary is missing, backend runs `make` in `c-engine/`.
@@ -156,7 +178,7 @@ make
 ./civic_alert_engine "The election was cancelled"
 ```
 
-## 11. Example Claims to Test
+## 12. Example Claims to Test
 
 - `"The election was cancelled."`
 - `"You can vote by SMS."`
@@ -177,4 +199,3 @@ Validator:
 - `GET /api/validator/reports/{id}`
 - `PATCH /api/validator/reports/{id}/under-review`
 - `POST /api/validator/reports/{id}/decision`
-

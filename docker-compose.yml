@@ -1,0 +1,29 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend-spring/Dockerfile
+    container_name: civicalert-backend
+    environment:
+      DB_HOST: host.docker.internal
+      DB_PORT: "55432"
+      DB_NAME: civicalert
+      DB_USER: civicalert_user
+      DB_PASSWORD: civicalert_pass
+    ports:
+      - "8080:8080"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend-angular/Dockerfile
+    container_name: civicalert-frontend
+    depends_on:
+      - backend
+    ports:
+      - "4200:80"
+    restart: unless-stopped
+

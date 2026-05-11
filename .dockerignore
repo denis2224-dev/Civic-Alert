@@ -1,0 +1,12 @@
+.git
+.idea
+.DS_Store
+
+backend-spring/target
+frontend-angular/node_modules
+frontend-angular/dist
+frontend-angular/.angular
+
+c-engine/*.o
+c-engine/civic_alert_engine
+
