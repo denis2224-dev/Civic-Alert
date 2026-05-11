@@ -7,6 +7,7 @@ import com.civicalert.enums.ClaimStatus;
 import com.civicalert.repository.OfficialInfoRepository;
 import com.civicalert.repository.RumorPatternRepository;
 import com.civicalert.repository.VerifiedClaimRepository;
+import com.civicalert.util.ElectionTextRules;
 import com.civicalert.util.TextNormalizer;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -16,6 +17,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,6 +59,7 @@ public class DataSeeder implements CommandLineRunner {
         seedOfficialInfo(seedData.officialInfo());
         seedRumorPatterns(seedData.rumorPatterns());
         seedVerifiedClaims(seedData.verifiedClaims());
+        cleanupSmsVotingClaims();
     }
 
     private void ensureOfficialInfoTopicLanguageUniqueness() {
@@ -297,6 +300,62 @@ public class DataSeeder implements CommandLineRunner {
             inserted++;
         }
         log.info("Seeded verified_claims: inserted {} new rows.", inserted);
+    }
+
+    private void cleanupSmsVotingClaims() {
+        int updated = 0;
+        List<VerifiedClaim> allClaims = verifiedClaimRepository.findAll();
+        for (VerifiedClaim claim : allClaims) {
+            String normalizedClaim = TextNormalizer.normalize(claim.getClaimText());
+            if (!ElectionTextRules.isSmsVotingClaim(normalizedClaim)) {
+                continue;
+            }
+
+            boolean changed = false;
+            if (!Objects.equals(claim.getNormalizedClaim(), normalizedClaim)) {
+                claim.setNormalizedClaim(normalizedClaim);
+                changed = true;
+            }
+            if (claim.getStatus() != ClaimStatus.VERIFIED_FALSE) {
+                claim.setStatus(ClaimStatus.VERIFIED_FALSE);
+                changed = true;
+            }
+            if (!"fake_voting_method".equals(claim.getCategory())) {
+                claim.setCategory("fake_voting_method");
+                changed = true;
+            }
+            if (!Boolean.TRUE.equals(claim.getPublished())) {
+                claim.setPublished(true);
+                changed = true;
+            }
+
+            String correctionText = smsCorrectionForLanguage(claim.getLanguage());
+            if (!Objects.equals(correctionText, claim.getCorrectionText())) {
+                claim.setCorrectionText(correctionText);
+                changed = true;
+            }
+            if (claim.getOfficialSource() == null || claim.getOfficialSource().isBlank()) {
+                claim.setOfficialSource("Demo Central Electoral Commission");
+                changed = true;
+            }
+
+            if (changed) {
+                verifiedClaimRepository.save(claim);
+                updated++;
+            }
+        }
+        if (updated > 0) {
+            log.info("Cleaned up {} SMS voting verified claims to VERIFIED_FALSE.", updated);
+        }
+    }
+
+    private String smsCorrectionForLanguage(String language) {
+        String normalizedLanguage = language == null ? "" : language.trim().toLowerCase(Locale.ROOT);
+        return switch (normalizedLanguage) {
+            case "ro" -> "Votarea prin SMS nu este disponibilă. Folosiți doar procedurile oficiale de vot.";
+            case "ru" -> "Голосование по SMS недоступно. Используйте только официальные процедуры голосования.";
+            default -> "Voting by SMS is not available. Use only official voting procedures.";
+        };
     }
 
     private String blankToNull(String value) {
