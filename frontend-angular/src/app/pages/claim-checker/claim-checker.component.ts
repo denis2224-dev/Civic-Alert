@@ -15,6 +15,12 @@ export class ClaimCheckerComponent {
   private static readonly CHECK_TIMEOUT_MS = 12000;
   private static readonly FAILSAFE_LOADING_RESET_MS = 15000;
 
+  readonly exampleClaims = [
+    'Can I vote by SMS?',
+    'The election was cancelled.',
+    'Polling stations are open from 07:00 to 21:00.'
+  ];
+
   text = '';
   region = 'Chisinau';
   language = 'en';
@@ -98,6 +104,12 @@ export class ClaimCheckerComponent {
       this.errorMessage = 'Something went wrong while checking the claim. Please try again.';
       this.scheduleViewUpdate();
     }
+  }
+
+  useExample(example: string): void {
+    this.text = example;
+    this.errorMessage = '';
+    this.scheduleViewUpdate();
   }
 
   get showReportButton(): boolean {

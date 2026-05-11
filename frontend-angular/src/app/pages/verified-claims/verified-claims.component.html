@@ -2,14 +2,29 @@
   <div class="header">
     <div class="title-group">
       <img src="/images/verified-hero.svg" alt="" aria-hidden="true" />
-      <h1>Verified Corrections</h1>
+      <div>
+        <h1>Verified Corrections</h1>
+        <p>Published outcomes from validator reviews.</p>
+      </div>
     </div>
-    <div>
-      <label for="category">Filter by category</label>
-      <select id="category" [(ngModel)]="selectedCategory" (change)="applyFilter()">
-        <option value="all">All</option>
-        <option *ngFor="let category of categories" [value]="category">{{ formatLabel(category) }}</option>
-      </select>
+
+    <div class="filters">
+      <div>
+        <label for="language">Language</label>
+        <select id="language" [(ngModel)]="selectedLanguage" (change)="onLanguageChange()">
+          <option value="en">English</option>
+          <option value="ro">Romanian</option>
+          <option value="ru">Russian</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="category">Filter by category</label>
+        <select id="category" [(ngModel)]="selectedCategory" (change)="applyFilter()">
+          <option value="all">All</option>
+          <option *ngFor="let category of categories" [value]="category">{{ formatLabel(category) }}</option>
+        </select>
+      </div>
     </div>
   </div>
 
@@ -17,12 +32,11 @@
 
   <div class="claims">
     <article class="claim-card" *ngFor="let claim of filteredClaims">
-      <h2>{{ formatLabel(claim.category) }}</h2>
-      <p><strong>Claim:</strong> {{ claim.claimText }}</p>
-      <p>
-        <strong>Status:</strong>
+      <div class="card-head">
+        <h2>{{ formatLabel(claim.category) }}</h2>
         <span class="status-pill" [ngClass]="statusClass(claim.status)">{{ formatLabel(claim.status) }}</span>
-      </p>
+      </div>
+      <p><strong>Claim:</strong> {{ claim.claimText }}</p>
       <p *ngIf="claim.correctionText"><strong>Correction:</strong> {{ claim.correctionText }}</p>
       <p *ngIf="claim.officialSource">
         <strong>Official Source:</strong>
@@ -31,7 +45,7 @@
         </a>
         <span *ngIf="!claim.officialSourceUrl">{{ claim.officialSource }}</span>
       </p>
-      <p><strong>Updated:</strong> {{ claim.updatedAt | date: 'medium' }}</p>
+      <p class="updated"><strong>Updated:</strong> {{ claim.updatedAt | date: 'medium' }}</p>
     </article>
     <p class="empty-state" *ngIf="!filteredClaims.length && !errorMessage">No verified claims match this filter.</p>
   </div>

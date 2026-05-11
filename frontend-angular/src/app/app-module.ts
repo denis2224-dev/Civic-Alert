@@ -8,7 +8,6 @@ import { App } from './app';
 import { ClaimCheckerComponent } from './pages/claim-checker/claim-checker.component';
 import { ReportFormComponent } from './pages/report-form/report-form.component';
 import { VerifiedClaimsComponent } from './pages/verified-claims/verified-claims.component';
-import { OfficialInfoComponent } from './pages/official-info/official-info.component';
 import { ReportStatusComponent } from './pages/report-status/report-status.component';
 import { ValidatorDashboardComponent } from './pages/validator-dashboard/validator-dashboard.component';
 import { ValidatorReportDetailComponent } from './pages/validator-report-detail/validator-report-detail.component';
@@ -19,7 +18,6 @@ import { ValidatorReportDetailComponent } from './pages/validator-report-detail/
     ClaimCheckerComponent,
     ReportFormComponent,
     VerifiedClaimsComponent,
-    OfficialInfoComponent,
     ReportStatusComponent,
     ValidatorDashboardComponent,
     ValidatorReportDetailComponent

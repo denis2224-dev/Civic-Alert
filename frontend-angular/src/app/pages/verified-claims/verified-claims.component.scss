@@ -1,11 +1,13 @@
 .panel {
-  background: #121820;
-  border: 1px solid #2d3b45;
+  background: #ffffff;
+  border: 1px solid #dce3ef;
   border-radius: 8px;
-  padding: 24px;
+  padding: 22px;
   display: flex;
   flex-direction: column;
   gap: 12px;
+  box-shadow: 0 8px 24px rgba(16, 32, 56, 0.08);
+  border-top: 3px solid #f5c400;
 }
 
 .header {
@@ -25,27 +27,45 @@
 .title-group img {
   width: 88px;
   border-radius: 8px;
-  border: 1px solid #40606a;
+  border: 1px solid #ced9ea;
+  background: #f3f7ff;
 }
 
 h1 {
   margin: 0;
-  color: #e8edf7;
+  color: #11233f;
+}
+
+.title-group p {
+  margin: 2px 0 0;
+  color: #506582;
+}
+
+.filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 10px;
 }
 
 label {
   display: block;
   margin-bottom: 4px;
-  color: #d2dceb;
+  color: #364c6b;
   font-size: 14px;
 }
 
 select {
-  border: 1px solid #435368;
-  background: #0d131d;
-  color: #e8edf7;
+  border: 1px solid #c7d4e8;
+  background: #ffffff;
+  color: #11233f;
   border-radius: 8px;
   padding: 8px 10px;
+}
+
+select:focus {
+  outline: 2px solid #a8c4f2;
+  outline-offset: 1px;
+  border-color: #8fb2eb;
 }
 
 .claims {
@@ -55,71 +75,88 @@ select {
 }
 
 .claim-card {
-  background: #0e141d;
-  border: 1px solid #30414c;
+  background: #f7f9fd;
+  border: 1px solid #d8e1ef;
   border-radius: 8px;
   padding: 14px;
 }
 
+.card-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
 h2 {
-  margin: 0 0 10px;
+  margin: 0;
   font-size: 16px;
-  color: #8be2cc;
+  color: #193760;
 }
 
 p {
   margin: 0 0 8px;
-  color: #ced9ea;
+  color: #334a68;
 }
 
 a {
-  color: #9fd8ff;
+  color: #0f4aa6;
+}
+
+.updated {
+  color: #4e6483;
 }
 
 .status-pill {
   display: inline-block;
-  margin-left: 6px;
   padding: 3px 8px;
   border-radius: 999px;
   font-size: 12px;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .status-neutral {
-  background: #37424d;
-  color: #dce7f6;
+  background: #e4e9f2;
+  color: #3a4d67;
 }
 
 .status-verified_true {
-  background: #1d5944;
-  color: #bdf6df;
+  background: #d9f3e4;
+  color: #1e6a42;
 }
 
 .status-verified_false {
-  background: #5d2430;
-  color: #ffc0cd;
+  background: #fde0e5;
+  color: #8f1d36;
 }
 
 .status-misleading {
-  background: #6a4521;
-  color: #ffdcb4;
+  background: #ffe9d0;
+  color: #8c4e05;
 }
 
 .status-needs_context,
 .status-needs_review {
-  background: #544b1f;
-  color: #fff1b4;
+  background: #fff3cf;
+  color: #785c00;
+}
+
+.status-rejected {
+  background: #fde0e5;
+  color: #8f1d36;
 }
 
 .empty-state {
   grid-column: 1 / -1;
   margin: 0;
   padding: 12px;
-  border: 1px dashed #3f5461;
+  border: 1px dashed #c7d5ea;
   border-radius: 8px;
-  color: #c8d8f0;
+  color: #4c6482;
 }
 
 .error {
-  color: #ff7d7d;
+  color: #a01f35;
 }

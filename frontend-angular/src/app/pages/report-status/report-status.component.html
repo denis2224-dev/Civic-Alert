@@ -1,5 +1,8 @@
 <section class="panel">
-  <h1>Track Report Status</h1>
+  <div class="header">
+    <h1>Track Report Status</h1>
+    <span class="hint">Use your tracking code from the report submission page.</span>
+  </div>
   <label for="tracking">Tracking Code</label>
   <input id="tracking" [(ngModel)]="trackingCode" placeholder="CA-2026-00042" />
 
@@ -11,13 +14,19 @@
 </section>
 
 <section class="panel result" *ngIf="reportStatus">
-  <h2>Status</h2>
-  <p><strong>Tracking Code:</strong> {{ reportStatus.trackingCode }}</p>
-  <p><strong>Status:</strong> {{ formatLabel(reportStatus.status) }}</p>
-  <p><strong>Category:</strong> {{ formatLabel(reportStatus.category) }}</p>
-  <p>
-    <strong>Risk Level:</strong>
-    <span class="risk-pill" [ngClass]="riskClass(reportStatus.riskLevel)">{{ formatLabel(reportStatus.riskLevel) }}</span>
-  </p>
-  <p><strong>Risk Score:</strong> {{ reportStatus.riskScore ?? 'N/A' }}</p>
+  <h2>Current Report Outcome</h2>
+
+  <div class="meta-grid">
+    <p><strong>Tracking Code:</strong> {{ reportStatus.trackingCode }}</p>
+    <p>
+      <strong>Status:</strong>
+      <span class="status-pill" [ngClass]="statusClass(reportStatus.status)">{{ formatLabel(reportStatus.status) }}</span>
+    </p>
+    <p><strong>Category:</strong> {{ formatLabel(reportStatus.category) }}</p>
+    <p>
+      <strong>Risk Level:</strong>
+      <span class="risk-pill" [ngClass]="riskClass(reportStatus.riskLevel)">{{ formatLabel(reportStatus.riskLevel) }}</span>
+    </p>
+    <p><strong>Risk Score:</strong> {{ reportStatus.riskScore ?? 'N/A' }}</p>
+  </div>
 </section>

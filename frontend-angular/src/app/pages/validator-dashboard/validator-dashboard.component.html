@@ -2,7 +2,10 @@
   <div class="header">
     <div class="title-group">
       <img src="/images/validator-hero.svg" alt="" aria-hidden="true" />
-      <h1>Validator Dashboard</h1>
+      <div>
+        <h1>Validator Dashboard</h1>
+        <p>Reports ordered by risk score and urgency.</p>
+      </div>
     </div>
     <button type="button" (click)="loadReports()">Refresh</button>
   </div>
@@ -33,10 +36,14 @@
             <span class="risk-badge" [ngClass]="riskClass(report.riskLevel)">{{ formatLabel(report.riskLevel || 'LOW') }}</span>
           </td>
           <td>{{ report.riskScore ?? 0 }}</td>
-          <td>{{ formatLabel(report.status) }}</td>
+          <td>
+            <span class="status-pill status-{{ (report.status || 'neutral').toLowerCase() }}">
+              {{ formatLabel(report.status) }}
+            </span>
+          </td>
           <td>{{ report.createdAt | date: 'short' }}</td>
           <td>
-            <a [routerLink]="['/validator/reports', report.id]">Review</a>
+            <a class="review-link" [routerLink]="['/validator/reports', report.id]">Review</a>
           </td>
         </tr>
       </tbody>

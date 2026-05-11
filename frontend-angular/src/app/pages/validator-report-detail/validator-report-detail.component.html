@@ -2,11 +2,21 @@
   <h1>Review Report {{ report.trackingCode }}</h1>
 
   <div class="meta-grid">
-    <p><strong>Status:</strong> {{ report.status }}</p>
+    <p>
+      <strong>Status:</strong>
+      <span class="status-pill status-{{ (report.status || 'neutral').toLowerCase() }}">
+        {{ formatLabel(report.status) }}
+      </span>
+    </p>
     <p><strong>Region:</strong> {{ report.region }}</p>
     <p><strong>Platform:</strong> {{ report.platform }}</p>
-    <p><strong>Category:</strong> {{ report.category || 'N/A' }}</p>
-    <p><strong>Risk Level:</strong> {{ report.riskLevel || 'LOW' }}</p>
+    <p><strong>Category:</strong> {{ formatLabel(report.category) }}</p>
+    <p>
+      <strong>Risk Level:</strong>
+      <span class="risk-pill" [ngClass]="riskClass(report.riskLevel)">
+        {{ formatLabel(report.riskLevel || 'LOW') }}
+      </span>
+    </p>
     <p><strong>Risk Score:</strong> {{ report.riskScore ?? 0 }}</p>
   </div>
 
@@ -19,9 +29,15 @@
     <h2>Detection Logs</h2>
     <div class="log-item" *ngFor="let log of detectionLogs">
       <p><strong>Matched Phrase:</strong> {{ log.matchedPhrase || 'N/A' }}</p>
-      <p><strong>Category:</strong> {{ log.category || 'N/A' }}</p>
+      <p><strong>Category:</strong> {{ formatLabel(log.category) }}</p>
       <p><strong>Severity:</strong> {{ log.severity ?? 0 }}</p>
-      <p><strong>Risk:</strong> {{ log.riskLevel || 'LOW' }} ({{ log.riskScore ?? 0 }})</p>
+      <p>
+        <strong>Risk:</strong>
+        <span class="risk-pill" [ngClass]="riskClass(log.riskLevel)">
+          {{ formatLabel(log.riskLevel || 'LOW') }}
+        </span>
+        ({{ log.riskScore ?? 0 }})
+      </p>
       <p><strong>Created:</strong> {{ log.createdAt | date: 'short' }}</p>
     </div>
   </div>
@@ -61,4 +77,3 @@
     <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
   </section>
 </ng-template>
-

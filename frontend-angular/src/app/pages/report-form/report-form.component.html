@@ -1,5 +1,8 @@
 <section class="panel">
-  <h1>Report Suspicious Claim</h1>
+  <div class="header">
+    <h1>Report Suspicious Claim</h1>
+    <span class="hint">Public report intake for validator review</span>
+  </div>
 
   <label for="text">Claim</label>
   <textarea id="text" rows="5" [(ngModel)]="text" placeholder="Write the suspicious claim here"></textarea>
@@ -35,9 +38,12 @@
     </div>
   </div>
 
-  <button type="button" (click)="submitReport()" [disabled]="loading">
-    {{ loading ? 'Submitting...' : 'Submit Report' }}
-  </button>
+  <div class="action-row">
+    <button type="button" (click)="submitReport()" [disabled]="loading">
+      {{ loading ? 'Submitting...' : 'Submit Report' }}
+    </button>
+    <span class="helper-text">A tracking code is generated after submission.</span>
+  </div>
 
   <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
 </section>

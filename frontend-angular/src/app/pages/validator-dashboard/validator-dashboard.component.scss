@@ -1,8 +1,10 @@
 .panel {
-  background: #121820;
-  border: 1px solid #2d3b45;
+  background: #ffffff;
+  border: 1px solid #dce3ef;
   border-radius: 8px;
-  padding: 24px;
+  padding: 22px;
+  box-shadow: 0 8px 24px rgba(16, 32, 56, 0.08);
+  border-top: 3px solid #c8102e;
 }
 
 .header {
@@ -23,16 +25,22 @@
 .title-group img {
   width: 88px;
   border-radius: 8px;
-  border: 1px solid #40606a;
+  border: 1px solid #ced9ea;
+  background: #f3f7ff;
 }
 
 h1 {
   margin: 0;
-  color: #e8edf7;
+  color: #11233f;
+}
+
+.title-group p {
+  margin: 2px 0 0;
+  color: #506582;
 }
 
 button {
-  background: #3d9b86;
+  background: #0f4aa6;
   border: 0;
   color: #fff;
   padding: 8px 12px;
@@ -43,9 +51,9 @@ button {
 
 .table-wrapper {
   overflow-x: auto;
-  border: 1px solid #2e404d;
+  border: 1px solid #d6e0ee;
   border-radius: 8px;
-  background: #0e141d;
+  background: #ffffff;
 }
 
 table {
@@ -55,60 +63,92 @@ table {
 
 th,
 td {
-  border-bottom: 1px solid #2a3944;
+  border-bottom: 1px solid #dde6f2;
   padding: 10px 8px;
   text-align: left;
-  color: #d2def0;
+  color: #29405f;
   white-space: nowrap;
 }
 
 th {
-  color: #9fb9cb;
+  color: #4c6482;
   font-size: 13px;
-  background: #111a26;
+  background: #f4f7fc;
 }
 
-a {
-  color: #9fd8ff;
+.review-link {
+  color: #0f4aa6;
   text-decoration: none;
+  font-weight: 600;
 }
 
 .risk-badge {
   padding: 4px 8px;
   border-radius: 999px;
   font-size: 12px;
+  font-weight: 600;
 }
 
 .risk-critical {
-  background: #6b2834;
-  color: #ffc6d2;
+  background: #ffdbe4;
+  color: #92203f;
 }
 
 .risk-high {
-  background: #6a4a1c;
-  color: #ffe0b8;
+  background: #ffe6ce;
+  color: #8f4f06;
 }
 
 .risk-medium {
-  background: #625a24;
-  color: #fff4b7;
+  background: #fff1bf;
+  color: #786000;
 }
 
 .risk-low {
-  background: #225846;
-  color: #c3f9e3;
+  background: #dcf5e5;
+  color: #206440;
 }
 
 .loading {
-  color: #d8e4f6;
+  color: #364d6b;
 }
 
 .empty {
   margin: 0;
   padding: 12px;
-  color: #b9cae2;
+  color: #4c6482;
 }
 
 .error {
-  color: #ff7d7d;
+  color: #a01f35;
+}
+
+.status-pill {
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-neutral {
+  background: #e4e9f2;
+  color: #3a4d67;
+}
+
+.status-received,
+.status-under_review {
+  background: #fff3cf;
+  color: #785c00;
+}
+
+.status-resolved,
+.status-published,
+.status-merged {
+  background: #dcf5e5;
+  color: #206440;
+}
+
+.status-rejected {
+  background: #fde0e5;
+  color: #8f1d36;
 }

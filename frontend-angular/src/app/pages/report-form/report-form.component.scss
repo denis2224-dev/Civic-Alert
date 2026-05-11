@@ -1,21 +1,35 @@
 .panel {
-  background: #121825;
-  border: 1px solid #2b3445;
+  background: #ffffff;
+  border: 1px solid #dce3ef;
   border-radius: 8px;
-  padding: 24px;
+  padding: 22px;
   display: flex;
   flex-direction: column;
   gap: 12px;
+  box-shadow: 0 8px 24px rgba(16, 32, 56, 0.08);
+  border-top: 3px solid #0046ad;
+}
+
+.header {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.hint {
+  font-size: 13px;
+  color: #5b6f8e;
 }
 
 h1,
 h2 {
   margin: 0;
-  color: #e8edf7;
+  color: #11233f;
 }
 
 label {
-  color: #d2dceb;
+  color: #364c6b;
   font-size: 14px;
 }
 
@@ -23,41 +37,63 @@ textarea,
 input,
 select {
   width: 100%;
-  border: 1px solid #344158;
-  background: #0f1420;
-  color: #e8edf7;
+  border: 1px solid #c7d4e8;
+  background: #ffffff;
+  color: #11233f;
   border-radius: 8px;
   padding: 10px;
   box-sizing: border-box;
 }
 
+textarea:focus,
+input:focus,
+select:focus {
+  outline: 2px solid #a8c4f2;
+  outline-offset: 1px;
+  border-color: #8fb2eb;
+}
+
 button {
   width: fit-content;
-  background: #3a73ff;
+  background: #0f4aa6;
   color: #fff;
   border: 0;
   border-radius: 8px;
   padding: 10px 16px;
   cursor: pointer;
+  font-weight: 600;
+}
+
+.action-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.helper-text {
+  color: #526887;
+  font-size: 13px;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 12px;
 }
 
 .error {
-  color: #ff7d7d;
+  color: #a01f35;
 }
 
 .success {
   margin-top: 16px;
+  border-top: 3px solid #f5c400;
 }
 
 p {
   margin: 0;
-  color: #a9b6ca;
+  color: #334a68;
 }
 
 .status-pill {
@@ -70,23 +106,24 @@ p {
 }
 
 .status-neutral {
-  background: #37424d;
-  color: #dce7f6;
+  background: #e4e9f2;
+  color: #3a4d67;
 }
 
 .status-received,
 .status-under_review {
-  background: #544b1f;
-  color: #fff1b4;
+  background: #fff3cf;
+  color: #785c00;
 }
 
 .status-resolved,
-.status-published {
-  background: #225846;
-  color: #c3f9e3;
+.status-published,
+.status-merged {
+  background: #dcf5e5;
+  color: #206440;
 }
 
 .status-rejected {
-  background: #5d2430;
-  color: #ffc0cd;
+  background: #fde0e5;
+  color: #8f1d36;
 }

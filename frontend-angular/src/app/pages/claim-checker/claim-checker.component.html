@@ -1,10 +1,22 @@
-<section class="panel">
+<section class="panel checker">
   <div class="hero">
     <img src="/images/claim-hero.svg" alt="" aria-hidden="true" />
     <div>
       <h1>Check election information before sharing it.</h1>
-      <p>Paste a suspicious election-process claim and verify it against trusted corrections.</p>
+      <p>Paste a claim and check whether it matches published corrections or suspicious election-process patterns.</p>
     </div>
+  </div>
+
+  <div class="examples" aria-label="Example claims">
+    <span>Try a quick example:</span>
+    <button
+      type="button"
+      class="chip"
+      *ngFor="let example of exampleClaims"
+      (click)="useExample(example)"
+    >
+      {{ example }}
+    </button>
   </div>
 
   <label for="claimText">Claim</label>
@@ -26,13 +38,17 @@
       <select id="language" [(ngModel)]="language">
         <option value="en">English</option>
         <option value="ro">Romanian</option>
+        <option value="ru">Russian</option>
       </select>
     </div>
   </div>
 
-  <button type="button" (click)="checkClaim()" [disabled]="loading">
-    {{ loading ? 'Checking...' : 'Check Claim' }}
-  </button>
+  <div class="action-row">
+    <button type="button" (click)="checkClaim()" [disabled]="loading">
+      {{ loading ? 'Checking...' : 'Check Claim' }}
+    </button>
+    <span class="helper-text">Use short direct sentences for best matching.</span>
+  </div>
 
   <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
 </section>

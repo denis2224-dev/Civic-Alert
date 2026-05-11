@@ -5,6 +5,7 @@ import { finalize, timeout, TimeoutError } from 'rxjs';
 import { ClaimStatus } from '../../models/claim-check.model';
 import { ValidatorDetectionLog, ValidatorReport } from '../../models/validator.model';
 import { ValidatorService } from '../../services/validator.service';
+import { toDisplayLabel } from '../../utils/display-label';
 
 @Component({
   selector: 'app-validator-report-detail',
@@ -146,6 +147,17 @@ export class ValidatorReportDetailComponent implements OnInit {
           this.changeDetectorRef.markForCheck();
         }
       });
+  }
+
+  formatLabel(value?: string | null): string {
+    return toDisplayLabel(value);
+  }
+
+  riskClass(value?: string | null): string {
+    if (!value) {
+      return 'risk-low';
+    }
+    return `risk-${value.toLowerCase()}`;
   }
 
   private resolveApiError(error: unknown, defaultMessage: string): string {

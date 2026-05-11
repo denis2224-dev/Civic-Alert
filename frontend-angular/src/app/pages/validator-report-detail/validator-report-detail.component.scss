@@ -1,14 +1,16 @@
 .panel {
-  background: #121825;
-  border: 1px solid #2b3445;
+  background: #ffffff;
+  border: 1px solid #dce3ef;
   border-radius: 8px;
-  padding: 24px;
+  padding: 22px;
+  box-shadow: 0 8px 24px rgba(16, 32, 56, 0.08);
+  border-top: 3px solid #0046ad;
 }
 
 h1,
 h2 {
   margin: 0 0 10px;
-  color: #e8edf7;
+  color: #11233f;
 }
 
 .meta-grid {
@@ -21,19 +23,19 @@ h2 {
 .claim-block p,
 .log-item p {
   margin: 0;
-  color: #c7d4e8;
+  color: #334a68;
 }
 
 .claim-block {
   margin-top: 16px;
-  border: 1px solid #283247;
+  border: 1px solid #d8e1ef;
   border-radius: 8px;
   padding: 12px;
-  background: #0f1420;
+  background: #f7f9fd;
 }
 
 .log-item {
-  border-top: 1px solid #233148;
+  border-top: 1px solid #d5dfef;
   margin-top: 10px;
   padding-top: 10px;
   display: grid;
@@ -47,16 +49,23 @@ h2 {
 }
 
 label {
-  color: #d2dceb;
+  color: #364c6b;
 }
 
 textarea,
 input {
-  border: 1px solid #344158;
-  background: #0f1420;
-  color: #e8edf7;
+  border: 1px solid #c7d4e8;
+  background: #ffffff;
+  color: #11233f;
   border-radius: 8px;
   padding: 10px;
+}
+
+textarea:focus,
+input:focus {
+  outline: 2px solid #a8c4f2;
+  outline-offset: 1px;
+  border-color: #8fb2eb;
 }
 
 .checkbox {
@@ -78,31 +87,84 @@ button {
   padding: 9px 12px;
   cursor: pointer;
   color: #fff;
+  font-weight: 600;
 }
 
 .neutral {
-  background: #2e3c55;
+  background: #4f6079;
 }
 
 .success {
-  background: #2b7a56;
+  background: #206f49;
 }
 
 .danger {
-  background: #933748;
+  background: #98273f;
 }
 
 .warn {
-  background: #8d6528;
+  background: #95621a;
 }
 
 .success-text {
-  color: #7ce6ad;
+  color: #1d6d46;
   margin-top: 12px;
 }
 
 .error {
-  color: #ff7d7d;
+  color: #a01f35;
   margin-top: 12px;
 }
 
+.status-pill,
+.risk-pill {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-neutral {
+  background: #e4e9f2;
+  color: #3a4d67;
+}
+
+.status-received,
+.status-under_review {
+  background: #fff3cf;
+  color: #785c00;
+}
+
+.status-resolved,
+.status-published,
+.status-merged {
+  background: #dcf5e5;
+  color: #206440;
+}
+
+.status-rejected {
+  background: #fde0e5;
+  color: #8f1d36;
+}
+
+.risk-critical {
+  background: #ffdbe4;
+  color: #92203f;
+}
+
+.risk-high {
+  background: #ffe6ce;
+  color: #8f4f06;
+}
+
+.risk-medium {
+  background: #fff1bf;
+  color: #786000;
+}
+
+.risk-low {
+  background: #dcf5e5;
+  color: #206440;
+}

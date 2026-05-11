@@ -14,6 +14,7 @@ export class VerifiedClaimsComponent implements OnInit {
   filteredClaims: VerifiedClaim[] = [];
   categories: string[] = [];
   selectedCategory = 'all';
+  selectedLanguage = 'en';
   errorMessage = '';
 
   constructor(
@@ -26,18 +27,28 @@ export class VerifiedClaimsComponent implements OnInit {
   }
 
   loadClaims(): void {
-    this.verifiedClaimService.getVerifiedClaims(undefined, 'en').subscribe({
+    this.errorMessage = '';
+    this.verifiedClaimService.getVerifiedClaims(undefined, this.selectedLanguage).subscribe({
       next: (claims) => {
         this.claims = claims;
-        this.categories = Array.from(new Set(claims.map((claim) => claim.category))).sort();
+        this.categories = Array.from(new Set(claims.map((claim) => claim.category).filter(Boolean) as string[])).sort();
+        if (this.selectedCategory !== 'all' && !this.categories.includes(this.selectedCategory)) {
+          this.selectedCategory = 'all';
+        }
         this.applyFilter();
         this.changeDetectorRef.markForCheck();
       },
-      error: () => {
+      error: (error) => {
+        console.error('Unable to load verified claims:', error);
         this.errorMessage = 'Unable to load verified claims.';
         this.changeDetectorRef.markForCheck();
       }
     });
+  }
+
+  onLanguageChange(): void {
+    this.selectedCategory = 'all';
+    this.loadClaims();
   }
 
   applyFilter(): void {

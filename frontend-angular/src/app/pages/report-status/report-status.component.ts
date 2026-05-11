@@ -78,4 +78,11 @@ export class ReportStatusComponent {
     }
     return `risk-${value.toLowerCase()}`;
   }
+
+  statusClass(value?: string | null): string {
+    if (!value) {
+      return 'status-neutral';
+    }
+    return `status-${value.toLowerCase()}`;
+  }
 }
