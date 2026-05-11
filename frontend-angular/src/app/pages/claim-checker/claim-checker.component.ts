@@ -12,6 +12,7 @@ import { ClaimService } from '../../services/claim.service';
 })
 export class ClaimCheckerComponent {
   private static readonly CHECK_TIMEOUT_MS = 12000;
+  private static readonly FAILSAFE_LOADING_RESET_MS = 15000;
 
   text = '';
   region = 'Chisinau';
@@ -19,6 +20,7 @@ export class ClaimCheckerComponent {
   loading = false;
   errorMessage = '';
   result: ClaimCheckResponse | null = null;
+  private loadingFailsafeTimer: ReturnType<typeof setTimeout> | null = null;
 
   constructor(private readonly claimService: ClaimService) {}
 
@@ -31,46 +33,68 @@ export class ClaimCheckerComponent {
     this.loading = true;
     this.errorMessage = '';
     this.result = null;
+    this.resetLoadingFailsafe();
+    this.loadingFailsafeTimer = setTimeout(() => {
+      if (this.loading) {
+        this.loading = false;
+        this.errorMessage = 'Something went wrong while checking the claim. Please try again.';
+      }
+    }, ClaimCheckerComponent.FAILSAFE_LOADING_RESET_MS);
 
-    this.claimService
-      .checkClaim({
-        text: this.text.trim(),
-        region: this.region.trim(),
-        language: this.language.trim()
-      })
-      .pipe(
-        timeout(ClaimCheckerComponent.CHECK_TIMEOUT_MS),
-        finalize(() => {
-          this.loading = false;
+    try {
+      this.claimService
+        .checkClaim({
+          text: this.text.trim(),
+          region: this.region.trim(),
+          language: this.language.trim()
         })
-      )
-      .subscribe({
-        next: (response) => {
-          this.result = response;
-        },
-        error: (error: unknown) => {
-          console.error('Claim check request failed:', error);
+        .pipe(
+          timeout(ClaimCheckerComponent.CHECK_TIMEOUT_MS),
+          finalize(() => {
+            this.loading = false;
+            this.resetLoadingFailsafe();
+          })
+        )
+        .subscribe({
+          next: (response) => {
+            this.result = response;
+          },
+          error: (error: unknown) => {
+            console.error('Claim check request failed:', error);
 
-          if (error instanceof TimeoutError) {
-            this.errorMessage = 'Something went wrong while checking the claim. Please try again.';
-            return;
-          }
-
-          if (error instanceof HttpErrorResponse) {
-            if (error.status === 0) {
-              this.errorMessage = 'Could not connect to the backend. Make sure Spring Boot is running on port 8080.';
+            if (error instanceof TimeoutError) {
+              this.errorMessage = 'Something went wrong while checking the claim. Please try again.';
               return;
             }
-            this.errorMessage = 'Something went wrong while checking the claim. Please try again.';
-            return;
-          }
 
-          this.errorMessage = 'Something went wrong while checking the claim. Please try again.';
-        }
-      });
+            if (error instanceof HttpErrorResponse) {
+              if (error.status === 0) {
+                this.errorMessage = 'Could not connect to the backend. Make sure Spring Boot is running on port 8080.';
+                return;
+              }
+              this.errorMessage = 'Something went wrong while checking the claim. Please try again.';
+              return;
+            }
+
+            this.errorMessage = 'Something went wrong while checking the claim. Please try again.';
+          }
+        });
+    } catch (error) {
+      console.error('Claim check setup failed:', error);
+      this.loading = false;
+      this.resetLoadingFailsafe();
+      this.errorMessage = 'Something went wrong while checking the claim. Please try again.';
+    }
   }
 
   get showReportButton(): boolean {
     return this.result?.status === 'NEEDS_REVIEW' || this.result?.status === 'NO_MATCH_FOUND';
+  }
+
+  private resetLoadingFailsafe(): void {
+    if (this.loadingFailsafeTimer) {
+      clearTimeout(this.loadingFailsafeTimer);
+      this.loadingFailsafeTimer = null;
+    }
   }
 }
