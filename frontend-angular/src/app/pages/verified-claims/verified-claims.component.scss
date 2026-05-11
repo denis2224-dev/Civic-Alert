@@ -1,0 +1,70 @@
+.panel {
+  background: #121825;
+  border: 1px solid #2b3445;
+  border-radius: 8px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+h1 {
+  margin: 0;
+  color: #e8edf7;
+}
+
+label {
+  display: block;
+  margin-bottom: 4px;
+  color: #d2dceb;
+  font-size: 14px;
+}
+
+select {
+  border: 1px solid #344158;
+  background: #0f1420;
+  color: #e8edf7;
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+.claims {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+}
+
+.claim-card {
+  background: #0f1420;
+  border: 1px solid #293246;
+  border-radius: 8px;
+  padding: 14px;
+}
+
+h2 {
+  margin: 0 0 10px;
+  font-size: 16px;
+  color: #9db9ff;
+}
+
+p {
+  margin: 0 0 8px;
+  color: #b4c3da;
+}
+
+a {
+  color: #9db9ff;
+}
+
+.error {
+  color: #ff7d7d;
+}
+

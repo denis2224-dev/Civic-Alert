@@ -1,0 +1,51 @@
+<section class="panel">
+  <h1>Report Suspicious Claim</h1>
+
+  <label for="text">Claim</label>
+  <textarea id="text" rows="5" [(ngModel)]="text" placeholder="Write the suspicious claim here"></textarea>
+
+  <div class="grid">
+    <div>
+      <label for="platform">Platform</label>
+      <select id="platform" [(ngModel)]="platform">
+        <option value="Facebook">Facebook</option>
+        <option value="Telegram">Telegram</option>
+        <option value="TikTok">TikTok</option>
+        <option value="Website">Website</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="region">Region</label>
+      <input id="region" [(ngModel)]="region" />
+    </div>
+
+    <div>
+      <label for="language">Language</label>
+      <select id="language" [(ngModel)]="language">
+        <option value="en">English</option>
+        <option value="ro">Romanian</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="sourceUrl">Source URL (optional)</label>
+      <input id="sourceUrl" [(ngModel)]="sourceUrl" placeholder="https://..." />
+    </div>
+  </div>
+
+  <button type="button" (click)="submitReport()" [disabled]="loading">
+    {{ loading ? 'Submitting...' : 'Submit Report' }}
+  </button>
+
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+</section>
+
+<section class="panel success" *ngIf="response">
+  <h2>Report Submitted</h2>
+  <p><strong>Tracking Code:</strong> {{ response.trackingCode }}</p>
+  <p><strong>Status:</strong> {{ response.status }}</p>
+  <p>{{ response.message }}</p>
+</section>
+

@@ -1,0 +1,18 @@
+<section class="panel">
+  <h1>Official Voting Information</h1>
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+  <div class="cards">
+    <article class="info-card" *ngFor="let item of infoItems">
+      <h2>{{ item.topic }}</h2>
+      <p>{{ item.content }}</p>
+      <p class="meta">
+        Source:
+        <a *ngIf="item.sourceUrl" [href]="item.sourceUrl" target="_blank" rel="noreferrer">{{ item.sourceName }}</a>
+        <span *ngIf="!item.sourceUrl">{{ item.sourceName }}</span>
+      </p>
+      <p class="meta">Updated: {{ item.updatedAt | date: 'medium' }}</p>
+    </article>
+  </div>
+</section>
+

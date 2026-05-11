@@ -1,0 +1,63 @@
+<section class="panel">
+  <h1>Check election information before sharing it.</h1>
+  <p>Paste a suspicious election-process claim and verify it against trusted corrections.</p>
+
+  <label for="claimText">Claim</label>
+  <textarea
+    id="claimText"
+    [(ngModel)]="text"
+    rows="5"
+    placeholder="Example: Can I vote by SMS?"
+  ></textarea>
+
+  <div class="grid">
+    <div>
+      <label for="region">Region</label>
+      <input id="region" [(ngModel)]="region" />
+    </div>
+
+    <div>
+      <label for="language">Language</label>
+      <select id="language" [(ngModel)]="language">
+        <option value="en">English</option>
+        <option value="ro">Romanian</option>
+      </select>
+    </div>
+  </div>
+
+  <button type="button" (click)="checkClaim()" [disabled]="loading">
+    {{ loading ? 'Checking...' : 'Check Claim' }}
+  </button>
+
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+</section>
+
+<section class="panel result" *ngIf="result">
+  <h2>Result</h2>
+
+  <div class="result-grid">
+    <div><strong>Status:</strong> {{ result.status }}</div>
+    <div><strong>Risk Level:</strong> {{ result.riskLevel }}</div>
+    <div><strong>Category:</strong> {{ result.category }}</div>
+    <div><strong>Message:</strong> {{ result.message }}</div>
+  </div>
+
+  <p *ngIf="result.correction"><strong>Correction:</strong> {{ result.correction }}</p>
+  <p *ngIf="result.officialSource">
+    <strong>Official Source:</strong>
+    <a *ngIf="result.officialSourceUrl" [href]="result.officialSourceUrl" target="_blank" rel="noreferrer">
+      {{ result.officialSource }}
+    </a>
+    <span *ngIf="!result.officialSourceUrl">{{ result.officialSource }}</span>
+  </p>
+
+  <a
+    *ngIf="showReportButton"
+    class="link-button"
+    [routerLink]="['/report']"
+    [queryParams]="{ text: text, region: region, language: language }"
+  >
+    Report This Claim
+  </a>
+</section>
+

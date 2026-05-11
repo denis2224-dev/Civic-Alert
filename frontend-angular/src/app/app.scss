@@ -1,0 +1,59 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.shell {
+  min-height: 100vh;
+  background: #0b1019;
+  color: #edf3ff;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  padding: 18px 24px;
+  border-bottom: 1px solid #293146;
+  background: #101826;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.brand h1 {
+  margin: 0;
+  font-size: 24px;
+  color: #e8edf7;
+}
+
+.brand span {
+  color: #9bb0cf;
+  font-size: 13px;
+}
+
+nav {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: #c8d6ef;
+  text-decoration: none;
+  border: 1px solid #33405a;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 14px;
+}
+
+nav a.active {
+  background: #2f58c4;
+  border-color: #2f58c4;
+  color: #ffffff;
+}
+
+main {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 24px;
+}

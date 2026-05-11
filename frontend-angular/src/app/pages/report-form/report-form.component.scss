@@ -1,0 +1,62 @@
+.panel {
+  background: #121825;
+  border: 1px solid #2b3445;
+  border-radius: 8px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+h1,
+h2 {
+  margin: 0;
+  color: #e8edf7;
+}
+
+label {
+  color: #d2dceb;
+  font-size: 14px;
+}
+
+textarea,
+input,
+select {
+  width: 100%;
+  border: 1px solid #344158;
+  background: #0f1420;
+  color: #e8edf7;
+  border-radius: 8px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+button {
+  width: fit-content;
+  background: #3a73ff;
+  color: #fff;
+  border: 0;
+  border-radius: 8px;
+  padding: 10px 16px;
+  cursor: pointer;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.error {
+  color: #ff7d7d;
+}
+
+.success {
+  margin-top: 16px;
+}
+
+p {
+  margin: 0;
+  color: #a9b6ca;
+}
+
