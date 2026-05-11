@@ -9,4 +9,6 @@ public interface RumorPatternRepository extends JpaRepository<RumorPattern, Long
     List<RumorPattern> findByActiveTrue();
 
     Optional<RumorPattern> findByNormalizedPhrase(String normalizedPhrase);
+
+    Optional<RumorPattern> findByNormalizedPhraseAndLanguage(String normalizedPhrase, String language);
 }
