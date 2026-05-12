@@ -1,0 +1,723 @@
+phrase,normalized_phrase,category,severity,language,active
+the election was cancelled,the election was cancelled,voting_process,5,en,true
+election cancelled,election cancelled,voting_process,5,en,true
+voting cancelled,voting cancelled,voting_process,5,en,true
+the vote has been cancelled,the vote has been cancelled,voting_process,5,en,true
+the election is no longer happening,the election is no longer happening,voting_process,5,en,true
+the election has been suspended,the election has been suspended,voting_process,5,en,true
+polling has been stopped,polling has been stopped,voting_process,5,en,true
+the election is invalid,the election is invalid,voting_process,5,en,true
+the vote is invalid,the vote is invalid,voting_process,5,en,true
+the voting process is fake,the voting process is fake,voting_process,5,en,true
+the election commission cancelled voting,the election commission cancelled voting,voting_process,5,en,true
+officials stopped the election,officials stopped the election,voting_process,5,en,true
+voting has been suspended nationwide,voting has been suspended nationwide,voting_process,5,en,true
+the election will not take place,the election will not take place,voting_process,5,en,true
+the election is cancelled today,the election is cancelled today,voting_process,5,en,true
+do not go because voting is cancelled,do not go because voting is cancelled,voting_process,5,en,true
+the polling process was cancelled,the polling process was cancelled,voting_process,5,en,true
+voting was stopped by authorities,voting was stopped by authorities,voting_process,5,en,true
+the election was postponed,the election was postponed,voting_date,5,en,true
+election postponed,election postponed,voting_date,5,en,true
+voting moved to tomorrow,voting moved to tomorrow,voting_date,5,en,true
+the vote was moved to another day,the vote was moved to another day,voting_date,5,en,true
+voting date changed,voting date changed,voting_date,5,en,true
+the election date changed,the election date changed,voting_date,5,en,true
+voting is tomorrow not today,voting is tomorrow not today,voting_date,5,en,true
+go vote tomorrow instead,go vote tomorrow instead,voting_date,5,en,true
+election moved to next week,election moved to next week,voting_date,5,en,true
+the election is delayed,the election is delayed,voting_date,5,en,true
+voting will happen next month,voting will happen next month,voting_date,5,en,true
+today is not election day,today is not election day,voting_date,5,en,true
+the election date was secretly changed,the election date was secretly changed,voting_date,5,en,true
+polling day changed,polling day changed,voting_date,5,en,true
+vote another day,vote another day,voting_date,5,en,true
+voting starts tomorrow,voting starts tomorrow,voting_date,5,en,true
+voting has been moved from today,voting has been moved from today,voting_date,5,en,true
+the date on your invitation is wrong,the date on your invitation is wrong,voting_date,5,en,true
+the official voting date is not today,the official voting date is not today,voting_date,5,en,true
+the election was rescheduled,the election was rescheduled,voting_date,5,en,true
+polling stations close at 18:00,polling stations close at 18 00,voting_hours,4,en,true
+polling stations close at 6 pm,polling stations close at 6 pm,voting_hours,4,en,true
+voting ends at noon,voting ends at noon,voting_hours,4,en,true
+voting ends at 12,voting ends at 12,voting_hours,4,en,true
+polling stations open only after lunch,polling stations open only after lunch,voting_hours,4,en,true
+voting starts at 10:00,voting starts at 10 00,voting_hours,4,en,true
+voting begins late today,voting begins late today,voting_hours,4,en,true
+voting hours changed,voting hours changed,voting_hours,4,en,true
+polling stations are open only for two hours,polling stations are open only for two hours,voting_hours,4,en,true
+you can vote only before 10 am,you can vote only before 10 am,voting_hours,4,en,true
+voting ends early,voting ends early,voting_hours,4,en,true
+polls close early today,polls close early today,voting_hours,4,en,true
+polling stations closed before 21:00,polling stations closed before 21 00,voting_hours,4,en,true
+voting is only in the morning,voting is only in the morning,voting_hours,4,en,true
+voting is only in the evening,voting is only in the evening,voting_hours,4,en,true
+the voting schedule was changed,the voting schedule was changed,voting_hours,4,en,true
+polls will close before 21:00,polls will close before 21 00,voting_hours,4,en,true
+polls open at 09:00,polls open at 09 00,voting_hours,4,en,true
+your polling station moved,your polling station moved,polling_location,5,en,true
+polling station moved,polling station moved,polling_location,5,en,true
+polling stations are closed,polling stations are closed,polling_location,5,en,true
+your voting location changed,your voting location changed,polling_location,5,en,true
+your polling place changed,your polling place changed,polling_location,5,en,true
+all polling stations are closed,all polling stations are closed,polling_location,5,en,true
+the school polling station is closed,the school polling station is closed,polling_location,5,en,true
+the polling station was moved to city hall,the polling station was moved to city hall,polling_location,5,en,true
+go to a different polling station,go to a different polling station,polling_location,5,en,true
+do not go to your assigned polling station,do not go to your assigned polling station,polling_location,5,en,true
+your precinct changed,your precinct changed,polling_location,5,en,true
+the polling location is fake,the polling location is fake,polling_location,5,en,true
+the polling address is wrong,the polling address is wrong,polling_location,5,en,true
+the polling station has been relocated,the polling station has been relocated,polling_location,5,en,true
+only central polling stations are open,only central polling stations are open,polling_location,5,en,true
+local polling stations are closed,local polling stations are closed,polling_location,5,en,true
+polling station closed due to emergency,polling station closed due to emergency,polling_location,5,en,true
+your polling station no longer exists,your polling station no longer exists,polling_location,5,en,true
+the voting center has been moved,the voting center has been moved,polling_location,5,en,true
+all voters must vote in the capital,all voters must vote in the capital,polling_location,5,en,true
+vote by sms,vote by sms,fake_voting_method,5,en,true
+can i vote by sms,can i vote by sms,fake_voting_method,5,en,true
+you can vote by SMS,you can vote by sms,fake_voting_method,5,en,true
+SMS voting is available,sms voting is available,fake_voting_method,5,en,true
+vote by text message,vote by text message,fake_voting_method,5,en,true
+vote by phone,vote by phone,fake_voting_method,5,en,true
+vote using your phone,vote using your phone,fake_voting_method,5,en,true
+vote online,vote online,fake_voting_method,5,en,true
+online voting is available,online voting is available,fake_voting_method,5,en,true
+vote by email,vote by email,fake_voting_method,5,en,true
+send your vote by email,send your vote by email,fake_voting_method,5,en,true
+vote through telegram,vote through telegram,fake_voting_method,5,en,true
+vote through facebook,vote through facebook,fake_voting_method,5,en,true
+vote using QR code,vote using qr code,fake_voting_method,5,en,true
+scan this code to vote,scan this code to vote,fake_voting_method,5,en,true
+vote by mobile app,vote by mobile app,fake_voting_method,5,en,true
+remote voting is available for everyone,remote voting is available for everyone,fake_voting_method,5,en,true
+send your candidate number by SMS,send your candidate number by sms,fake_voting_method,5,en,true
+text your vote to this number,text your vote to this number,fake_voting_method,5,en,true
+vote by calling this number,vote by calling this number,fake_voting_method,5,en,true
+vote on this website,vote on this website,fake_voting_method,5,en,true
+click this link to vote,click this link to vote,fake_voting_method,5,en,true
+use this online ballot,use this online ballot,fake_voting_method,5,en,true
+vote through messenger,vote through messenger,fake_voting_method,5,en,true
+vote from home using SMS,vote from home using sms,fake_voting_method,5,en,true
+phone voting is official,phone voting is official,fake_voting_method,5,en,true
+internet voting is official,internet voting is official,fake_voting_method,5,en,true
+vote by WhatsApp,vote by whatsapp,fake_voting_method,5,en,true
+send passport number to vote by SMS,send passport number to vote by sms,fake_voting_method,5,en,true
+vote by viber,vote by viber,fake_voting_method,5,en,true
+mobile voting is open now,mobile voting is open now,fake_voting_method,5,en,true
+do not vote today,do not vote today,voter_suppression,5,en,true
+stay home and do not vote,stay home and do not vote,voter_suppression,5,en,true
+your vote will not count,your vote will not count,voter_suppression,5,en,true
+voting is useless,voting is useless,voter_suppression,5,en,true
+do not go to the polling station,do not go to the polling station,voter_suppression,5,en,true
+there is no reason to vote,there is no reason to vote,voter_suppression,5,en,true
+only party members can vote,only party members can vote,voter_suppression,5,en,true
+young people cannot vote today,young people cannot vote today,voter_suppression,5,en,true
+students cannot vote,students cannot vote,voter_suppression,5,en,true
+diaspora voters should not vote,diaspora voters should not vote,voter_suppression,5,en,true
+people from this region cannot vote,people from this region cannot vote,voter_suppression,5,en,true
+do not risk going to vote,do not risk going to vote,voter_suppression,5,en,true
+police will check voters,police will check voters,voter_suppression,5,en,true
+voters will be fined,voters will be fined,voter_suppression,5,en,true
+your employer will know how you voted,your employer will know how you voted,voter_suppression,5,en,true
+authorities will punish voters,authorities will punish voters,voter_suppression,5,en,true
+voting today is dangerous,voting today is dangerous,voter_suppression,5,en,true
+avoid polling stations,avoid polling stations,voter_suppression,5,en,true
+do not vote if you are undecided,do not vote if you are undecided,voter_suppression,5,en,true
+your vote will be tracked,your vote will be tracked,voter_suppression,5,en,true
+people who vote will lose benefits,people who vote will lose benefits,voter_suppression,5,en,true
+do not vote unless invited,do not vote unless invited,voter_suppression,5,en,true
+only selected citizens can vote,only selected citizens can vote,voter_suppression,5,en,true
+ballots with pen are invalid,ballots with pen are invalid,ballot_confusion,4,en,true
+ballots marked with pen are invalid,ballots marked with pen are invalid,ballot_confusion,4,en,true
+ballots marked with pencil are invalid,ballots marked with pencil are invalid,ballot_confusion,4,en,true
+ballots with stamp are invalid,ballots with stamp are invalid,ballot_confusion,4,en,true
+folded ballots are invalid,folded ballots are invalid,ballot_confusion,4,en,true
+ballots must be photographed,ballots must be photographed,ballot_confusion,4,en,true
+take a photo of your ballot,take a photo of your ballot,ballot_confusion,4,en,true
+write your name on the ballot,write your name on the ballot,ballot_confusion,4,en,true
+sign your ballot,sign your ballot,ballot_confusion,4,en,true
+blank ballots count for candidate X,blank ballots count for candidate x,ballot_confusion,4,en,true
+damaged ballots are all counted for one party,damaged ballots are all counted for one party,ballot_confusion,4,en,true
+ask for two ballots,ask for two ballots,ballot_confusion,4,en,true
+use two stamps,use two stamps,ballot_confusion,4,en,true
+cross out all candidates,cross out all candidates,ballot_confusion,4,en,true
+vote is valid only with a blue pen,vote is valid only with a blue pen,ballot_confusion,4,en,true
+vote is valid only with red ink,vote is valid only with red ink,ballot_confusion,4,en,true
+ballots without signature are invalid,ballots without signature are invalid,ballot_confusion,4,en,true
+ballots are already marked,ballots are already marked,ballot_confusion,4,en,true
+ballots are fake,ballots are fake,ballot_confusion,4,en,true
+spoiled ballots count against your candidate,spoiled ballots count against your candidate,ballot_confusion,4,en,true
+do not fold the ballot,do not fold the ballot,ballot_confusion,4,en,true
+fold the ballot twice or it is invalid,fold the ballot twice or it is invalid,ballot_confusion,4,en,true
+id cards are not accepted,id cards are not accepted,id_requirement,4,en,true
+passport only for voting,passport only for voting,id_requirement,4,en,true
+bring only passport,bring only passport,id_requirement,4,en,true
+expired documents are not accepted,expired documents are not accepted,id_requirement,4,en,true
+students need a special certificate,students need a special certificate,id_requirement,4,en,true
+you need a tax certificate to vote,you need a tax certificate to vote,id_requirement,4,en,true
+you need proof of employment to vote,you need proof of employment to vote,id_requirement,4,en,true
+you need a vaccine certificate to vote,you need a vaccine certificate to vote,id_requirement,4,en,true
+you need a party invitation to vote,you need a party invitation to vote,id_requirement,4,en,true
+only biometric passports are accepted,only biometric passports are accepted,id_requirement,4,en,true
+old ID cards are invalid,old id cards are invalid,id_requirement,4,en,true
+driver license is enough to vote,driver license is enough to vote,id_requirement,4,en,true
+you can vote without any ID,you can vote without any id,id_requirement,4,en,true
+bring a utility bill to vote,bring a utility bill to vote,id_requirement,4,en,true
+bring military record to vote,bring military record to vote,id_requirement,4,en,true
+voters need a registration code,voters need a registration code,id_requirement,4,en,true
+you must register again today,you must register again today,id_requirement,4,en,true
+you need a special QR code to vote,you need a special qr code to vote,id_requirement,4,en,true
+you need a bank card to vote,you need a bank card to vote,id_requirement,4,en,true
+results already decided,results already decided,results_misinformation,4,en,true
+official results leaked,official results leaked,results_misinformation,4,en,true
+winner already announced,winner already announced,results_misinformation,4,en,true
+votes have already been counted,votes have already been counted,results_misinformation,4,en,true
+election result is final before polls close,election result is final before polls close,results_misinformation,4,en,true
+preliminary results are final,preliminary results are final,results_misinformation,4,en,true
+exit polls are official results,exit polls are official results,results_misinformation,4,en,true
+candidate X already won,candidate x already won,results_misinformation,4,en,true
+candidate Y already lost,candidate y already lost,results_misinformation,4,en,true
+the commission already chose the winner,the commission already chose the winner,results_misinformation,4,en,true
+ballots are already counted,ballots are already counted,results_misinformation,4,en,true
+results were published before voting,results were published before voting,results_misinformation,4,en,true
+all diaspora votes were rejected,all diaspora votes were rejected,results_misinformation,4,en,true
+all urban votes were cancelled,all urban votes were cancelled,results_misinformation,4,en,true
+the final result is known,the final result is known,results_misinformation,4,en,true
+secret results show the winner,secret results show the winner,results_misinformation,4,en,true
+do not vote because the winner is known,do not vote because the winner is known,results_misinformation,4,en,true
+official results are available on this private channel,official results are available on this private channel,results_misinformation,4,en,true
+official election commission message,official election commission message,official_impersonation,5,en,true
+CEC confirms election cancelled,cec confirms election cancelled,official_impersonation,5,en,true
+central electoral commission says vote by SMS,central electoral commission says vote by sms,official_impersonation,5,en,true
+official polling station notice,official polling station notice,official_impersonation,5,en,true
+government says do not vote today,government says do not vote today,official_impersonation,5,en,true
+police announcement polling stations closed,police announcement polling stations closed,official_impersonation,5,en,true
+mayor office changed voting place,mayor office changed voting place,official_impersonation,5,en,true
+official message voting postponed,official message voting postponed,official_impersonation,5,en,true
+CEC link to vote online,cec link to vote online,official_impersonation,5,en,true
+election authority asks for ID by SMS,election authority asks for id by sms,official_impersonation,5,en,true
+official commission asks voters to register on this website,official commission asks voters to register on this website,official_impersonation,5,en,true
+CEC announces new voting hours,cec announces new voting hours,official_impersonation,5,en,true
+official election chatbot says vote online,official election chatbot says vote online,official_impersonation,5,en,true
+the ministry confirms polling stations are closed,the ministry confirms polling stations are closed,official_impersonation,5,en,true
+observers are banned,observers are banned,observer_misinformation,3,en,true
+observers cannot enter polling stations,observers cannot enter polling stations,observer_misinformation,3,en,true
+journalists are not allowed near polling stations,journalists are not allowed near polling stations,observer_misinformation,3,en,true
+citizens cannot report violations,citizens cannot report violations,observer_misinformation,3,en,true
+photos of violations are illegal,photos of violations are illegal,observer_misinformation,3,en,true
+international observers left the country,international observers left the country,observer_misinformation,3,en,true
+local observers are fake,local observers are fake,observer_misinformation,3,en,true
+observers will cancel your vote,observers will cancel your vote,observer_misinformation,3,en,true
+do not speak to observers,do not speak to observers,observer_misinformation,3,en,true
+observers will record your vote,observers will record your vote,observer_misinformation,3,en,true
+diaspora votes cancelled,diaspora votes cancelled,diaspora_voting,5,en,true
+diaspora voters cannot vote,diaspora voters cannot vote,diaspora_voting,5,en,true
+embassies are closed for voting,embassies are closed for voting,diaspora_voting,5,en,true
+diaspora polling stations moved,diaspora polling stations moved,diaspora_voting,5,en,true
+diaspora ballots are invalid,diaspora ballots are invalid,diaspora_voting,5,en,true
+citizens abroad must vote online,citizens abroad must vote online,diaspora_voting,5,en,true
+diaspora must vote by SMS,diaspora must vote by sms,diaspora_voting,5,en,true
+only residents inside the country can vote,only residents inside the country can vote,diaspora_voting,5,en,true
+diaspora voting ended yesterday,diaspora voting ended yesterday,diaspora_voting,5,en,true
+diaspora voters need a special code,diaspora voters need a special code,diaspora_voting,5,en,true
+diaspora votes will not be counted,diaspora votes will not be counted,diaspora_voting,5,en,true
+all foreign polling stations are closed,all foreign polling stations are closed,diaspora_voting,5,en,true
+voting will cause violence,voting will cause violence,fear_appeal,4,en,true
+there will be attacks at polling stations,there will be attacks at polling stations,fear_appeal,4,en,true
+polling stations are unsafe,polling stations are unsafe,fear_appeal,4,en,true
+dangerous groups are waiting near voting centers,dangerous groups are waiting near voting centers,fear_appeal,4,en,true
+do not bring your family to vote,do not bring your family to vote,fear_appeal,4,en,true
+there will be arrests at polling stations,there will be arrests at polling stations,fear_appeal,4,en,true
+voters will be photographed by police,voters will be photographed by police,fear_appeal,4,en,true
+your name will be published if you vote,your name will be published if you vote,fear_appeal,4,en,true
+armed groups control polling stations,armed groups control polling stations,fear_appeal,4,en,true
+voting today is a trap,voting today is a trap,fear_appeal,4,en,true
+sell your vote for cash,sell your vote for cash,vote_buying,5,en,true
+get money for voting,get money for voting,vote_buying,5,en,true
+bring proof of vote for payment,bring proof of vote for payment,vote_buying,5,en,true
+take ballot photo to receive money,take ballot photo to receive money,vote_buying,5,en,true
+payment after voting,payment after voting,vote_buying,5,en,true
+free goods for voting,free goods for voting,vote_buying,5,en,true
+receive voucher after voting,receive voucher after voting,vote_buying,5,en,true
+vote for reward,vote for reward,vote_buying,5,en,true
+send ballot photo for bonus,send ballot photo for bonus,vote_buying,5,en,true
+your vote can be bought,your vote can be bought,vote_buying,5,en,true
+alegerile au fost anulate,alegerile au fost anulate,voting_process,5,ro,true
+votarea a fost anulata,votarea a fost anulata,voting_process,5,ro,true
+scrutinul a fost anulat,scrutinul a fost anulat,voting_process,5,ro,true
+votul a fost anulat,votul a fost anulat,voting_process,5,ro,true
+alegerile nu mai au loc,alegerile nu mai au loc,voting_process,5,ro,true
+procesul de votare a fost oprit,procesul de votare a fost oprit,voting_process,5,ro,true
+votarea este suspendata,votarea este suspendata,voting_process,5,ro,true
+votarea s a anulat,votarea s a anulat,voting_process,5,ro,true
+alegerile sunt invalide,alegerile sunt invalide,voting_process,5,ro,true
+comisia a anulat votarea,comisia a anulat votarea,voting_process,5,ro,true
+nu mergeti deoarece votarea a fost anulata,nu mergeti deoarece votarea a fost anulata,voting_process,5,ro,true
+sectiile nu mai primesc alegatori,sectiile nu mai primesc alegatori,voting_process,5,ro,true
+procesul electoral este fals,procesul electoral este fals,voting_process,5,ro,true
+autoritatile au oprit alegerile,autoritatile au oprit alegerile,voting_process,5,ro,true
+votarea s a suspendat in toata tara,votarea s a suspendat in toata tara,voting_process,5,ro,true
+alegerile au fost amanate,alegerile au fost amanate,voting_date,5,ro,true
+votarea s a mutat pe maine,votarea s a mutat pe maine,voting_date,5,ro,true
+data votarii s a schimbat,data votarii s a schimbat,voting_date,5,ro,true
+ziua alegerilor s a schimbat,ziua alegerilor s a schimbat,voting_date,5,ro,true
+mergeti la vot maine,mergeti la vot maine,voting_date,5,ro,true
+votarea este maine nu astazi,votarea este maine nu astazi,voting_date,5,ro,true
+alegerile au fost mutate saptamana viitoare,alegerile au fost mutate saptamana viitoare,voting_date,5,ro,true
+votarea este intarziata,votarea este intarziata,voting_date,5,ro,true
+astazi nu este ziua alegerilor,astazi nu este ziua alegerilor,voting_date,5,ro,true
+ziua votului s a modificat,ziua votului s a modificat,voting_date,5,ro,true
+votati in alta zi,votati in alta zi,voting_date,5,ro,true
+programarea la vot s a schimbat,programarea la vot s a schimbat,voting_date,5,ro,true
+data oficiala nu este astazi,data oficiala nu este astazi,voting_date,5,ro,true
+scrutinul a fost reprogramat,scrutinul a fost reprogramat,voting_date,5,ro,true
+sectiile se inchid la ora 18,sectiile se inchid la ora 18,voting_hours,4,ro,true
+sectiile se inchid la 18:00,sectiile se inchid la 18 00,voting_hours,4,ro,true
+votarea se termina la pranz,votarea se termina la pranz,voting_hours,4,ro,true
+votarea se termina la ora 12,votarea se termina la ora 12,voting_hours,4,ro,true
+sectiile se deschid dupa pranz,sectiile se deschid dupa pranz,voting_hours,4,ro,true
+votarea incepe la ora 10,votarea incepe la ora 10,voting_hours,4,ro,true
+programul de votare s a schimbat,programul de votare s a schimbat,voting_hours,4,ro,true
+sectiile sunt deschise doar doua ore,sectiile sunt deschise doar doua ore,voting_hours,4,ro,true
+puteti vota doar dimineata,puteti vota doar dimineata,voting_hours,4,ro,true
+votarea se incheie mai devreme,votarea se incheie mai devreme,voting_hours,4,ro,true
+sectiile se inchid inainte de 21:00,sectiile se inchid inainte de 21 00,voting_hours,4,ro,true
+votul este doar seara,votul este doar seara,voting_hours,4,ro,true
+orarul sectiilor a fost modificat,orarul sectiilor a fost modificat,voting_hours,4,ro,true
+sectia de votare s a mutat,sectia de votare s a mutat,polling_location,5,ro,true
+sectia ta de votare s a schimbat,sectia ta de votare s a schimbat,polling_location,5,ro,true
+sectiile de votare sunt inchise,sectiile de votare sunt inchise,polling_location,5,ro,true
+locul de votare s a schimbat,locul de votare s a schimbat,polling_location,5,ro,true
+toate sectiile de votare sunt inchise,toate sectiile de votare sunt inchise,polling_location,5,ro,true
+nu mergeti la sectia repartizata,nu mergeti la sectia repartizata,polling_location,5,ro,true
+mergeti la alta sectie de votare,mergeti la alta sectie de votare,polling_location,5,ro,true
+adresa sectiei este gresita,adresa sectiei este gresita,polling_location,5,ro,true
+sectia de votare a fost relocata,sectia de votare a fost relocata,polling_location,5,ro,true
+sectia din scoala este inchisa,sectia din scoala este inchisa,polling_location,5,ro,true
+doar sectiile centrale sunt deschise,doar sectiile centrale sunt deschise,polling_location,5,ro,true
+sectiile locale sunt inchise,sectiile locale sunt inchise,polling_location,5,ro,true
+sectia de votare nu mai exista,sectia de votare nu mai exista,polling_location,5,ro,true
+toti alegatorii trebuie sa voteze in capitala,toti alegatorii trebuie sa voteze in capitala,polling_location,5,ro,true
+centrul de votare s a mutat,centrul de votare s a mutat,polling_location,5,ro,true
+pot sa votez prin sms,pot sa votez prin sms,fake_voting_method,5,ro,true
+pot vota prin sms,pot vota prin sms,fake_voting_method,5,ro,true
+poți vota prin sms,poti vota prin sms,fake_voting_method,5,ro,true
+se poate vota prin sms,se poate vota prin sms,fake_voting_method,5,ro,true
+vot prin sms,vot prin sms,fake_voting_method,5,ro,true
+votare prin sms,votare prin sms,fake_voting_method,5,ro,true
+votez prin sms,votez prin sms,fake_voting_method,5,ro,true
+votam prin sms,votam prin sms,fake_voting_method,5,ro,true
+vot prin mesaj,vot prin mesaj,fake_voting_method,5,ro,true
+trimite sms pentru vot,trimite sms pentru vot,fake_voting_method,5,ro,true
+vot prin telefon,vot prin telefon,fake_voting_method,5,ro,true
+se poate vota cu sms,se poate vota cu sms,fake_voting_method,5,ro,true
+pot sa votez cu sms,pot sa votez cu sms,fake_voting_method,5,ro,true
+poti vota cu sms,poti vota cu sms,fake_voting_method,5,ro,true
+vot online,vot online,fake_voting_method,5,ro,true
+pot vota online,pot vota online,fake_voting_method,5,ro,true
+se poate vota online,se poate vota online,fake_voting_method,5,ro,true
+vot prin email,vot prin email,fake_voting_method,5,ro,true
+trimite votul prin email,trimite votul prin email,fake_voting_method,5,ro,true
+voteaza pe telegram,voteaza pe telegram,fake_voting_method,5,ro,true
+voteaza pe facebook,voteaza pe facebook,fake_voting_method,5,ro,true
+scaneaza codul pentru vot,scaneaza codul pentru vot,fake_voting_method,5,ro,true
+vot prin aplicatie mobila,vot prin aplicatie mobila,fake_voting_method,5,ro,true
+voteaza de acasa prin sms,voteaza de acasa prin sms,fake_voting_method,5,ro,true
+votul prin telefon este oficial,votul prin telefon este oficial,fake_voting_method,5,ro,true
+vot pe internet,vot pe internet,fake_voting_method,5,ro,true
+voteaza prin whatsapp,voteaza prin whatsapp,fake_voting_method,5,ro,true
+trimite numarul buletinului prin sms,trimite numarul buletinului prin sms,fake_voting_method,5,ro,true
+voteaza prin viber,voteaza prin viber,fake_voting_method,5,ro,true
+nu mergeti la vot astazi,nu mergeti la vot astazi,voter_suppression,5,ro,true
+stati acasa si nu votati,stati acasa si nu votati,voter_suppression,5,ro,true
+votul tau nu conteaza,votul tau nu conteaza,voter_suppression,5,ro,true
+nu are rost sa votezi,nu are rost sa votezi,voter_suppression,5,ro,true
+nu merge la sectia de votare,nu merge la sectia de votare,voter_suppression,5,ro,true
+doar membrii de partid pot vota,doar membrii de partid pot vota,voter_suppression,5,ro,true
+studentii nu pot vota,studentii nu pot vota,voter_suppression,5,ro,true
+tinerii nu pot vota astazi,tinerii nu pot vota astazi,voter_suppression,5,ro,true
+diaspora nu trebuie sa voteze,diaspora nu trebuie sa voteze,voter_suppression,5,ro,true
+alegatorii din aceasta regiune nu pot vota,alegatorii din aceasta regiune nu pot vota,voter_suppression,5,ro,true
+nu riscati sa mergeti la vot,nu riscati sa mergeti la vot,voter_suppression,5,ro,true
+politia verifica alegatorii,politia verifica alegatorii,voter_suppression,5,ro,true
+alegatorii vor fi amendati,alegatorii vor fi amendati,voter_suppression,5,ro,true
+angajatorul va sti cum ai votat,angajatorul va sti cum ai votat,voter_suppression,5,ro,true
+autoritatile vor pedepsi alegatorii,autoritatile vor pedepsi alegatorii,voter_suppression,5,ro,true
+votarea astazi este periculoasa,votarea astazi este periculoasa,voter_suppression,5,ro,true
+evitati sectiile de votare,evitati sectiile de votare,voter_suppression,5,ro,true
+votul tau va fi urmarit,votul tau va fi urmarit,voter_suppression,5,ro,true
+nu vota daca nu ai invitatie,nu vota daca nu ai invitatie,voter_suppression,5,ro,true
+buletinele completate cu pixul sunt invalide,buletinele completate cu pixul sunt invalide,ballot_confusion,4,ro,true
+buletinele marcate cu pixul sunt invalide,buletinele marcate cu pixul sunt invalide,ballot_confusion,4,ro,true
+buletinele marcate cu creionul sunt invalide,buletinele marcate cu creionul sunt invalide,ballot_confusion,4,ro,true
+buletinele cu stampila sunt invalide,buletinele cu stampila sunt invalide,ballot_confusion,4,ro,true
+buletinele indoite sunt invalide,buletinele indoite sunt invalide,ballot_confusion,4,ro,true
+trebuie sa fotografiezi buletinul,trebuie sa fotografiezi buletinul,ballot_confusion,4,ro,true
+fa poza la buletinul de vot,fa poza la buletinul de vot,ballot_confusion,4,ro,true
+scrie numele pe buletin,scrie numele pe buletin,ballot_confusion,4,ro,true
+semneaza buletinul de vot,semneaza buletinul de vot,ballot_confusion,4,ro,true
+buletinele goale merg la candidatul x,buletinele goale merg la candidatul x,ballot_confusion,4,ro,true
+cereti doua buletine,cereti doua buletine,ballot_confusion,4,ro,true
+folositi doua stampile,folositi doua stampile,ballot_confusion,4,ro,true
+taiati toti candidatii,taiati toti candidatii,ballot_confusion,4,ro,true
+votul este valid doar cu pix albastru,votul este valid doar cu pix albastru,ballot_confusion,4,ro,true
+votul este valid doar cu cerneala rosie,votul este valid doar cu cerneala rosie,ballot_confusion,4,ro,true
+buletinele sunt deja marcate,buletinele sunt deja marcate,ballot_confusion,4,ro,true
+buletinele sunt false,buletinele sunt false,ballot_confusion,4,ro,true
+nu impaturi buletinul,nu impaturi buletinul,ballot_confusion,4,ro,true
+impatureste buletinul de doua ori,impatureste buletinul de doua ori,ballot_confusion,4,ro,true
+cartea de identitate nu este acceptata,cartea de identitate nu este acceptata,id_requirement,4,ro,true
+doar pasaportul este acceptat,doar pasaportul este acceptat,id_requirement,4,ro,true
+actele expirate nu sunt acceptate,actele expirate nu sunt acceptate,id_requirement,4,ro,true
+studentii au nevoie de certificat special,studentii au nevoie de certificat special,id_requirement,4,ro,true
+ai nevoie de certificat fiscal pentru vot,ai nevoie de certificat fiscal pentru vot,id_requirement,4,ro,true
+ai nevoie de dovada angajarii pentru vot,ai nevoie de dovada angajarii pentru vot,id_requirement,4,ro,true
+ai nevoie de certificat de vaccinare pentru vot,ai nevoie de certificat de vaccinare pentru vot,id_requirement,4,ro,true
+ai nevoie de invitatie de partid pentru vot,ai nevoie de invitatie de partid pentru vot,id_requirement,4,ro,true
+doar pasapoartele biometrice sunt acceptate,doar pasapoartele biometrice sunt acceptate,id_requirement,4,ro,true
+buletinele vechi sunt invalide,buletinele vechi sunt invalide,id_requirement,4,ro,true
+permisul de conducere este suficient pentru vot,permisul de conducere este suficient pentru vot,id_requirement,4,ro,true
+poti vota fara act,poti vota fara act,id_requirement,4,ro,true
+adu factura de utilitati pentru vot,adu factura de utilitati pentru vot,id_requirement,4,ro,true
+ai nevoie de cod de inregistrare,ai nevoie de cod de inregistrare,id_requirement,4,ro,true
+trebuie sa te inregistrezi din nou astazi,trebuie sa te inregistrezi din nou astazi,id_requirement,4,ro,true
+ai nevoie de cod qr pentru vot,ai nevoie de cod qr pentru vot,id_requirement,4,ro,true
+rezultatele sunt deja decise,rezultatele sunt deja decise,results_misinformation,4,ro,true
+rezultatele oficiale au fost scurse,rezultatele oficiale au fost scurse,results_misinformation,4,ro,true
+castigatorul a fost deja anuntat,castigatorul a fost deja anuntat,results_misinformation,4,ro,true
+voturile au fost deja numarate,voturile au fost deja numarate,results_misinformation,4,ro,true
+rezultatul este final inainte de inchiderea sectiilor,rezultatul este final inainte de inchiderea sectiilor,results_misinformation,4,ro,true
+exit pollurile sunt rezultate oficiale,exit pollurile sunt rezultate oficiale,results_misinformation,4,ro,true
+candidatul x a castigat deja,candidatul x a castigat deja,results_misinformation,4,ro,true
+comisia a ales deja castigatorul,comisia a ales deja castigatorul,results_misinformation,4,ro,true
+buletinele sunt deja numarate,buletinele sunt deja numarate,results_misinformation,4,ro,true
+rezultatele au fost publicate inainte de vot,rezultatele au fost publicate inainte de vot,results_misinformation,4,ro,true
+toate voturile diasporei au fost respinse,toate voturile diasporei au fost respinse,results_misinformation,4,ro,true
+rezultatul final este cunoscut,rezultatul final este cunoscut,results_misinformation,4,ro,true
+nu votati pentru ca invingatorul este cunoscut,nu votati pentru ca invingatorul este cunoscut,results_misinformation,4,ro,true
+mesaj oficial de la comisia electorala,mesaj oficial de la comisia electorala,official_impersonation,5,ro,true
+cec confirma anularea alegerilor,cec confirma anularea alegerilor,official_impersonation,5,ro,true
+comisia electorala spune ca se voteaza prin sms,comisia electorala spune ca se voteaza prin sms,official_impersonation,5,ro,true
+anunt oficial sectia este inchisa,anunt oficial sectia este inchisa,official_impersonation,5,ro,true
+guvernul spune sa nu votati astazi,guvernul spune sa nu votati astazi,official_impersonation,5,ro,true
+politia anunta ca sectiile sunt inchise,politia anunta ca sectiile sunt inchise,official_impersonation,5,ro,true
+primaria a schimbat locul de votare,primaria a schimbat locul de votare,official_impersonation,5,ro,true
+mesaj oficial votarea s a amanat,mesaj oficial votarea s a amanat,official_impersonation,5,ro,true
+cec a publicat link pentru vot online,cec a publicat link pentru vot online,official_impersonation,5,ro,true
+comisia cere buletinul prin sms,comisia cere buletinul prin sms,official_impersonation,5,ro,true
+comisia electorala cere inregistrare pe acest site,comisia electorala cere inregistrare pe acest site,official_impersonation,5,ro,true
+cec anunta program nou de votare,cec anunta program nou de votare,official_impersonation,5,ro,true
+observatorii sunt interzisi,observatorii sunt interzisi,observer_misinformation,3,ro,true
+observatorii nu pot intra in sectii,observatorii nu pot intra in sectii,observer_misinformation,3,ro,true
+jurnalistii nu au voie langa sectii,jurnalistii nu au voie langa sectii,observer_misinformation,3,ro,true
+cetatenii nu pot raporta incalcari,cetatenii nu pot raporta incalcari,observer_misinformation,3,ro,true
+pozele cu incalcari sunt ilegale,pozele cu incalcari sunt ilegale,observer_misinformation,3,ro,true
+observatorii internationali au plecat,observatorii internationali au plecat,observer_misinformation,3,ro,true
+observatorii locali sunt falsi,observatorii locali sunt falsi,observer_misinformation,3,ro,true
+observatorii iti vor anula votul,observatorii iti vor anula votul,observer_misinformation,3,ro,true
+nu vorbiti cu observatorii,nu vorbiti cu observatorii,observer_misinformation,3,ro,true
+voturile diasporei au fost anulate,voturile diasporei au fost anulate,diaspora_voting,5,ro,true
+diaspora nu poate vota,diaspora nu poate vota,diaspora_voting,5,ro,true
+ambasadele sunt inchise pentru vot,ambasadele sunt inchise pentru vot,diaspora_voting,5,ro,true
+sectiile din diaspora s au mutat,sectiile din diaspora s au mutat,diaspora_voting,5,ro,true
+buletinele diasporei sunt invalide,buletinele diasporei sunt invalide,diaspora_voting,5,ro,true
+cetatenii din strainatate trebuie sa voteze online,cetatenii din strainatate trebuie sa voteze online,diaspora_voting,5,ro,true
+diaspora trebuie sa voteze prin sms,diaspora trebuie sa voteze prin sms,diaspora_voting,5,ro,true
+doar rezidentii din tara pot vota,doar rezidentii din tara pot vota,diaspora_voting,5,ro,true
+votarea in diaspora s a incheiat ieri,votarea in diaspora s a incheiat ieri,diaspora_voting,5,ro,true
+diaspora are nevoie de cod special,diaspora are nevoie de cod special,diaspora_voting,5,ro,true
+voturile diasporei nu vor fi numarate,voturile diasporei nu vor fi numarate,diaspora_voting,5,ro,true
+votarea va provoca violente,votarea va provoca violente,fear_appeal,4,ro,true
+vor fi atacuri la sectii,vor fi atacuri la sectii,fear_appeal,4,ro,true
+sectiile de votare sunt nesigure,sectiile de votare sunt nesigure,fear_appeal,4,ro,true
+grupuri periculoase asteapta langa sectii,grupuri periculoase asteapta langa sectii,fear_appeal,4,ro,true
+nu aduceti familia la vot,nu aduceti familia la vot,fear_appeal,4,ro,true
+vor fi arestari la sectii,vor fi arestari la sectii,fear_appeal,4,ro,true
+alegatorii vor fi fotografiati de politie,alegatorii vor fi fotografiati de politie,fear_appeal,4,ro,true
+numele tau va fi publicat daca votezi,numele tau va fi publicat daca votezi,fear_appeal,4,ro,true
+grupuri inarmate controleaza sectiile,grupuri inarmate controleaza sectiile,fear_appeal,4,ro,true
+votarea astazi este o capcana,votarea astazi este o capcana,fear_appeal,4,ro,true
+vinde votul pentru bani,vinde votul pentru bani,vote_buying,5,ro,true
+primesti bani daca votezi,primesti bani daca votezi,vote_buying,5,ro,true
+adu dovada votului pentru plata,adu dovada votului pentru plata,vote_buying,5,ro,true
+fa poza la buletin pentru bani,fa poza la buletin pentru bani,vote_buying,5,ro,true
+plata dupa vot,plata dupa vot,vote_buying,5,ro,true
+bunuri gratuite pentru vot,bunuri gratuite pentru vot,vote_buying,5,ro,true
+primeste voucher dupa vot,primeste voucher dupa vot,vote_buying,5,ro,true
+voteaza pentru recompensa,voteaza pentru recompensa,vote_buying,5,ro,true
+trimite poza cu buletinul pentru bonus,trimite poza cu buletinul pentru bonus,vote_buying,5,ro,true
+выборы отменены,выборы отменены,voting_process,5,ru,true
+голосование отменено,голосование отменено,voting_process,5,ru,true
+выборы больше не состоятся,выборы больше не состоятся,voting_process,5,ru,true
+процесс голосования остановлен,процесс голосования остановлен,voting_process,5,ru,true
+голосование приостановлено,голосование приостановлено,voting_process,5,ru,true
+выборы недействительны,выборы недеиствительны,voting_process,5,ru,true
+избирательная комиссия отменила голосование,избирательная комиссия отменила голосование,voting_process,5,ru,true
+не ходите потому что голосование отменено,не ходите потому что голосование отменено,voting_process,5,ru,true
+избирательные участки больше не принимают voters,избирательные участки больше не принимают voters,voting_process,5,ru,true
+власти остановили выборы,власти остановили выборы,voting_process,5,ru,true
+голосование отменено сегодня,голосование отменено сегодня,voting_process,5,ru,true
+выборы перенесли,выборы перенесли,voting_date,5,ru,true
+голосование перенесли на завтра,голосование перенесли на завтра,voting_date,5,ru,true
+дата голосования изменилась,дата голосования изменилась,voting_date,5,ru,true
+день выборов изменился,день выборов изменился,voting_date,5,ru,true
+идите голосовать завтра,идите голосовать завтра,voting_date,5,ru,true
+голосование завтра а не сегодня,голосование завтра а не сегодня,voting_date,5,ru,true
+выборы перенесли на следующую неделю,выборы перенесли на следующую неделю,voting_date,5,ru,true
+голосование задерживается,голосование задерживается,voting_date,5,ru,true
+сегодня не день выборов,сегодня не день выборов,voting_date,5,ru,true
+дата выборов тайно изменена,дата выборов таино изменена,voting_date,5,ru,true
+голосуйте в другой день,голосуите в другои день,voting_date,5,ru,true
+выборы были перенесены,выборы были перенесены,voting_date,5,ru,true
+участки закрываются в 18:00,участки закрываются в 18 00,voting_hours,4,ru,true
+избирательные участки закрываются в шесть,избирательные участки закрываются в шесть,voting_hours,4,ru,true
+голосование заканчивается в полдень,голосование заканчивается в полдень,voting_hours,4,ru,true
+голосование заканчивается в 12,голосование заканчивается в 12,voting_hours,4,ru,true
+участки открываются после обеда,участки открываются после обеда,voting_hours,4,ru,true
+голосование начинается в 10:00,голосование начинается в 10 00,voting_hours,4,ru,true
+часы голосования изменились,часы голосования изменились,voting_hours,4,ru,true
+участки открыты только два часа,участки открыты только два часа,voting_hours,4,ru,true
+можно голосовать только утром,можно голосовать только утром,voting_hours,4,ru,true
+голосование закончится раньше,голосование закончится раньше,voting_hours,4,ru,true
+участки закрываются до 21:00,участки закрываются до 21 00,voting_hours,4,ru,true
+расписание голосования изменено,расписание голосования изменено,voting_hours,4,ru,true
+ваш участок изменился,ваш участок изменился,polling_location,5,ru,true
+избирательный участок перенесли,избирательныи участок перенесли,polling_location,5,ru,true
+избирательные участки закрыты,избирательные участки закрыты,polling_location,5,ru,true
+место голосования изменилось,место голосования изменилось,polling_location,5,ru,true
+все участки закрыты,все участки закрыты,polling_location,5,ru,true
+идите на другой участок,идите на другои участок,polling_location,5,ru,true
+не идите на свой участок,не идите на свои участок,polling_location,5,ru,true
+адрес участка неправильный,адрес участка неправильныи,polling_location,5,ru,true
+участок был перенесен,участок был перенесен,polling_location,5,ru,true
+участок в школе закрыт,участок в школе закрыт,polling_location,5,ru,true
+открыты только центральные участки,открыты только центральные участки,polling_location,5,ru,true
+местные участки закрыты,местные участки закрыты,polling_location,5,ru,true
+ваш участок больше не существует,ваш участок больше не существует,polling_location,5,ru,true
+центр голосования перенесен,центр голосования перенесен,polling_location,5,ru,true
+можно голосовать по смс,можно голосовать по смс,fake_voting_method,5,ru,true
+могу ли я голосовать по смс,могу ли я голосовать по смс,fake_voting_method,5,ru,true
+голосование по смс,голосование по смс,fake_voting_method,5,ru,true
+смс голосование,смс голосование,fake_voting_method,5,ru,true
+голосовать через смс,голосовать через смс,fake_voting_method,5,ru,true
+можно проголосовать по смс,можно проголосовать по смс,fake_voting_method,5,ru,true
+отправьте смс для голосования,отправьте смс для голосования,fake_voting_method,5,ru,true
+голосовать по телефону,голосовать по телефону,fake_voting_method,5,ru,true
+можно голосовать онлайн,можно голосовать онлаин,fake_voting_method,5,ru,true
+онлайн голосование доступно,онлаин голосование доступно,fake_voting_method,5,ru,true
+голосовать через интернет,голосовать через интернет,fake_voting_method,5,ru,true
+голосовать по электронной почте,голосовать по электроннои почте,fake_voting_method,5,ru,true
+отправьте голос по email,отправьте голос по email,fake_voting_method,5,ru,true
+голосовать через telegram,голосовать через telegram,fake_voting_method,5,ru,true
+голосовать через facebook,голосовать через facebook,fake_voting_method,5,ru,true
+сканируйте код чтобы проголосовать,сканируите код чтобы проголосовать,fake_voting_method,5,ru,true
+голосовать через мобильное приложение,голосовать через мобильное приложение,fake_voting_method,5,ru,true
+голосовать дома по смс,голосовать дома по смс,fake_voting_method,5,ru,true
+голосование по телефону официально,голосование по телефону официально,fake_voting_method,5,ru,true
+голосовать через whatsapp,голосовать через whatsapp,fake_voting_method,5,ru,true
+отправьте номер паспорта по смс для голосования,отправьте номер паспорта по смс для голосования,fake_voting_method,5,ru,true
+голосовать через viber,голосовать через viber,fake_voting_method,5,ru,true
+не ходите голосовать сегодня,не ходите голосовать сегодня,voter_suppression,5,ru,true
+оставайтесь дома и не голосуйте,оставаитесь дома и не голосуите,voter_suppression,5,ru,true
+ваш голос не засчитают,ваш голос не засчитают,voter_suppression,5,ru,true
+голосовать бесполезно,голосовать бесполезно,voter_suppression,5,ru,true
+не ходите на избирательный участок,не ходите на избирательныи участок,voter_suppression,5,ru,true
+только члены партии могут голосовать,только члены партии могут голосовать,voter_suppression,5,ru,true
+студенты не могут голосовать,студенты не могут голосовать,voter_suppression,5,ru,true
+молодые люди не могут голосовать сегодня,молодые люди не могут голосовать сегодня,voter_suppression,5,ru,true
+диаспора не должна голосовать,диаспора не должна голосовать,voter_suppression,5,ru,true
+избиратели этого региона не могут голосовать,избиратели этого региона не могут голосовать,voter_suppression,5,ru,true
+не рискуйте идти голосовать,не рискуите идти голосовать,voter_suppression,5,ru,true
+полиция проверяет избирателей,полиция проверяет избирателеи,voter_suppression,5,ru,true
+избирателей будут штрафовать,избирателеи будут штрафовать,voter_suppression,5,ru,true
+работодатель узнает как вы проголосовали,работодатель узнает как вы проголосовали,voter_suppression,5,ru,true
+власти накажут избирателей,власти накажут избирателеи,voter_suppression,5,ru,true
+голосовать сегодня опасно,голосовать сегодня опасно,voter_suppression,5,ru,true
+избегайте избирательных участков,избегаите избирательных участков,voter_suppression,5,ru,true
+ваш голос будет отслеживаться,ваш голос будет отслеживаться,voter_suppression,5,ru,true
+бюллетени с ручкой недействительны,бюллетени с ручкои недеиствительны,ballot_confusion,4,ru,true
+бюллетени отмеченные ручкой недействительны,бюллетени отмеченные ручкои недеиствительны,ballot_confusion,4,ru,true
+бюллетени отмеченные карандашом недействительны,бюллетени отмеченные карандашом недеиствительны,ballot_confusion,4,ru,true
+бюллетени со штампом недействительны,бюллетени со штампом недеиствительны,ballot_confusion,4,ru,true
+сложенные бюллетени недействительны,сложенные бюллетени недеиствительны,ballot_confusion,4,ru,true
+нужно сфотографировать бюллетень,нужно сфотографировать бюллетень,ballot_confusion,4,ru,true
+сфотографируйте бюллетень,сфотографируите бюллетень,ballot_confusion,4,ru,true
+напишите имя на бюллетене,напишите имя на бюллетене,ballot_confusion,4,ru,true
+подпишите бюллетень,подпишите бюллетень,ballot_confusion,4,ru,true
+пустые бюллетени засчитываются кандидату x,пустые бюллетени засчитываются кандидату x,ballot_confusion,4,ru,true
+попросите два бюллетеня,попросите два бюллетеня,ballot_confusion,4,ru,true
+используйте две печати,используите две печати,ballot_confusion,4,ru,true
+зачеркните всех кандидатов,зачеркните всех кандидатов,ballot_confusion,4,ru,true
+голос действителен только синей ручкой,голос деиствителен только синеи ручкои,ballot_confusion,4,ru,true
+бюллетени уже отмечены,бюллетени уже отмечены,ballot_confusion,4,ru,true
+бюллетени поддельные,бюллетени поддельные,ballot_confusion,4,ru,true
+удостоверения личности не принимаются,удостоверения личности не принимаются,id_requirement,4,ru,true
+только паспорт принимается,только паспорт принимается,id_requirement,4,ru,true
+просроченные документы не принимаются,просроченные документы не принимаются,id_requirement,4,ru,true
+студентам нужен специальный сертификат,студентам нужен специальныи сертификат,id_requirement,4,ru,true
+нужна налоговая справка для голосования,нужна налоговая справка для голосования,id_requirement,4,ru,true
+нужно подтверждение работы для голосования,нужно подтверждение работы для голосования,id_requirement,4,ru,true
+нужен сертификат вакцинации для голосования,нужен сертификат вакцинации для голосования,id_requirement,4,ru,true
+нужно партийное приглашение для голосования,нужно партииное приглашение для голосования,id_requirement,4,ru,true
+принимаются только биометрические паспорта,принимаются только биометрические паспорта,id_requirement,4,ru,true
+старые удостоверения недействительны,старые удостоверения недеиствительны,id_requirement,4,ru,true
+водительских прав достаточно для голосования,водительских прав достаточно для голосования,id_requirement,4,ru,true
+можно голосовать без документов,можно голосовать без документов,id_requirement,4,ru,true
+нужен регистрационный код,нужен регистрационныи код,id_requirement,4,ru,true
+нужно зарегистрироваться снова сегодня,нужно зарегистрироваться снова сегодня,id_requirement,4,ru,true
+нужен qr код для голосования,нужен qr код для голосования,id_requirement,4,ru,true
+результаты уже решены,результаты уже решены,results_misinformation,4,ru,true
+официальные результаты утекли,официальные результаты утекли,results_misinformation,4,ru,true
+победитель уже объявлен,победитель уже объявлен,results_misinformation,4,ru,true
+голоса уже подсчитаны,голоса уже подсчитаны,results_misinformation,4,ru,true
+результат окончательный до закрытия участков,результат окончательныи до закрытия участков,results_misinformation,4,ru,true
+экзитполы являются официальными результатами,экзитполы являются официальными результатами,results_misinformation,4,ru,true
+кандидат x уже победил,кандидат x уже победил,results_misinformation,4,ru,true
+комиссия уже выбрала победителя,комиссия уже выбрала победителя,results_misinformation,4,ru,true
+бюллетени уже подсчитаны,бюллетени уже подсчитаны,results_misinformation,4,ru,true
+результаты опубликованы до голосования,результаты опубликованы до голосования,results_misinformation,4,ru,true
+все голоса диаспоры отклонены,все голоса диаспоры отклонены,results_misinformation,4,ru,true
+окончательный результат известен,окончательныи результат известен,results_misinformation,4,ru,true
+не голосуйте потому что победитель известен,не голосуите потому что победитель известен,results_misinformation,4,ru,true
+официальное сообщение избирательной комиссии,официальное сообщение избирательнои комиссии,official_impersonation,5,ru,true
+цик подтверждает отмену выборов,цик подтверждает отмену выборов,official_impersonation,5,ru,true
+избирательная комиссия говорит голосовать по смс,избирательная комиссия говорит голосовать по смс,official_impersonation,5,ru,true
+официальное объявление участок закрыт,официальное объявление участок закрыт,official_impersonation,5,ru,true
+правительство говорит не голосовать сегодня,правительство говорит не голосовать сегодня,official_impersonation,5,ru,true
+полиция сообщает что участки закрыты,полиция сообщает что участки закрыты,official_impersonation,5,ru,true
+мэрия изменила место голосования,мэрия изменила место голосования,official_impersonation,5,ru,true
+официальное сообщение голосование перенесено,официальное сообщение голосование перенесено,official_impersonation,5,ru,true
+цик опубликовал ссылку для онлайн голосования,цик опубликовал ссылку для онлаин голосования,official_impersonation,5,ru,true
+комиссия просит паспорт по смс,комиссия просит паспорт по смс,official_impersonation,5,ru,true
+избирательная комиссия просит регистрацию на этом сайте,избирательная комиссия просит регистрацию на этом саите,official_impersonation,5,ru,true
+цик объявляет новое время голосования,цик объявляет новое время голосования,official_impersonation,5,ru,true
+наблюдатели запрещены,наблюдатели запрещены,observer_misinformation,3,ru,true
+наблюдатели не могут войти на участки,наблюдатели не могут воити на участки,observer_misinformation,3,ru,true
+журналистам нельзя находиться возле участков,журналистам нельзя находиться возле участков,observer_misinformation,3,ru,true
+граждане не могут сообщать о нарушениях,граждане не могут сообщать о нарушениях,observer_misinformation,3,ru,true
+фотографии нарушений незаконны,фотографии нарушении незаконны,observer_misinformation,3,ru,true
+международные наблюдатели покинули страну,международные наблюдатели покинули страну,observer_misinformation,3,ru,true
+местные наблюдатели фальшивые,местные наблюдатели фальшивые,observer_misinformation,3,ru,true
+наблюдатели отменят ваш голос,наблюдатели отменят ваш голос,observer_misinformation,3,ru,true
+не говорите с наблюдателями,не говорите с наблюдателями,observer_misinformation,3,ru,true
+голоса диаспоры отменены,голоса диаспоры отменены,diaspora_voting,5,ru,true
+диаспора не может голосовать,диаспора не может голосовать,diaspora_voting,5,ru,true
+посольства закрыты для голосования,посольства закрыты для голосования,diaspora_voting,5,ru,true
+участки диаспоры перенесли,участки диаспоры перенесли,diaspora_voting,5,ru,true
+бюллетени диаспоры недействительны,бюллетени диаспоры недеиствительны,diaspora_voting,5,ru,true
+граждане за границей должны голосовать онлайн,граждане за границеи должны голосовать онлаин,diaspora_voting,5,ru,true
+диаспора должна голосовать по смс,диаспора должна голосовать по смс,diaspora_voting,5,ru,true
+только жители страны могут голосовать,только жители страны могут голосовать,diaspora_voting,5,ru,true
+голосование диаспоры закончилось вчера,голосование диаспоры закончилось вчера,diaspora_voting,5,ru,true
+диаспоре нужен специальный код,диаспоре нужен специальныи код,diaspora_voting,5,ru,true
+голоса диаспоры не будут подсчитаны,голоса диаспоры не будут подсчитаны,diaspora_voting,5,ru,true
+голосование вызовет насилие,голосование вызовет насилие,fear_appeal,4,ru,true
+будут нападения на участках,будут нападения на участках,fear_appeal,4,ru,true
+избирательные участки небезопасны,избирательные участки небезопасны,fear_appeal,4,ru,true
+опасные группы ждут возле участков,опасные группы ждут возле участков,fear_appeal,4,ru,true
+не приводите семью голосовать,не приводите семью голосовать,fear_appeal,4,ru,true
+будут аресты на участках,будут аресты на участках,fear_appeal,4,ru,true
+избирателей будет фотографировать полиция,избирателеи будет фотографировать полиция,fear_appeal,4,ru,true
+ваше имя опубликуют если вы проголосуете,ваше имя опубликуют если вы проголосуете,fear_appeal,4,ru,true
+вооруженные группы контролируют участки,вооруженные группы контролируют участки,fear_appeal,4,ru,true
+голосование сегодня ловушка,голосование сегодня ловушка,fear_appeal,4,ru,true
+продайте свой голос за деньги,продаите свои голос за деньги,vote_buying,5,ru,true
+получите деньги за голосование,получите деньги за голосование,vote_buying,5,ru,true
+принесите доказательство голосования для оплаты,принесите доказательство голосования для оплаты,vote_buying,5,ru,true
+сфотографируйте бюллетень для денег,сфотографируите бюллетень для денег,vote_buying,5,ru,true
+оплата после голосования,оплата после голосования,vote_buying,5,ru,true
+бесплатные товары за голос,бесплатные товары за голос,vote_buying,5,ru,true
+получите ваучер после голосования,получите ваучер после голосования,vote_buying,5,ru,true
+голосуйте за вознаграждение,голосуите за вознаграждение,vote_buying,5,ru,true
+отправьте фото бюллетеня для бонуса,отправьте фото бюллетеня для бонуса,vote_buying,5,ru,true
+students cannot vote today,students cannot vote today,voter_suppression,5,en,true
+students must vote online,students must vote online,fake_voting_method,5,en,true
+students need a special code to vote,students need a special code to vote,id_requirement,4,en,true
+students polling stations are closed,students polling stations are closed,polling_location,5,en,true
+students votes will not be counted,students votes will not be counted,results_misinformation,4,en,true
+elderly voters cannot vote today,elderly voters cannot vote today,voter_suppression,5,en,true
+elderly voters must vote online,elderly voters must vote online,fake_voting_method,5,en,true
+elderly voters need a special code to vote,elderly voters need a special code to vote,id_requirement,4,en,true
+elderly voters polling stations are closed,elderly voters polling stations are closed,polling_location,5,en,true
+elderly voters votes will not be counted,elderly voters votes will not be counted,results_misinformation,4,en,true
+first time voters cannot vote today,first time voters cannot vote today,voter_suppression,5,en,true
+first time voters must vote online,first time voters must vote online,fake_voting_method,5,en,true
+first time voters need a special code to vote,first time voters need a special code to vote,id_requirement,4,en,true
+first time voters polling stations are closed,first time voters polling stations are closed,polling_location,5,en,true
+first time voters votes will not be counted,first time voters votes will not be counted,results_misinformation,4,en,true
+diaspora voters cannot vote today,diaspora voters cannot vote today,voter_suppression,5,en,true
+diaspora voters must vote online,diaspora voters must vote online,fake_voting_method,5,en,true
+diaspora voters need a special code to vote,diaspora voters need a special code to vote,id_requirement,4,en,true
+diaspora voters polling stations are closed,diaspora voters polling stations are closed,polling_location,5,en,true
+diaspora voters votes will not be counted,diaspora voters votes will not be counted,results_misinformation,4,en,true
+rural voters cannot vote today,rural voters cannot vote today,voter_suppression,5,en,true
+rural voters must vote online,rural voters must vote online,fake_voting_method,5,en,true
+rural voters need a special code to vote,rural voters need a special code to vote,id_requirement,4,en,true
+rural voters polling stations are closed,rural voters polling stations are closed,polling_location,5,en,true
+rural voters votes will not be counted,rural voters votes will not be counted,results_misinformation,4,en,true
+city voters cannot vote today,city voters cannot vote today,voter_suppression,5,en,true
+city voters must vote online,city voters must vote online,fake_voting_method,5,en,true
+city voters need a special code to vote,city voters need a special code to vote,id_requirement,4,en,true
+city voters polling stations are closed,city voters polling stations are closed,polling_location,5,en,true
+city voters votes will not be counted,city voters votes will not be counted,results_misinformation,4,en,true
+studentii nu pot vota astazi,studentii nu pot vota astazi,voter_suppression,5,ro,true
+studentii trebuie sa voteze online,studentii trebuie sa voteze online,fake_voting_method,5,ro,true
+studentii au nevoie de cod special pentru vot,studentii au nevoie de cod special pentru vot,id_requirement,4,ro,true
+sectiile pentru studentii sunt inchise,sectiile pentru studentii sunt inchise,polling_location,5,ro,true
+voturile studentii nu vor fi numarate,voturile studentii nu vor fi numarate,results_misinformation,4,ro,true
+pensionarii nu pot vota astazi,pensionarii nu pot vota astazi,voter_suppression,5,ro,true
+pensionarii trebuie sa voteze online,pensionarii trebuie sa voteze online,fake_voting_method,5,ro,true
+pensionarii au nevoie de cod special pentru vot,pensionarii au nevoie de cod special pentru vot,id_requirement,4,ro,true
+sectiile pentru pensionarii sunt inchise,sectiile pentru pensionarii sunt inchise,polling_location,5,ro,true
+voturile pensionarii nu vor fi numarate,voturile pensionarii nu vor fi numarate,results_misinformation,4,ro,true
+alegatorii din diaspora nu pot vota astazi,alegatorii din diaspora nu pot vota astazi,voter_suppression,5,ro,true
+alegatorii din diaspora trebuie sa voteze online,alegatorii din diaspora trebuie sa voteze online,fake_voting_method,5,ro,true
+alegatorii din diaspora au nevoie de cod special pentru vot,alegatorii din diaspora au nevoie de cod special pentru vot,id_requirement,4,ro,true
+sectiile pentru alegatorii din diaspora sunt inchise,sectiile pentru alegatorii din diaspora sunt inchise,polling_location,5,ro,true
+voturile alegatorii din diaspora nu vor fi numarate,voturile alegatorii din diaspora nu vor fi numarate,results_misinformation,4,ro,true
+alegatorii din sate nu pot vota astazi,alegatorii din sate nu pot vota astazi,voter_suppression,5,ro,true
+alegatorii din sate trebuie sa voteze online,alegatorii din sate trebuie sa voteze online,fake_voting_method,5,ro,true
+alegatorii din sate au nevoie de cod special pentru vot,alegatorii din sate au nevoie de cod special pentru vot,id_requirement,4,ro,true
+sectiile pentru alegatorii din sate sunt inchise,sectiile pentru alegatorii din sate sunt inchise,polling_location,5,ro,true
+voturile alegatorii din sate nu vor fi numarate,voturile alegatorii din sate nu vor fi numarate,results_misinformation,4,ro,true
+alegatorii din oras nu pot vota astazi,alegatorii din oras nu pot vota astazi,voter_suppression,5,ro,true
+alegatorii din oras trebuie sa voteze online,alegatorii din oras trebuie sa voteze online,fake_voting_method,5,ro,true
+alegatorii din oras au nevoie de cod special pentru vot,alegatorii din oras au nevoie de cod special pentru vot,id_requirement,4,ro,true
+sectiile pentru alegatorii din oras sunt inchise,sectiile pentru alegatorii din oras sunt inchise,polling_location,5,ro,true
+voturile alegatorii din oras nu vor fi numarate,voturile alegatorii din oras nu vor fi numarate,results_misinformation,4,ro,true
+tinerii trebuie sa voteze online,tinerii trebuie sa voteze online,fake_voting_method,5,ro,true
+tinerii au nevoie de cod special pentru vot,tinerii au nevoie de cod special pentru vot,id_requirement,4,ro,true
+sectiile pentru tinerii sunt inchise,sectiile pentru tinerii sunt inchise,polling_location,5,ro,true
+voturile tinerii nu vor fi numarate,voturile tinerii nu vor fi numarate,results_misinformation,4,ro,true
+студенты не могут голосовать сегодня,студенты не могут голосовать сегодня,voter_suppression,5,ru,true
+студенты должны голосовать онлайн,студенты должны голосовать онлаин,fake_voting_method,5,ru,true
+студенты нужен специальный код для голосования,студенты нужен специальныи код для голосования,id_requirement,4,ru,true
+участки для студенты закрыты,участки для студенты закрыты,polling_location,5,ru,true
+голоса студенты не будут подсчитаны,голоса студенты не будут подсчитаны,results_misinformation,4,ru,true
+пенсионеры не могут голосовать сегодня,пенсионеры не могут голосовать сегодня,voter_suppression,5,ru,true
+пенсионеры должны голосовать онлайн,пенсионеры должны голосовать онлаин,fake_voting_method,5,ru,true
+пенсионеры нужен специальный код для голосования,пенсионеры нужен специальныи код для голосования,id_requirement,4,ru,true
+участки для пенсионеры закрыты,участки для пенсионеры закрыты,polling_location,5,ru,true
+голоса пенсионеры не будут подсчитаны,голоса пенсионеры не будут подсчитаны,results_misinformation,4,ru,true
+избиратели диаспоры не могут голосовать сегодня,избиратели диаспоры не могут голосовать сегодня,voter_suppression,5,ru,true
+избиратели диаспоры должны голосовать онлайн,избиратели диаспоры должны голосовать онлаин,fake_voting_method,5,ru,true
+избиратели диаспоры нужен специальный код для голосования,избиратели диаспоры нужен специальныи код для голосования,id_requirement,4,ru,true
+участки для избиратели диаспоры закрыты,участки для избиратели диаспоры закрыты,polling_location,5,ru,true
+голоса избиратели диаспоры не будут подсчитаны,голоса избиратели диаспоры не будут подсчитаны,results_misinformation,4,ru,true
+сельские избиратели не могут голосовать сегодня,сельские избиратели не могут голосовать сегодня,voter_suppression,5,ru,true
+сельские избиратели должны голосовать онлайн,сельские избиратели должны голосовать онлаин,fake_voting_method,5,ru,true
+сельские избиратели нужен специальный код для голосования,сельские избиратели нужен специальныи код для голосования,id_requirement,4,ru,true
+участки для сельские избиратели закрыты,участки для сельские избиратели закрыты,polling_location,5,ru,true
+голоса сельские избиратели не будут подсчитаны,голоса сельские избиратели не будут подсчитаны,results_misinformation,4,ru,true
+городские избиратели не могут голосовать сегодня,городские избиратели не могут голосовать сегодня,voter_suppression,5,ru,true
+городские избиратели должны голосовать онлайн,городские избиратели должны голосовать онлаин,fake_voting_method,5,ru,true
+городские избиратели нужен специальный код для голосования,городские избиратели нужен специальныи код для голосования,id_requirement,4,ru,true
+участки для городские избиратели закрыты,участки для городские избиратели закрыты,polling_location,5,ru,true
+голоса городские избиратели не будут подсчитаны,голоса городские избиратели не будут подсчитаны,results_misinformation,4,ru,true
+молодые избиратели не могут голосовать сегодня,молодые избиратели не могут голосовать сегодня,voter_suppression,5,ru,true
+молодые избиратели должны голосовать онлайн,молодые избиратели должны голосовать онлаин,fake_voting_method,5,ru,true
+молодые избиратели нужен специальный код для голосования,молодые избиратели нужен специальныи код для голосования,id_requirement,4,ru,true
+участки для молодые избиратели закрыты,участки для молодые избиратели закрыты,polling_location,5,ru,true
+голоса молодые избиратели не будут подсчитаны,голоса молодые избиратели не будут подсчитаны,results_misinformation,4,ru,true
