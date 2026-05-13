@@ -53,32 +53,20 @@ public class ClaimCheckService {
         String language = normalizeLanguage(request.getLanguage());
         boolean smsVotingClaim = ElectionTextRules.isSmsVotingClaim(normalizedClaim);
 
-        List<VerifiedClaim> publishedClaims = verifiedClaimRepository.findByPublishedTrueAndLanguageOrderByUpdatedAtDesc(language);
-        if (publishedClaims.isEmpty()) {
-            publishedClaims = verifiedClaimRepository.findByPublishedTrueOrderByUpdatedAtDesc();
-        }
+        List<VerifiedClaim> languageClaims = verifiedClaimRepository.findByPublishedTrueAndLanguageOrderByUpdatedAtDesc(language);
+        List<VerifiedClaim> globalClaims = verifiedClaimRepository.findByPublishedTrueOrderByUpdatedAtDesc();
 
-        Optional<VerifiedClaim> exactMatch =
-                publishedClaims.stream()
-                        .filter(claim -> normalizedClaim.equals(claim.getNormalizedClaim()))
-                        .findFirst();
-
-        if (exactMatch.isPresent()) {
-            return buildVerifiedResponseWithSmsSafeguard(exactMatch.get(), smsVotingClaim, language, publishedClaims);
-        }
-
-        Optional<VerifiedClaim> similarMatch = publishedClaims.stream()
-                .filter(claim -> isSimilarEnough(normalizedClaim, claim.getNormalizedClaim()))
-                .findFirst();
-
-        if (similarMatch.isPresent()) {
-            return buildVerifiedResponseWithSmsSafeguard(similarMatch.get(), smsVotingClaim, language, publishedClaims);
+        Optional<VerifiedClaim> matchedClaim = findVerifiedClaimMatch(normalizedClaim, languageClaims, globalClaims);
+        if (matchedClaim.isPresent()) {
+            List<VerifiedClaim> smsCorrectionPool = !languageClaims.isEmpty() ? languageClaims : globalClaims;
+            return buildVerifiedResponseWithSmsSafeguard(matchedClaim.get(), smsVotingClaim, language, smsCorrectionPool);
         }
 
         Optional<PatternMatch> dbPatternMatch = findRumorPatternMatch(normalizedClaim, language);
         if (dbPatternMatch.isPresent()) {
             if (smsVotingClaim) {
-                return buildSmsRuleResponse(language, publishedClaims);
+                List<VerifiedClaim> smsCorrectionPool = !languageClaims.isEmpty() ? languageClaims : globalClaims;
+                return buildSmsRuleResponse(language, smsCorrectionPool);
             }
             return buildNeedsReviewResponse(
                     dbPatternMatch.get().pattern().getCategory(),
@@ -88,7 +76,8 @@ public class ClaimCheckService {
         }
 
         if (smsVotingClaim) {
-            return buildSmsRuleResponse(language, publishedClaims);
+            List<VerifiedClaim> smsCorrectionPool = !languageClaims.isEmpty() ? languageClaims : globalClaims;
+            return buildSmsRuleResponse(language, smsCorrectionPool);
         }
 
         DetectionResult detectionResult = cEngineService.analyzeClaim(normalizedClaim, language);
@@ -201,9 +190,19 @@ public class ClaimCheckService {
     }
 
     private Optional<PatternMatch> findRumorPatternMatch(String normalizedClaim, String language) {
-        List<RumorPattern> patterns = rumorPatternRepository.findByActiveTrueAndLanguage(language);
-        if (patterns.isEmpty()) {
-            patterns = rumorPatternRepository.findByActiveTrue();
+        List<RumorPattern> languagePatterns = rumorPatternRepository.findByActiveTrueAndLanguage(language);
+        Optional<PatternMatch> languageMatch = findBestPatternMatch(normalizedClaim, languagePatterns);
+        if (languageMatch.isPresent()) {
+            return languageMatch;
+        }
+
+        List<RumorPattern> globalPatterns = rumorPatternRepository.findByActiveTrue();
+        return findBestPatternMatch(normalizedClaim, globalPatterns);
+    }
+
+    private Optional<PatternMatch> findBestPatternMatch(String normalizedClaim, List<RumorPattern> patterns) {
+        if (patterns == null || patterns.isEmpty()) {
+            return Optional.empty();
         }
 
         return patterns.stream()
@@ -213,6 +212,47 @@ public class ClaimCheckService {
                         .comparingInt(PatternMatch::riskScore)
                         .thenComparing(match -> match.pattern().getSeverity(), Comparator.nullsLast(Comparator.naturalOrder()))
                 );
+    }
+
+    private Optional<VerifiedClaim> findVerifiedClaimMatch(
+            String normalizedClaim,
+            List<VerifiedClaim> languageClaims,
+            List<VerifiedClaim> globalClaims
+    ) {
+        Optional<VerifiedClaim> exactLanguage = findExactMatch(normalizedClaim, languageClaims);
+        if (exactLanguage.isPresent()) {
+            return exactLanguage;
+        }
+
+        Optional<VerifiedClaim> exactGlobal = findExactMatch(normalizedClaim, globalClaims);
+        if (exactGlobal.isPresent()) {
+            return exactGlobal;
+        }
+
+        Optional<VerifiedClaim> similarLanguage = findSimilarMatch(normalizedClaim, languageClaims);
+        if (similarLanguage.isPresent()) {
+            return similarLanguage;
+        }
+
+        return findSimilarMatch(normalizedClaim, globalClaims);
+    }
+
+    private Optional<VerifiedClaim> findExactMatch(String normalizedClaim, List<VerifiedClaim> claims) {
+        if (claims == null || claims.isEmpty()) {
+            return Optional.empty();
+        }
+        return claims.stream()
+                .filter(claim -> normalizedClaim.equals(claim.getNormalizedClaim()))
+                .findFirst();
+    }
+
+    private Optional<VerifiedClaim> findSimilarMatch(String normalizedClaim, List<VerifiedClaim> claims) {
+        if (claims == null || claims.isEmpty()) {
+            return Optional.empty();
+        }
+        return claims.stream()
+                .filter(claim -> isSimilarEnough(normalizedClaim, claim.getNormalizedClaim()))
+                .findFirst();
     }
 
     private Optional<PatternMatch> evaluatePatternMatch(String normalizedClaim, RumorPattern pattern) {
